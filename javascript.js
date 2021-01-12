@@ -33,9 +33,11 @@ searchBtn.on("click", function(event) {
                 success: function(response) {
                     console.log(response);
                     var zipcode = response.restaurants[0].restaurant.location.zipcode;
+                    // only the zipcode of the first result of the restaurant list is used for the covid api call
+                    // does the covid api give hotspots?
                     var queryURL = "https://cors-anywhere.herokuapp.com/https://localcoviddata.com/covid19/v1/locations?zipCode=" + zipcode;    
 
-                    $.ajax({
+                    $.ajax({ 
                         url: queryURL,
                         method: "GET"
                     }).then(function(response) {
