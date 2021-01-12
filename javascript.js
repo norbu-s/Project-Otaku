@@ -53,7 +53,7 @@ searchBtn.on("click", function(event) {
 
                         var restaurantNameDiv = $("<div>" + restaurantName + "</div>");
                         var cuisineDiv = $("<div>" + cuisine + "Cuisine");
-                        var averageCostForTwoDiv = $("<div>" + "Average Cost For Two: " + averageCostForTwo + "</div>");
+                        var averageCostForTwoDiv = $("<div>" + "Average Cost For Two: $" + averageCostForTwo + "</div>");
                         var restaurantLocationDiv = $("<div>" + restaurantLocation + "</div>");
                         var restaurantPhoneNoDiv = $("<div>" + restaurantPhoneNo + "</div>");
 
