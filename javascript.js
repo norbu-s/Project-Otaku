@@ -3,19 +3,10 @@ var searchBtn = $("#search-btn");
 var searchHistoryList = $("#search-history-list");
 var resultsDiv = $("#results");
 
-var queryURL = "https://cors-anywhere.herokuapp.com/https://localcoviddata.com/covid19/v1/locations?zipCode="+searchInputEl;
-
-$.ajax({
-  url: queryURL,
-  method: "GET"
-}).then(function(response) {
-  console.log(response);
-});
-
 searchBtn.on("click", function(event) {
     event.preventDefault();
+
     var searchInput = $("#zipcode").val();
-    console.log(searchInput)
 
     $.ajax({
         headers: {"user-key": "9a1b7bbdae3e31891d3b697bed7433bc"},
@@ -41,6 +32,16 @@ searchBtn.on("click", function(event) {
                 },
                 success: function(response) {
                     console.log(response);
+                    var zipcode = response.restaurants[0].restaurant.location.zipcode;
+                    var queryURL = "https://cors-anywhere.herokuapp.com/https://localcoviddata.com/covid19/v1/locations?zipCode=" + zipcode;    
+
+                    $.ajax({
+                        url: queryURL,
+                        method: "GET"
+                    }).then(function(response) {
+                        console.log(response);
+                    });
+
                     for (var i = 0; i < response.restaurants.length; i++) {
                         var resultDiv = $("<div>");
                         resultDiv.attr("id", "result-each");
