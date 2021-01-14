@@ -1,8 +1,73 @@
-#result-each {
-    margin: 10px;
-    padding: 10px;
-    background: rgb(255, 232, 175);
+body{
+    border: none;
+    margin: 0;
+    padding: 0;
+    color: #FFFFFF;
+    font-weight: 300;
+    font-family: 'Lato', sans-serif;
+    line-height: 1.55;
+    overflow-x: hidden;
+    background-color: #0f0919;
+ }
+form{
+     display: inline-block;
+ }
+
+ #search-btn {
+     
+     display: inline-block;
+     padding: 0.35em 1.2em;
+     border: 0.1em solid #FFFFFF;
+     margin: 0 0.3em 0.3em 0;
+     border-radius: 0.12em;
+     box-sizing: border-box;
+     text-decoration: none;
+     /* font-family: 'Roboto',sans-serif; */
+     font-weight: 300;
+     color: #FFFFFF;
+     text-align: center;
+     transition: all 0.2s;
+ }
+ #title-history{
+     font-size: 26px;
+ }
+
+ #search-history-list{
+    /* margin: 10px; */
+    /* padding: 10px; */
+    background-color: rgba(255,255,255,0.7);
     border: none;
     border-radius: 10px;
-}
-
+ }
+ 
+ .top-bar{
+     margin: 10px;
+     padding: 10px;
+     background-color: #FFEEEE;
+     background: linear-gradient(10deg, #EEDDDD 0%, #FFEEEE 100%);
+     box-shadow: 0 0 1em rgba(0,0,0,0.3);
+     top: 0;
+     height: 4.2em;
+     color: #000000;
+ 
+ }
+ #nearest-restaurant{
+     margin: 10px;
+     font-size: 26px;
+ }
+ 
+ #result-each {
+     margin: 10px;
+     padding: 10px;
+     background-color: rgba(255,255,255,0.7);
+     border: none;
+     border-radius: 10px;
+ }
+ 
+ 
+ #search-zipcode{
+     margin-left: 10px;
+     margin-top: 10px;
+     /* width: 450px; */
+ }
+ 
