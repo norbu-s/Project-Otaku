@@ -89,8 +89,27 @@ searchBtn.on("click", function(event) {
             console.log(response)
             var entityId = response.location_suggestions[0].entity_id;
             var entityType = response.location_suggestions[0].entity_type;
-            var city = response.location_suggestions[0].title.slice(0, response.location_suggestions[0].title.indexOf(","));
-            var state = response.location_suggestions[0].title.slice(response.location_suggestions[0].title.indexOf(",") + 2, response.location_suggestions[0].title.length);
+    
+            $.ajax({
+                url: "https://public.opendatasoft.com/api/records/1.0/search/?dataset=us-zip-code-latitude-and-longitude&q=" + searchInput,
+                method: "GET",
+                error: function() {
+                    alert("Sorry, there was an error loading the data.");
+                    return;
+                },
+                success: function(response) {
+                    console.log(response);
+                    var zipcode = response.records[0].fields.zip;
+                    var queryURL = "https://cors-anywhere.herokuapp.com/https://localcoviddata.com/covid19/v1/locations?zipCode=" + zipcode;    
+
+                    $.ajax({ 
+                        url: queryURL,
+                        method: "GET"
+                    }).then(function(response) {
+                        console.log(response);
+                    });
+                }
+            })
 
             $.ajax({
                 headers: {
@@ -104,15 +123,6 @@ searchBtn.on("click", function(event) {
                 },
                 success: function(response) {
                     console.log(response);
-                    var zipcode = response.restaurants[0].restaurant.location.zipcode;
-                    var queryURL = "https://cors-anywhere.herokuapp.com/https://localcoviddata.com/covid19/v1/locations?zipCode=" + zipcode;    
-
-                    $.ajax({ 
-                        url: queryURL,
-                        method: "GET"
-                    }).then(function(response) {
-                        console.log(response);
-                    });
 
                     for (var i = 0; i < response.restaurants.length; i++) {
                         var resultDiv = $("<div>");
