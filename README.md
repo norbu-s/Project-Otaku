@@ -1,15 +1,15 @@
 # Covid-Safe-Restaurant
 
 # Project Description.
- 
-  
+
+
 
 # Project Goals.
 
 
 
 # Authors.
- 
+
  1. Jessica Hong.
 
  2. Tomomi Inoue.
@@ -24,7 +24,7 @@
 
 # Link for resources
 
- 
+
 
 # Project Links
 
