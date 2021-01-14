@@ -5,31 +5,59 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+   <!-- Compressed CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/dist/css/foundation.min.css" integrity="sha256-ogmFxjqiTMnZhxCqVmcqTvjfe1Y/ec4WaRj/aQPvn+I=" crossorigin="anonymous">
     <link rel="stylesheet" href="style.css">
+
     <title>Covidsafe Restaurants</title>
 </head>
 
 <body>
+    <div class="top-bar">
+        
     <header>
         <h1>Covidsafe Restaurants</h1>
     </header>
+  
+    </div>
 
+
+     
+<!-- <div class="grid-container">
+ <div class="row"> -->
+    <div class="grid-x">
     <div id="search-zipcode">
+        <div class="cell medium-6 large-4">
         <form>
             <input type="text" id="zipcode" placeholder="Search zipcode">
-            <button type="submit" id="search-btn">Search</button>
+            <button type="submit" id="search-btn">search</button>
         </form>
+   
+    </div>
+
+   <!-- <div class="medium-8 large-10 columns">8 columns -->
+ 
+        
         <div id="search-history">
             <h2>Search History</h2>
             <ul id="search-history-list"></ul>
         </div>
     </div>
-
+    </div>
+    <!-- </div> -->
+    
+</div>
+</div>
+<div class="cell medium-12 large-12">
     <div id="content">
         <h2>Nearest Covidsafe Restaurants</h2>
         <div id="results"></div>
     </div>
-
+</div>
+    
+<!-- Compressed JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/dist/js/foundation.min.js" integrity="sha256-pRF3zifJRA9jXGv++b06qwtSqX1byFQOLjqa2PTEb2o=" crossorigin="anonymous"></script>   
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="javascript.js"></script>
 </body>
