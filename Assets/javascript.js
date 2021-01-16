@@ -5,6 +5,7 @@ var searchBtn = $("#search-btn");
 var searchHistoryList = $("#search-history-list");
 var resultsDiv = $("#results");
 
+// render the search history list
 initialise();
 
 function renderSearchHistory() {
@@ -26,16 +27,19 @@ function initialise() {
     renderSearchHistory();
 }
 
+// store searches (on search button click)
 function storeSearches() {
     localStorage.setItem("storedSearches", JSON.stringify(storedSearches));
 }
 
+// search button click event 
 searchBtn.on("click", function(event) {
     event.preventDefault();
 
     resultsDiv.empty();
     var searchInput = $("#zipcode").val();
 
+    // Zomato location API call
     $.ajax({
         headers: {"user-key": "9a1b7bbdae3e31891d3b697bed7433bc"},
         url: "https://developers.zomato.com/api/v2.1/locations?query=" + searchInput,
@@ -115,6 +119,7 @@ searchBtn.on("click", function(event) {
             //     }
             // })
 
+            // Zomato restaurant search API call
             $.ajax({
                 headers: {
                     "Accept": "application/json",
