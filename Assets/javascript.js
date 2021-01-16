@@ -12,6 +12,7 @@ function renderSearchHistory() {
 
     for (var i = 0; i < storedSearches.length; i++) {
         var storedLocationBtn = $("<button>" + storedSearches[i] + "</button>");
+        storedLocationBtn.attr("class", "history-btn");
         searchHistoryList.append(storedLocationBtn);
     }
 }
