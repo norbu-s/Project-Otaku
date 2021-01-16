@@ -74,16 +74,15 @@ searchBtn.on("click", function(event) {
         success: function(response) {
             console.log(response) 
             var locationName = response.location_suggestions[0].title.slice(0, response.location_suggestions[0].title.indexOf(","));
-
             for (var i = 0; i < storedSearches.length; i++) {
                 if (storedSearches[i] === locationName) {
                     storedSearches.splice(i, 1);
                 }
-                if (storedSearches.length > 4) {
-                    storedSearches.splice(0, 1);
-                }
             }
             storedSearches.push(locationName);
+            if (storedSearches.length > 5) {
+                storedSearches.splice(0, 1);
+            }
             storeSearches();
             renderSearchHistory();
 
