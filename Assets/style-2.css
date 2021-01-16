@@ -1,0 +1,33 @@
+.hide {
+    display: none;
+}
+
+main {
+    margin: 50px;
+}
+
+.card {
+    display: inline-block;
+    margin: 20px;
+}
+
+.fave {
+    height: 70vh;
+    width: 40vw;
+    border: solid 2px rgb(94, 92, 92);
+    box-shadow: 10px -5px rgb(255, 177, 60);
+}
+
+.fave div {
+    margin: 3px;
+}
+
+.img {
+    padding-bottom: 10px;
+}
+
+.info {
+    padding-top: 0;
+    padding-bottom: 10px;
+    border-bottom: solid 1px grey;
+}
