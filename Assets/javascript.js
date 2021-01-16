@@ -1,7 +1,33 @@
+var storedSearches = [];
+
 var searchInputEl = $("#zipcode");
 var searchBtn = $("#search-btn");
 var searchHistoryList = $("#search-history-list");
 var resultsDiv = $("#results");
+
+initialise();
+
+function renderSearchHistory() {
+    searchHistoryList.empty();
+
+    for (var i = 0; i < storedSearches.length; i++) {
+        var storedLocationBtn = $("<button>" + storedSearches[i] + "</button>");
+        searchHistoryList.append(storedLocationBtn);
+    }
+}
+
+function initialise() {
+    var updatedStoredSearches = JSON.parse(localStorage.getItem("storedSearches"));
+    if (updatedStoredSearches !== null) {
+        storedSearches = updatedStoredSearches;
+    }
+
+    renderSearchHistory();
+}
+
+function storeSearches() {
+    localStorage.setItem("storedSearches", JSON.stringify(storedSearches));
+}
 
 searchBtn.on("click", function(event) {
     event.preventDefault();
@@ -17,7 +43,21 @@ searchBtn.on("click", function(event) {
             return;
         },
         success: function(response) {
-            console.log(response)
+            console.log(response) // grab city name from zomato api to put in city btn
+            var locationName = response.location_suggestions[0].title.slice(0, response.location_suggestions[0].title.indexOf(","));
+
+            for (var i = 0; i < storedSearches.length; i++) {
+                if (storedSearches[i].toLowerCase() === searchInput.toLowerCase()) {
+                    storedSearches.splice(i, 1);
+                }
+                if (storedSearches.length > 5) {
+                    storedSearches.splice(0, 1);
+                }
+            }
+            storedSearches.push(locationName);
+            storeSearches();
+            renderSearchHistory();
+
             var entityId = response.location_suggestions[0].entity_id;
             var entityType = response.location_suggestions[0].entity_type;
     
