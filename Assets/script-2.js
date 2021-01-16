@@ -52,3 +52,23 @@ function initialise() {
 function storeImages() {
     localStorage.setItem("storedImages", JSON.stringify(storedImages));
 }
+
+// Google Maps rendering
+var mapBtns = document.querySelectorAll(".map-btn");
+
+document.body.addEventListener("click", function(event) {
+    if (event.target.classList.contains("map-btn")) {
+        var mapNumber = event.target.id[event.target.id.length - 1];
+        var mapFrame = $("#map" + mapNumber);
+        mapFrame.attr("src", "https://www.google.com/maps/embed/v1/place?key=AIzaSyBMo1myYnlmnCYMJc5fwiGiDZPqXar03ps&q=Opera+House");
+        
+        var mapDiv = mapFrame.parent();
+        if (event.target.textContent === "View on Map") {
+            event.target.textContent = "Hide Map";
+            mapDiv.removeClass("hide");
+        } else {
+            event.target.textContent = "View on Map";
+            mapDiv.addClass("hide");
+        }
+    }
+})
