@@ -1,11 +1,14 @@
+/* hidden elements*/
 .hide {
     display: none;
 }
 
+/* main content */
 main {
     margin: 50px;
 }
 
+/* foundation card component*/
 .card {
     display: inline-block;
     margin: 20px;
@@ -22,10 +25,26 @@ main {
     margin: 3px;
 }
 
+/* Google Maps */
+.map {
+    height: 30vh;
+}
+
+.map-btn {
+    background: rgb(243, 239, 239);
+    border: solid 1px grey;
+    border-radius: 4px;
+    margin-top: 5px;
+    margin-left: 20px;
+    padding: 6px;
+}
+
+/* user-uploaded image */
 .img {
     padding-bottom: 10px;
 }
 
+/* card info section */
 .info {
     padding-top: 0;
     padding-bottom: 10px;
