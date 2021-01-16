@@ -33,6 +33,7 @@ function storeSearches() {
 searchBtn.on("click", function(event) {
     event.preventDefault();
 
+    resultsDiv.empty();
     var searchInput = $("#zipcode").val();
 
     $.ajax({
