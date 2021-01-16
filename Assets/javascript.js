@@ -39,6 +39,11 @@ searchBtn.on("click", function(event) {
     resultsDiv.empty();
     var searchInput = $("#zipcode").val();
 
+    if (searchInput === "") {
+        console.log("no input");
+        return;
+    }
+
     // Zomato location API call
     $.ajax({
         headers: {"user-key": "9a1b7bbdae3e31891d3b697bed7433bc"},
@@ -53,7 +58,7 @@ searchBtn.on("click", function(event) {
             var locationName = response.location_suggestions[0].title.slice(0, response.location_suggestions[0].title.indexOf(","));
 
             for (var i = 0; i < storedSearches.length; i++) {
-                if (storedSearches[i].toLowerCase() === searchInput.toLowerCase()) {
+                if (storedSearches[i] === locationName) {
                     storedSearches.splice(i, 1);
                 }
                 if (storedSearches.length > 4) {
