@@ -5,10 +5,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-<!--font-->
-<link rel="preconnect" href="https://fonts.gstatic.com">
-<link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
-   <!-- Compressed CSS -->
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
+    <!-- Compressed CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/dist/css/foundation.min.css" integrity="sha256-ogmFxjqiTMnZhxCqVmcqTvjfe1Y/ec4WaRj/aQPvn+I=" crossorigin="anonymous">
     <link rel="stylesheet" href="Assets/style.css">
 
@@ -17,50 +17,39 @@
 
 <body>
     <div class="top-bar">
-        
-    <header>
-        <h1>Covid Safe Restaurants</h1>
-    </header>
-  
+        <header>
+            <h1>Covid Safe Restaurants</h1>
+        </header>
     </div>
 
-
-     
 <!--foundation grid-->
-<div class="grid-x">
+    <div class="grid-x">
+        <!--foundation column 1 (search bar & search history)-->
         <div class="cell medium-4 large-3">
-    <div id="search-zipcode">
-    <!--foundation colums-->
-      
-        <form>
-            <input type="text" id="zipcode" placeholder="Search zipcode">
-            <button type="submit" id="search-btn">search</button>
-        </form>
- 
-        
-        <div id="search-history">
-            <h2 id="title-history">Search History</h2>
-            <ul id="search-history-list"></ul>
+            <div id="search-zipcode">
+                <form>
+                    <input type="text" id="zipcode" placeholder="Search zipcode">
+                    <button type="submit" id="search-btn">search</button>
+                </form>
+                <div id="search-history">
+                    <h2 id="title-history">Search History</h2>
+                    <ul id="search-history-list"></ul>
+                </div>
+            </div>
+        </div>
+
+        <!--foundation column 2 (search results)-->
+        <div class="cell medium-8 large-9">
+            <div id="content">
+                <h2 id="nearest-restaurant">Nearest Covidsafe Restaurants</h2>
+                <div id="results"></div>
+            </div>
         </div>
     </div>
-    </div>
-
-  
-    
-
-
-<!--foundation colums-->
-<div class="cell medium-8 large-9">
-    <div id="content">
-        <h2 id="nearest-restaurant">Nearest Covidsafe Restaurants</h2>
-        <div id="results"></div>
-    </div>
-</div>
-</div>
     
 <!-- Compressed JavaScript -->
-    <script src="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/dist/js/foundation.min.js" integrity="sha256-pRF3zifJRA9jXGv++b06qwtSqX1byFQOLjqa2PTEb2o=" crossorigin="anonymous"></script>   
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/dist/js/foundation.min.js" integrity="sha256-pRF3zifJRA9jXGv++b06qwtSqX1byFQOLjqa2PTEb2o=" crossorigin="anonymous"></script>   
     <script src="Assets/javascript.js"></script>
 </body>
 
