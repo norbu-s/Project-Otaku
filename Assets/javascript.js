@@ -44,7 +44,25 @@ searchBtn.on("click", function(event) {
         return;
     }
 
-    // Zomato location API call
+    // Zomato location API call 
+    /*
+        Country data available: 
+        - India
+        - Australia
+        - Brazil
+        - Canada
+        - Indonesia
+        - New Zealand
+        - Phillipines
+        - Qatar
+        - Singapore
+        - South Africa
+        - Sri Lanka
+        - Turkey
+        - UAE
+        - UK
+        - US
+    */
     $.ajax({
         headers: {"user-key": "9a1b7bbdae3e31891d3b697bed7433bc"},
         url: "https://developers.zomato.com/api/v2.1/locations?query=" + searchInput,
