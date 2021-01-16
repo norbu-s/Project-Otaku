@@ -107,18 +107,6 @@ searchBtn.on("click", function(event) {
                     }
                 }
             })
-
-            // $.ajax({
-            //     headers: {"user-key": "9a1b7bbdae3e31891d3b697bed7433bc"},
-            //     url: "https://developers.zomato.com/api/v2.1/geocode?lat=" + latitude + "&lon=" + longitude,
-            //     method: "GET",
-            //     error: function() {
-            //         alert("Sorry, there was an error loading the data.");
-            //         return;
-            //     },
-            //     success: function(response) {}
-            // })
-
         }
     })
 })
