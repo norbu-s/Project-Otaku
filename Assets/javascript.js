@@ -44,14 +44,14 @@ searchBtn.on("click", function(event) {
             return;
         },
         success: function(response) {
-            console.log(response) // grab city name from zomato api to put in city btn
+            console.log(response) 
             var locationName = response.location_suggestions[0].title.slice(0, response.location_suggestions[0].title.indexOf(","));
 
             for (var i = 0; i < storedSearches.length; i++) {
                 if (storedSearches[i].toLowerCase() === searchInput.toLowerCase()) {
                     storedSearches.splice(i, 1);
                 }
-                if (storedSearches.length > 5) {
+                if (storedSearches.length > 4) {
                     storedSearches.splice(0, 1);
                 }
             }
@@ -150,4 +150,6 @@ searchBtn.on("click", function(event) {
             })
         }
     })
+
+    searchInputEl.val("");
 })
