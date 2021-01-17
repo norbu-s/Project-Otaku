@@ -24,6 +24,7 @@ This project aims to create a seamless, easily navigable and handy web applicati
 ## Links to resources
 
 [Zomato API](https://developers.zomato.com/api?lang=id)
+
 [Google Maps Embed API](https://developers.google.com/maps/documentation/embed/get-started)
 
 ## Project Links
