@@ -16,7 +16,7 @@ function renderSearchHistory() {
     for (var i = 0; i < storedSearches.length; i++) {
         var storedLocationBtn = $("<button>" + storedSearches[i] + "</button>");
         storedLocationBtn.attr("class", "history-btn");
-        searchHistoryList.append(storedLocationBtn);
+        searchHistoryList.prepend(storedLocationBtn);
     }
 }
 
@@ -200,12 +200,24 @@ searchBtn.on("click", function(event) {
                         data-phone="${restaurantPhoneNo}"
                         data-cuisine="${cuisine}"
                         >Add to Favorite</button>`);;
-                        faveBtn.click((event) =>{
-                          console.log(event.target) 
-                          console.log(event.target.dataset) 
-                   
 
-                        
+                        faveBtn.click((event) =>{
+                            var dataset = event.target.dataset;
+                            var faveList = {"name": dataset.name, "location": dataset.location, "phone": dataset.phone, "cuisine": dataset.cuisine};
+                            
+                            for (var i = 0; i < storedFaves.length; i++) {
+                                if (storedFaves[i].name === faveList.name) {
+                                    storedFaves.splice(i, 1);
+                                }
+                            }
+                            storedFaves.push(faveList);
+
+                            if (storedFaves.length > 4) {
+                                storedFaves.splice(0, 1);
+                            }
+
+                            storeFaves();
+                            renderFavouritesList();
                         });
                         
 
