@@ -48,6 +48,13 @@ for (var i = storedFaves.length - 1; i >= 0; i--) {
     renderImages();
 }
 
+// hiding/showing "You have no favourites message"
+if (storedFaves.length > 0) {
+    $("#no-fave-msg").attr("class", "hide");
+} else {
+    $("#no-fave-msg").attr("class", "");
+}
+
 // functionality for 'upload image' button
 var cardNumber = 0;
 var cardRestaurant = "";

@@ -25,15 +25,16 @@ function renderFavouritesList() {
 
     for (var i = 0; i < storedFaves.length; i++) {
         var storedFaveLi = $("<li>");
-        var storedFaveBtn = $(`<button 
-        class="fave-btn" 
+        var storedFaveBtn = $(`<a 
+        href="fave-restaurants.html"
+        class="button fave-btn" 
         data-name="${storedFaves[i].name}"
         data-cost="${storedFaves[i].cost}"
         data-location="${storedFaves[i].location}"
         data-phone="${storedFaves[i].phone}"
         data-cuisine="${storedFaves[i].cuisine}"
         data-id="${storedFaves[i].id}"
-        >` + storedFaves[i].name+ `</button>`);;
+        >` + storedFaves[i].name+ `</a>`);;
         var removeFaveBtn = $("<button id=" + storedFaves[i].id + " class=\"remove-fave-btn\">X</i></button");
         storedFaveLi.append(storedFaveBtn, removeFaveBtn);
 
@@ -344,34 +345,6 @@ searchHistoryList.on("click", function(event) {
                 })
             }
         })
-    }
-})
-
-// get API data on favourites button click
-favesList.on("click", function(event) {
-    if (event.target.classList.contains("fave-btn")) {
-
-        var dataset = event.target.dataset;
-        resultsDiv.empty();
-        
-        var resultDiv = $("<div>");
-        resultDiv.attr("id", "result-each");
-
-        var restaurantName = dataset.name;
-        var restaurantLocation = dataset.location;
-        var restaurantPhoneNo = dataset.phone;
-        var averageCostForTwo = dataset.cost;
-        var cuisine = dataset.cuisine;
-
-        var restaurantNameDiv = $("<div>" + restaurantName + "</div>");
-        var cuisineDiv = $("<div>" + cuisine + "Cuisine");
-        var averageCostForTwoDiv = $("<div>" + "Average Cost For Two: $" + averageCostForTwo + "</div>");
-        var restaurantLocationDiv = $("<div>" + restaurantLocation + "</div>");
-        var restaurantPhoneNoDiv = $("<div>" + restaurantPhoneNo + "</div>");
-        
-        resultDiv.append(restaurantNameDiv, cuisineDiv, averageCostForTwoDiv, restaurantLocationDiv, restaurantPhoneNoDiv);
-        resultsDiv.append(resultDiv);
-     
     }
 })
   

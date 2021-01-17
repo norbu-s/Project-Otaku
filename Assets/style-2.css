@@ -8,6 +8,15 @@ main {
     margin: 50px;
 }
 
+/* no favourites message */
+#no-fave-msg {
+    text-align: center;
+    font-size: 50px;
+    font-weight: bold;
+    width: 85vw;
+    margin-top: 6vh;
+}
+
 /* foundation card component*/
 .card {
     display: inline-block;

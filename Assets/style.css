@@ -38,10 +38,6 @@ form {
     font-size: 26px;
 }
 
-#title-faves:hover {
-    color: rgb(255, 196, 0);
-}
-
 #search-history-list {
     /* margin: 10px; */
     /* padding: 10px; */
@@ -80,8 +76,7 @@ form {
     border-top-left-radius: 10px;
     border-bottom-left-radius: 10px;
     padding: 10px;
-    margin: 3px;
-    margin-right: 0;
+    margin-bottom: 3px;
     width: 70%;
 }
 
@@ -95,8 +90,7 @@ form {
     color: white;
     font-weight: bold;
     padding: 10px;
-    margin: 3px;
-    margin-left: 0;
+    vertical-align: top;
     border-top-right-radius: 10px;
     border-bottom-right-radius: 10px;
 } /* work out how to make the height of the remove btn the same as the fave btn */
