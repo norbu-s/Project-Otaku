@@ -379,3 +379,14 @@ favesList.on("click", function(event) {
         renderFavouritesList();
     }
 })
+
+// clear search history list 
+$("#clear-search-btn").on("click", function(event) {
+    var clearConfirm = confirm("Are you sure you want to clear your search history?");
+    if (clearConfirm) {
+        localStorage.removeItem("storedSearches");
+        searchHistoryList.empty();
+    } else {
+        return;
+    }
+})
