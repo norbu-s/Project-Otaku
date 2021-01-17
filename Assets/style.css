@@ -34,7 +34,12 @@ form {
 }
  
 .sidebar-title {
+    color: white;
     font-size: 26px;
+}
+
+#title-faves:hover {
+    color: rgb(255, 196, 0);
 }
 
 #search-history-list {
