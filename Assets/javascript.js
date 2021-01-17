@@ -23,11 +23,10 @@ function renderSearchHistory() {
 function renderFavouritesList() {
     favesList.empty();
 
-    console.log(storedFaves)
     for (var i = 0; i < storedFaves.length; i++) {
         var storedFaveBtn = $("<button>" + storedFaves[i].name + "</button>");
         storedFaveBtn.attr("class", "fave-btn");
-        favesList.append(storedFaveBtn);
+        favesList.prepend(storedFaveBtn);
     }
 }
 
@@ -276,16 +275,12 @@ searchHistoryList.on("click", function(event) {
                             data-phone="${restaurantPhoneNo}"
                             data-cuisine="${cuisine}"
                             >Add to Favorite</button>`);;
-                            faveBtn.click((event) =>{
-                                console.log(event.target) 
-                                console.log(event.target.dataset) 
-                                var dataset = event.target.dataset;
 
+                            faveBtn.click((event) =>{
+                                var dataset = event.target.dataset;
                                 var faveList = {"name": dataset.name, "location": dataset.location, "phone": dataset.phone, "cuisine": dataset.cuisine};
                                 
-                                console.log(faveList.name)
                                 for (var i = 0; i < storedFaves.length; i++) {
-                                    console.log(storedFaves[i].name)
                                     if (storedFaves[i].name === faveList.name) {
                                         storedFaves.splice(i, 1);
                                     }
