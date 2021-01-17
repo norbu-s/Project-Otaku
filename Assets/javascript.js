@@ -24,7 +24,6 @@ function renderFavouritesList() {
     favesList.empty();
 
     for (var i = 0; i < storedFaves.length; i++) {
-        console.log(storedFaves[i].id)
         var storedFaveLi = $("<li>");
         var storedFaveBtn = $(`<button 
         class="fave-btn" 
@@ -35,7 +34,7 @@ function renderFavouritesList() {
         data-cuisine="${storedFaves[i].cuisine}"
         data-id="${storedFaves[i].id}"
         >` + storedFaves[i].name+ `</button>`);;
-        var removeFaveBtn = $("<button class=\"remove-fave-btn\">X</i></button");
+        var removeFaveBtn = $("<button id=" + storedFaves[i].id + " class=\"remove-fave-btn\">X</i></button");
         storedFaveLi.append(storedFaveBtn, removeFaveBtn);
 
         favesList.prepend(storedFaveLi);
@@ -366,3 +365,17 @@ favesList.on("click", function(event) {
     }
 })
   
+// delete favourite item 
+favesList.on("click", function(event) {
+    if (event.target.classList.contains("remove-fave-btn")) {
+        var faveBtnId = event.target.id;
+        console.log(faveBtnId)
+        for (var i = 0; i < storedFaves.length; i++) {
+            if (storedFaves[i].id === faveBtnId) {
+                storedFaves.splice(i, 1);
+            }
+            storeFaves();
+        }
+        renderFavouritesList();
+    }
+})
