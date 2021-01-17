@@ -3,6 +3,7 @@ var storedFaves = [];
 
 var searchInputEl = $("#zipcode");
 var searchBtn = $("#search-btn");
+var favesList = $("#faves-list");
 var searchHistoryList = $("#search-history-list");
 var resultsDiv = $("#results");
 
@@ -11,11 +12,19 @@ initialise();
 
 function renderSearchHistory() {
     searchHistoryList.empty();
+    favesList.empty();
 
     for (var i = 0; i < storedSearches.length; i++) {
         var storedLocationBtn = $("<button>" + storedSearches[i] + "</button>");
         storedLocationBtn.attr("class", "history-btn");
         searchHistoryList.append(storedLocationBtn);
+    }
+    
+    console.log(storedFaves)
+    for (var i = 0; i < storedFaves.length; i++) {
+        var storedFaveBtn = $("<button>" + storedFaves[i].name + "</button>");
+        storedFaveBtn.attr("class", "fave-btn");
+        favesList.append(storedFaveBtn);
     }
 }
 
@@ -25,6 +34,10 @@ function initialise() {
         storedSearches = updatedStoredSearches;
     }
 
+    var updatedStoredFaves = JSON.parse(localStorage.getItem("storedFaves"));
+    if (updatedStoredFaves !== null) {
+        storedFaves = updatedStoredFaves;
+    }
     renderSearchHistory();
 }
 
@@ -259,15 +272,11 @@ searchHistoryList.on("click", function(event) {
                               console.log(event.target) 
                               console.log(event.target.dataset) 
                               var dataset = event.target.dataset;
-                              var faverestaurantInfo = JSON.parse(localStorage.getItem("faveRestaurant"));
-                              if (faverestaurantInfo !== null) {
-                                storedFaves = faverestaurantInfo;
-                            }
 
                              var faveList = {"name": dataset.name, "location": dataset.location, "phone": dataset.phone, "cuisine": dataset.cuisine};
                              console.log(faveList)
                              storedFaves.push(faveList);
-                             localStorage.setItem("faveRestaurant", JSON.stringify(storedFaves));
+                             localStorage.setItem("storedFaves", JSON.stringify(storedFaves));
                             });
 
 
