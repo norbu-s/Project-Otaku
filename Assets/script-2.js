@@ -27,7 +27,7 @@ for (var i = storedFaves.length - 1; i >= 0; i--) {
     // Info section
     var cardInfo = $("<div id='info" + cardCounter + "' class='card-section info hide'></div>");
     var cuisine = $("<div class='cuisine'><strong>Cuisine: </strong>" + storedFaves[i].cuisine + "</div>");
-    var cost = $("<div class='cost'><strong>Average Cost For Two: </strong>" + storedFaves[i].cost + "</div>");
+    var cost = $("<div class='cost'><strong>Average Cost For Two: </strong>$" + storedFaves[i].cost + "</div>");
     var address = $("<div class='location'><strong>Address: </strong>" + storedFaves[i].location + "</div>");
     var phone = $("<div class='phone'><strong>Phone: </strong>" + storedFaves[i].phone + "</div>");
     cardInfo.append(cuisine, cost, address, phone);
