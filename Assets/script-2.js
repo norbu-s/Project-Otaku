@@ -72,3 +72,24 @@ document.body.addEventListener("click", function(event) {
         }
     }
 })
+
+// Expanding and minimising card
+var cardStatus = "closed";
+$(".card-divider").on("click", function(event) {
+    var cardNumber = event.target.id[event.target.id.length - 1];
+    if (cardStatus === "closed") {
+        cardStatus = "opened";
+        $("#map-btn" + cardNumber).removeClass("hide");
+        $("#map-btn" + cardNumber).text("View on Map");
+        $("#img" + cardNumber).removeClass("hide");
+        $("#info" + cardNumber).removeClass("hide");
+        $("#notes" + cardNumber).removeClass("hide");
+    } else {
+        cardStatus = "closed";
+        $("#map-btn" + cardNumber).addClass("hide");
+        $("#map" + cardNumber).parent().addClass("hide");
+        $("#img" + cardNumber).addClass("hide");
+        $("#info" + cardNumber).addClass("hide");
+        $("#notes" + cardNumber).addClass("hide");
+    }
+})

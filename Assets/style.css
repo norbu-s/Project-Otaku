@@ -1,3 +1,7 @@
+.hide {
+    display: none;
+}
+
 body {
     border: none;
     margin: 0;
@@ -29,13 +33,18 @@ form {
     transition: all 0.2s;
 }
  
-#title-history {
+.sidebar-title {
+    color: white;
     font-size: 26px;
+}
+
+#title-faves:hover {
+    color: rgb(255, 196, 0);
 }
 
 #search-history-list {
     /* margin: 10px; */
-    padding: 10px;
+    /* padding: 10px; */
     /* background-color: rgba(255,255,255,0.7); */
     /* border: none;
     border-radius: 10px; */
@@ -46,13 +55,59 @@ form {
     background-color: rgba(255,255,255,0.7); 
     border-radius: 10px;
     padding: 10px;
+    margin: 3px auto;
+    width: 100%;
+}
+
+#clear-search-btn { 
+    display: block;
+    color: white;
+    background-color: rgba(154, 146, 146, 0.7); 
+    border-radius: 10px;
+    padding: 10px;
     margin: 3px;
     width: 100%;
 }
 
-.history-btn:hover {
+#clear-search-btn:hover {
+    cursor: pointer;
+    background: rgb(70, 70, 70);
+}
+
+.fave-btn {
+    display: inline-block;
+    background-color: rgba(255,255,255,0.7); 
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    padding: 10px;
+    margin: 3px;
+    margin-right: 0;
+    width: 70%;
+}
+
+.history-btn:hover, .fave-btn:hover {
     cursor: pointer;
     background-color: grey;
+}
+
+.remove-fave-btn {
+    background-color: grey;
+    color: white;
+    font-weight: bold;
+    padding: 10px;
+    margin: 3px;
+    margin-left: 0;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+} /* work out how to make the height of the remove btn the same as the fave btn */
+
+.remove-fave-btn:hover {
+    background-color: rgb(182, 60, 60);
+    cursor: pointer;
+}
+
+#faves-list {
+    list-style: none;
 }
 
 .top-bar {

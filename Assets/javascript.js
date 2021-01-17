@@ -1,11 +1,13 @@
 var storedSearches = [];
+var storedFaves = [];
 
 var searchInputEl = $("#zipcode");
 var searchBtn = $("#search-btn");
+var favesList = $("#faves-list");
 var searchHistoryList = $("#search-history-list");
 var resultsDiv = $("#results");
 
-// render the search history list
+// render the stored items
 initialise();
 
 function renderSearchHistory() {
@@ -14,7 +16,28 @@ function renderSearchHistory() {
     for (var i = 0; i < storedSearches.length; i++) {
         var storedLocationBtn = $("<button>" + storedSearches[i] + "</button>");
         storedLocationBtn.attr("class", "history-btn");
-        searchHistoryList.append(storedLocationBtn);
+        searchHistoryList.prepend(storedLocationBtn);
+    }
+}
+
+function renderFavouritesList() {
+    favesList.empty();
+
+    for (var i = 0; i < storedFaves.length; i++) {
+        var storedFaveLi = $("<li>");
+        var storedFaveBtn = $(`<button 
+        class="fave-btn" 
+        data-name="${storedFaves[i].name}"
+        data-cost="${storedFaves[i].cost}"
+        data-location="${storedFaves[i].location}"
+        data-phone="${storedFaves[i].phone}"
+        data-cuisine="${storedFaves[i].cuisine}"
+        data-id="${storedFaves[i].id}"
+        >` + storedFaves[i].name+ `</button>`);;
+        var removeFaveBtn = $("<button id=" + storedFaves[i].id + " class=\"remove-fave-btn\">X</i></button");
+        storedFaveLi.append(storedFaveBtn, removeFaveBtn);
+
+        favesList.prepend(storedFaveLi);
     }
 }
 
@@ -24,12 +47,28 @@ function initialise() {
         storedSearches = updatedStoredSearches;
     }
 
+    var updatedStoredFaves = JSON.parse(localStorage.getItem("storedFaves"));
+    if (updatedStoredFaves !== null) {
+        storedFaves = updatedStoredFaves;
+    }
     renderSearchHistory();
-}
+    renderFavouritesList();
+;}
 
-// store searches (on search button click)
+// store searches/favourites
 function storeSearches() {
     localStorage.setItem("storedSearches", JSON.stringify(storedSearches));
+}
+
+function storeFaves() {
+    localStorage.setItem("storedFaves", JSON.stringify(storedFaves));
+}
+
+// hide/show clear search history btn depending on if there is anything in the list 
+if (storedSearches === []) {
+    $("#clear-search-btn").addClass("hide");
+} else {
+    $("#clear-search-btn").removeClass("hide");
 }
 
 // search button click event 
@@ -85,6 +124,9 @@ searchBtn.on("click", function(event) {
             }
             storeSearches();
             renderSearchHistory();
+            if ($("#clear-search-btn").attr("class") === "hide") {
+                $("#clear-search-btn").removeClass("hide");
+            }
 
             var entityId = response.location_suggestions[0].entity_id;
             var entityType = response.location_suggestions[0].entity_type;
@@ -164,6 +206,7 @@ searchBtn.on("click", function(event) {
                         var restaurantPhoneNo = response.restaurants[i].restaurant.phone_numbers;
                         var averageCostForTwo = response.restaurants[i].restaurant.average_cost_for_two;
                         var cuisine = response.restaurants[i].restaurant.cuisines;
+                        var restaurantId = response.restaurants[i].restaurant.id;
 
                         var restaurantNameDiv = $("<div>" + restaurantName + "</div>");
                         var cuisineDiv = $("<div>" + cuisine + "Cuisine");
@@ -171,8 +214,40 @@ searchBtn.on("click", function(event) {
                         var restaurantLocationDiv = $("<div>" + restaurantLocation + "</div>");
                         var restaurantPhoneNoDiv = $("<div>" + restaurantPhoneNo + "</div>");
 
-                        resultDiv.append(restaurantNameDiv, cuisineDiv, averageCostForTwoDiv, restaurantLocationDiv, restaurantPhoneNoDiv);
+                        // var faveBtn = $(`<button class="faveButton">Add to Favorite</button>`);
+                        var faveBtn = $(`<button 
+                        class="add-fave-btn" 
+                        data-name="${restaurantName}"
+                        data-cost="${averageCostForTwo}"
+                        data-location="${restaurantLocation}"
+                        data-phone="${restaurantPhoneNo}"
+                        data-cuisine="${cuisine}"
+                        data-id="${restaurantId}"
+                        >Add to Favorite</button>`);;
+
+                        faveBtn.click((event) =>{
+                            var dataset = event.target.dataset;
+                            var faveList = {"name": dataset.name, "cost": dataset.cost, "location": dataset.location, "phone": dataset.phone, "cuisine": dataset.cuisine, "id": dataset.id};
+                            
+                            for (var i = 0; i < storedFaves.length; i++) {
+                                if (storedFaves[i].name === faveList.name) {
+                                    storedFaves.splice(i, 1);
+                                }
+                            }
+                            storedFaves.push(faveList);
+
+                            if (storedFaves.length > 4) {
+                                storedFaves.splice(0, 1);
+                            }
+
+                            storeFaves();
+                            renderFavouritesList();
+                        });
+                        
+
+                        resultDiv.append(restaurantNameDiv, cuisineDiv, averageCostForTwoDiv, restaurantLocationDiv, restaurantPhoneNoDiv, faveBtn);
                         resultsDiv.append(resultDiv);
+
                     }
                 }
             })
@@ -213,6 +288,7 @@ searchHistoryList.on("click", function(event) {
                         return;
                     },
                     success: function(response) {
+                        console.log(response)
                         for (var i = 0; i < response.restaurants.length; i++) {
                             var resultDiv = $("<div>");
                             resultDiv.attr("id", "result-each");
@@ -222,19 +298,107 @@ searchHistoryList.on("click", function(event) {
                             var restaurantPhoneNo = response.restaurants[i].restaurant.phone_numbers;
                             var averageCostForTwo = response.restaurants[i].restaurant.average_cost_for_two;
                             var cuisine = response.restaurants[i].restaurant.cuisines;
+                            var restaurantId = response.restaurants[i].restaurant.id;
 
                             var restaurantNameDiv = $("<div>" + restaurantName + "</div>");
                             var cuisineDiv = $("<div>" + cuisine + "Cuisine");
                             var averageCostForTwoDiv = $("<div>" + "Average Cost For Two: $" + averageCostForTwo + "</div>");
                             var restaurantLocationDiv = $("<div>" + restaurantLocation + "</div>");
                             var restaurantPhoneNoDiv = $("<div>" + restaurantPhoneNo + "</div>");
+                            
+                            var faveBtn = $(`<button 
+                            class="add-fave-btn" 
+                            data-name="${restaurantName}"
+                            data-cost="${averageCostForTwo}"
+                            data-location="${restaurantLocation}"
+                            data-phone="${restaurantPhoneNo}"
+                            data-cuisine="${cuisine}"
+                            data-id="${restaurantId}"
+                            >Add to Favorite</button>`);;
 
-                            resultDiv.append(restaurantNameDiv, cuisineDiv, averageCostForTwoDiv, restaurantLocationDiv, restaurantPhoneNoDiv);
+                            faveBtn.click((event) =>{
+                                var dataset = event.target.dataset;
+                                var faveList = {"name": dataset.name, "cost": dataset.cost, "location": dataset.location, "phone": dataset.phone, "cuisine": dataset.cuisine, "id": dataset.id};
+                                
+                                for (var i = 0; i < storedFaves.length; i++) {
+                                    if (storedFaves[i].name === faveList.name) {
+                                        storedFaves.splice(i, 1);
+                                    }
+                                }
+                                storedFaves.push(faveList);
+
+                                if (storedFaves.length > 4) {
+                                    storedFaves.splice(0, 1);
+                                }
+
+                                storeFaves();
+                                renderFavouritesList();
+                            });
+
+
+
+                            resultDiv.append(restaurantNameDiv, cuisineDiv, averageCostForTwoDiv, restaurantLocationDiv, restaurantPhoneNoDiv,faveBtn);
                             resultsDiv.append(resultDiv);
                         }
                     }
                 })
             }
         })
+    }
+})
+
+// get API data on favourites button click
+favesList.on("click", function(event) {
+    if (event.target.classList.contains("fave-btn")) {
+
+        var dataset = event.target.dataset;
+        resultsDiv.empty();
+        
+        var resultDiv = $("<div>");
+        resultDiv.attr("id", "result-each");
+
+        var restaurantName = dataset.name;
+        var restaurantLocation = dataset.location;
+        var restaurantPhoneNo = dataset.phone;
+        var averageCostForTwo = dataset.cost;
+        var cuisine = dataset.cuisine;
+
+        var restaurantNameDiv = $("<div>" + restaurantName + "</div>");
+        var cuisineDiv = $("<div>" + cuisine + "Cuisine");
+        var averageCostForTwoDiv = $("<div>" + "Average Cost For Two: $" + averageCostForTwo + "</div>");
+        var restaurantLocationDiv = $("<div>" + restaurantLocation + "</div>");
+        var restaurantPhoneNoDiv = $("<div>" + restaurantPhoneNo + "</div>");
+        
+        resultDiv.append(restaurantNameDiv, cuisineDiv, averageCostForTwoDiv, restaurantLocationDiv, restaurantPhoneNoDiv);
+        resultsDiv.append(resultDiv);
+     
+    }
+})
+  
+// delete favourite item 
+favesList.on("click", function(event) {
+    if (event.target.classList.contains("remove-fave-btn")) {
+        var faveBtnId = event.target.id;
+        console.log(faveBtnId)
+        for (var i = 0; i < storedFaves.length; i++) {
+            if (storedFaves[i].id === faveBtnId) {
+                storedFaves.splice(i, 1);
+            }
+            storeFaves();
+        }
+        renderFavouritesList();
+    }
+})
+
+// clear search history list and storage
+$("#clear-search-btn").on("click", function() {
+    var clearConfirm = confirm("Are you sure you want to clear your search history?");
+    if (clearConfirm) {
+        localStorage.removeItem("storedSearches");
+        searchHistoryList.empty();
+        storedSearches = [];
+        $("#clear-search-btn").addClass("hide");
+    } else {
+        return;
     }
 })

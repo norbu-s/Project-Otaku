@@ -12,10 +12,15 @@ main {
 .card {
     display: inline-block;
     margin: 20px;
+    vertical-align: top;
+}
+
+.card-divider:hover {
+    cursor: pointer;
 }
 
 .fave {
-    height: 70vh;
+    height: fit-content;
     width: 40vw;
     border: solid 2px rgb(94, 92, 92);
     box-shadow: 10px -5px rgb(255, 177, 60);
