@@ -7,7 +7,7 @@ var favesList = $("#faves-list");
 var searchHistoryList = $("#search-history-list");
 var resultsDiv = $("#results");
 
-// render the search history list
+// render the stored items
 initialise();
 
 function renderSearchHistory() {
@@ -24,8 +24,16 @@ function renderFavouritesList() {
     favesList.empty();
 
     for (var i = 0; i < storedFaves.length; i++) {
-        var storedFaveBtn = $("<button>" + storedFaves[i].name + "</button>");
-        storedFaveBtn.attr("class", "fave-btn");
+        console.log(storedFaves[i].id)
+        var storedFaveBtn = $(`<button 
+        class="fave-btn" 
+        data-name="${storedFaves[i].name}"
+        data-cost="${storedFaves[i].cost}"
+        data-location="${storedFaves[i].location}"
+        data-phone="${storedFaves[i].phone}"
+        data-cuisine="${storedFaves[i].cuisine}"
+        data-id="${storedFaves[i].id}"
+        >` + storedFaves[i].name+ `</button>`);;
         favesList.prepend(storedFaveBtn);
     }
 }
@@ -44,7 +52,7 @@ function initialise() {
     renderFavouritesList();
 ;}
 
-// store searches (on search button click)
+// store searches/favourites
 function storeSearches() {
     localStorage.setItem("storedSearches", JSON.stringify(storedSearches));
 }
@@ -185,6 +193,7 @@ searchBtn.on("click", function(event) {
                         var restaurantPhoneNo = response.restaurants[i].restaurant.phone_numbers;
                         var averageCostForTwo = response.restaurants[i].restaurant.average_cost_for_two;
                         var cuisine = response.restaurants[i].restaurant.cuisines;
+                        var restaurantId = response.restaurants[i].restaurant.id;
 
                         var restaurantNameDiv = $("<div>" + restaurantName + "</div>");
                         var cuisineDiv = $("<div>" + cuisine + "Cuisine");
@@ -194,16 +203,18 @@ searchBtn.on("click", function(event) {
 
                         // var faveBtn = $(`<button class="faveButton">Add to Favorite</button>`);
                         var faveBtn = $(`<button 
-                        class="faveButton" 
+                        class="add-fave-btn" 
                         data-name="${restaurantName}"
+                        data-cost="${averageCostForTwo}"
                         data-location="${restaurantLocation}"
                         data-phone="${restaurantPhoneNo}"
                         data-cuisine="${cuisine}"
+                        data-id="${restaurantId}"
                         >Add to Favorite</button>`);;
 
                         faveBtn.click((event) =>{
                             var dataset = event.target.dataset;
-                            var faveList = {"name": dataset.name, "location": dataset.location, "phone": dataset.phone, "cuisine": dataset.cuisine};
+                            var faveList = {"name": dataset.name, "cost": dataset.cost, "location": dataset.location, "phone": dataset.phone, "cuisine": dataset.cuisine, "id": dataset.id};
                             
                             for (var i = 0; i < storedFaves.length; i++) {
                                 if (storedFaves[i].name === faveList.name) {
@@ -264,6 +275,7 @@ searchHistoryList.on("click", function(event) {
                         return;
                     },
                     success: function(response) {
+                        console.log(response)
                         for (var i = 0; i < response.restaurants.length; i++) {
                             var resultDiv = $("<div>");
                             resultDiv.attr("id", "result-each");
@@ -273,6 +285,7 @@ searchHistoryList.on("click", function(event) {
                             var restaurantPhoneNo = response.restaurants[i].restaurant.phone_numbers;
                             var averageCostForTwo = response.restaurants[i].restaurant.average_cost_for_two;
                             var cuisine = response.restaurants[i].restaurant.cuisines;
+                            var restaurantId = response.restaurants[i].restaurant.id;
 
                             var restaurantNameDiv = $("<div>" + restaurantName + "</div>");
                             var cuisineDiv = $("<div>" + cuisine + "Cuisine");
@@ -281,16 +294,18 @@ searchHistoryList.on("click", function(event) {
                             var restaurantPhoneNoDiv = $("<div>" + restaurantPhoneNo + "</div>");
                             
                             var faveBtn = $(`<button 
-                            class="faveButton" 
+                            class="add-fave-btn" 
                             data-name="${restaurantName}"
+                            data-cost="${averageCostForTwo}"
                             data-location="${restaurantLocation}"
                             data-phone="${restaurantPhoneNo}"
                             data-cuisine="${cuisine}"
+                            data-id="${restaurantId}"
                             >Add to Favorite</button>`);;
 
                             faveBtn.click((event) =>{
                                 var dataset = event.target.dataset;
-                                var faveList = {"name": dataset.name, "location": dataset.location, "phone": dataset.phone, "cuisine": dataset.cuisine};
+                                var faveList = {"name": dataset.name, "cost": dataset.cost, "location": dataset.location, "phone": dataset.phone, "cuisine": dataset.cuisine, "id": dataset.id};
                                 
                                 for (var i = 0; i < storedFaves.length; i++) {
                                     if (storedFaves[i].name === faveList.name) {
@@ -318,3 +333,32 @@ searchHistoryList.on("click", function(event) {
         })
     }
 })
+
+// get API data on favourites button click
+favesList.on("click", function(event) {
+    if (event.target.classList.contains("fave-btn")) {
+
+        var dataset = event.target.dataset;
+        resultsDiv.empty();
+        
+        var resultDiv = $("<div>");
+        resultDiv.attr("id", "result-each");
+
+        var restaurantName = dataset.name;
+        var restaurantLocation = dataset.location;
+        var restaurantPhoneNo = dataset.phone;
+        var averageCostForTwo = dataset.cost;
+        var cuisine = dataset.cuisine;
+
+        var restaurantNameDiv = $("<div>" + restaurantName + "</div>");
+        var cuisineDiv = $("<div>" + cuisine + "Cuisine");
+        var averageCostForTwoDiv = $("<div>" + "Average Cost For Two: $" + averageCostForTwo + "</div>");
+        var restaurantLocationDiv = $("<div>" + restaurantLocation + "</div>");
+        var restaurantPhoneNoDiv = $("<div>" + restaurantPhoneNo + "</div>");
+        
+        resultDiv.append(restaurantNameDiv, cuisineDiv, averageCostForTwoDiv, restaurantLocationDiv, restaurantPhoneNoDiv);
+        resultsDiv.append(resultDiv);
+     
+    }
+})
+  
