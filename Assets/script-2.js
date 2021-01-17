@@ -1,6 +1,7 @@
 var storedImages = [];
 initialise();
 
+// functionality for 'upload image' button
 var cardNumber = 0;
 
 $(function() {
@@ -72,6 +73,11 @@ document.body.addEventListener("click", function(event) {
         }
     }
 })
+
+// Creating card from local storage information 
+for (var i = 0; i < storedSearches.length; i++) {
+    console.log(storedSearches[i]);
+}
 
 // Expanding and minimising card
 var cardStatus = "closed";
