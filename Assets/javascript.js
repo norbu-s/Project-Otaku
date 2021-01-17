@@ -171,7 +171,18 @@ searchBtn.on("click", function(event) {
                         var restaurantLocationDiv = $("<div>" + restaurantLocation + "</div>");
                         var restaurantPhoneNoDiv = $("<div>" + restaurantPhoneNo + "</div>");
 
-                        var faveBtn = $(`<button class="faveButton">Add to Favorite</button>`);
+                        // var faveBtn = $(`<button class="faveButton">Add to Favorite</button>`);
+                        var faveBtn = $(`<button 
+                        class="faveButton" 
+                        data-name="${restaurantName}"
+                        data-location="${restaurantLocation}"
+                        data-phone="${restaurantPhoneNo}"
+                        data-cuisine="${cuisine}"
+                        >Add to Favorite</button>`);;
+                        faveBtn.click((event) =>{
+                          console.log(event.target) //this logs the button element itself
+                          console.log(event.target.dataset.name) //this grabs whatever the data-name attribute is storing!
+                        });
 
                         resultDiv.append(restaurantNameDiv, cuisineDiv, averageCostForTwoDiv, restaurantLocationDiv, restaurantPhoneNoDiv, faveBtn);
                         resultsDiv.append(resultDiv);
@@ -231,8 +242,17 @@ searchHistoryList.on("click", function(event) {
                             var averageCostForTwoDiv = $("<div>" + "Average Cost For Two: $" + averageCostForTwo + "</div>");
                             var restaurantLocationDiv = $("<div>" + restaurantLocation + "</div>");
                             var restaurantPhoneNoDiv = $("<div>" + restaurantPhoneNo + "</div>");
-                            var faveBtn = $(`<button class="faveButton">Add to Favorite</button>`);;
-
+                            var faveBtn = $(`<button 
+                            class="faveButton" 
+                            data-name="${restaurantName}"
+                            data-location="${restaurantLocation}"
+                            data-phone="${restaurantPhoneNo}"
+                            data-cuisine="${cuisine}"
+                            >Add to Favorite</button>`);;
+                            faveBtn.click((event) =>{
+                              console.log(event.target) //this logs the button element itself
+                              console.log(event.target.dataset.name) //this grabs whatever the data-name attribute is storing!
+                            });
                             resultDiv.append(restaurantNameDiv, cuisineDiv, averageCostForTwoDiv, restaurantLocationDiv, restaurantPhoneNoDiv,faveBtn);
                             resultsDiv.append(resultDiv);
                         }
@@ -242,7 +262,3 @@ searchHistoryList.on("click", function(event) {
         })
     }
 })
-
-faveBtn.onclick(() =>{
-    console.log("This is working")
-});
