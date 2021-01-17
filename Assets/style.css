@@ -50,7 +50,7 @@ form {
     width: 100%;
 }
 
-.history-btn:hover {
+.history-btn:hover, .fave-btn:hover {
     cursor: pointer;
     background-color: grey;
 }

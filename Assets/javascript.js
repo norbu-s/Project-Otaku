@@ -12,14 +12,17 @@ initialise();
 
 function renderSearchHistory() {
     searchHistoryList.empty();
-    favesList.empty();
 
     for (var i = 0; i < storedSearches.length; i++) {
         var storedLocationBtn = $("<button>" + storedSearches[i] + "</button>");
         storedLocationBtn.attr("class", "history-btn");
         searchHistoryList.append(storedLocationBtn);
     }
-    
+}
+
+function renderFavouritesList() {
+    favesList.empty();
+
     console.log(storedFaves)
     for (var i = 0; i < storedFaves.length; i++) {
         var storedFaveBtn = $("<button>" + storedFaves[i].name + "</button>");
@@ -39,11 +42,16 @@ function initialise() {
         storedFaves = updatedStoredFaves;
     }
     renderSearchHistory();
-}
+    renderFavouritesList();
+;}
 
 // store searches (on search button click)
 function storeSearches() {
     localStorage.setItem("storedSearches", JSON.stringify(storedSearches));
+}
+
+function storeFaves() {
+    localStorage.setItem("storedFaves", JSON.stringify(storedFaves));
 }
 
 // search button click event 
@@ -269,14 +277,16 @@ searchHistoryList.on("click", function(event) {
                             data-cuisine="${cuisine}"
                             >Add to Favorite</button>`);;
                             faveBtn.click((event) =>{
-                              console.log(event.target) 
-                              console.log(event.target.dataset) 
-                              var dataset = event.target.dataset;
+                                console.log(event.target) 
+                                console.log(event.target.dataset) 
+                                var dataset = event.target.dataset;
 
-                             var faveList = {"name": dataset.name, "location": dataset.location, "phone": dataset.phone, "cuisine": dataset.cuisine};
-                             console.log(faveList)
-                             storedFaves.push(faveList);
-                             localStorage.setItem("storedFaves", JSON.stringify(storedFaves));
+                                var faveList = {"name": dataset.name, "location": dataset.location, "phone": dataset.phone, "cuisine": dataset.cuisine};
+                                console.log(faveList)
+                                storedFaves.push(faveList);
+
+                                storeFaves();
+                                renderFavouritesList();
                             });
 
 
