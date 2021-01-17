@@ -50,6 +50,7 @@ for (var i = storedFaves.length - 1; i >= 0; i--) {
 
 // functionality for 'upload image' button
 var cardNumber = 0;
+var cardRestaurant = "";
 
 $(function() {
     $(":file").change(function(e) {
@@ -59,8 +60,8 @@ $(function() {
         }
 
         if (this.files && this.files[0]) {
-            cardNumber = e.target.id[e.target.id.length - 1];
-        
+            cardNumber = parseInt(e.target.id[e.target.id.length - 1]);
+            cardRestaurant = e.target.parentElement.parentElement.parentElement.firstElementChild.textContent;
             var reader = new FileReader();
             reader.onload = imageIsLoaded;
             reader.readAsDataURL(this.files[0]);
@@ -72,19 +73,24 @@ function imageIsLoaded(e) {
     $("#img" + cardNumber).removeAttr("class");
     $("#img" + cardNumber).attr("src", e.target.result);
     for (var i = 0; i < storedImages.length; i++) {
-        if (storedImages[i][0] === cardNumber) {
+        if (storedImages[i][0] === cardRestaurant) {
             storedImages.splice(i, 1);
         }
     }
-    storedImages.push([cardNumber, e.target.result]);
+    storedImages.push([cardRestaurant, e.target.result]);
 
     storeImages();
 }
 
 // local storage for saved imgs
 function renderImages() {
-    for (var i = 0; i < storedImages.length; i++) {
-        $("#img" + storedImages[i][0]).attr("src", storedImages[i][1]);
+    for (var i = 0; i < storedImages.length; i++) {         
+        var restaurantName = storedImages[i][0];
+        var divContainingRestaurantName = $("div:contains('" + restaurantName + "')")[$("div:contains('" + restaurantName + "')").length - 1];
+        if (typeof divContainingRestaurantName !== "undefined") {
+            var cardNumber = divContainingRestaurantName.id[divContainingRestaurantName.id.length - 1];
+            $("#img" + cardNumber).attr("src", storedImages[i][1]);
+        }
     }
 }
 
