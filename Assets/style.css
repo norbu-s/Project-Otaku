@@ -41,7 +41,7 @@ form {
     border-radius: 10px; */
 }
 
-.history-btn, .fave-btn {
+.history-btn {
     display: block;
     background-color: rgba(255,255,255,0.7); 
     border-radius: 10px;
@@ -50,9 +50,40 @@ form {
     width: 100%;
 }
 
+.fave-btn {
+    display: inline-block;
+    background-color: rgba(255,255,255,0.7); 
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    padding: 10px;
+    margin: 3px;
+    margin-right: 0;
+    width: 70%;
+}
+
 .history-btn:hover, .fave-btn:hover {
     cursor: pointer;
     background-color: grey;
+}
+
+.remove-fave-btn {
+    background-color: grey;
+    color: white;
+    font-weight: bold;
+    padding: 10px;
+    margin: 3px;
+    margin-left: 0;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.remove-fave-btn:hover {
+    background-color: rgb(182, 60, 60);
+    cursor: pointer;
+}
+
+#faves-list {
+    list-style: none;
 }
 
 .top-bar {

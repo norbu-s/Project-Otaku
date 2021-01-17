@@ -25,6 +25,7 @@ function renderFavouritesList() {
 
     for (var i = 0; i < storedFaves.length; i++) {
         console.log(storedFaves[i].id)
+        var storedFaveLi = $("<li>");
         var storedFaveBtn = $(`<button 
         class="fave-btn" 
         data-name="${storedFaves[i].name}"
@@ -34,7 +35,10 @@ function renderFavouritesList() {
         data-cuisine="${storedFaves[i].cuisine}"
         data-id="${storedFaves[i].id}"
         >` + storedFaves[i].name+ `</button>`);;
-        favesList.prepend(storedFaveBtn);
+        var removeFaveBtn = $("<button class=\"remove-fave-btn\">X</i></button");
+        storedFaveLi.append(storedFaveBtn, removeFaveBtn);
+
+        favesList.prepend(storedFaveLi);
     }
 }
 
