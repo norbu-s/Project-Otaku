@@ -54,7 +54,7 @@ form {
     width: 100%;
 }
 
-#clear-search-btn {
+#clear-search-btn { 
     display: block;
     color: white;
     background-color: rgba(154, 146, 146, 0.7); 
@@ -94,7 +94,7 @@ form {
     margin-left: 0;
     border-top-right-radius: 10px;
     border-bottom-right-radius: 10px;
-}
+} /* work out how to make the height of the remove btn the same as the fave btn */
 
 .remove-fave-btn:hover {
     background-color: rgb(182, 60, 60);
