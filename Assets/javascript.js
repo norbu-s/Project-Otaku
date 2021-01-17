@@ -1,4 +1,5 @@
 var storedSearches = [];
+var storedFaves = [];
 
 var searchInputEl = $("#zipcode");
 var searchBtn = $("#search-btn");
@@ -257,15 +258,16 @@ searchHistoryList.on("click", function(event) {
                             faveBtn.click((event) =>{
                               console.log(event.target) 
                               console.log(event.target.dataset) 
-                              var faverestrauntInfo = JSON.parse(localStorage.getItem("faveRestaurant") || []);
-                            //   if (faverestrauntInfo !== null) {
-                            //     storedSearches = updatedStoredSearches;
-                            // }
-                             var faveList = {"name": name.value, "location": location.value, "phone":phone.value, "cuisin":cuisin.value};
-                             faverestrauntInfo.push(faveList);
-                             localStorage.setItem("faveRestaurant", JSON.stringify(faverestrauntInfo));
-                        
-                              console.log(restrauntInfo); 
+                              var dataset = event.target.dataset;
+                              var faverestaurantInfo = JSON.parse(localStorage.getItem("faveRestaurant"));
+                              if (faverestaurantInfo !== null) {
+                                storedFaves = faverestaurantInfo;
+                            }
+
+                             var faveList = {"name": dataset.name, "location": dataset.location, "phone": dataset.phone, "cuisine": dataset.cuisine};
+                             console.log(faveList)
+                             storedFaves.push(faveList);
+                             localStorage.setItem("faveRestaurant", JSON.stringify(storedFaves));
                             });
 
 
