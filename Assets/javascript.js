@@ -282,8 +282,19 @@ searchHistoryList.on("click", function(event) {
                                 var dataset = event.target.dataset;
 
                                 var faveList = {"name": dataset.name, "location": dataset.location, "phone": dataset.phone, "cuisine": dataset.cuisine};
-                                console.log(faveList)
+                                
+                                console.log(faveList.name)
+                                for (var i = 0; i < storedFaves.length; i++) {
+                                    console.log(storedFaves[i].name)
+                                    if (storedFaves[i].name === faveList.name) {
+                                        storedFaves.splice(i, 1);
+                                    }
+                                }
                                 storedFaves.push(faveList);
+
+                                if (storedFaves.length > 4) {
+                                    storedFaves.splice(0, 1);
+                                }
 
                                 storeFaves();
                                 renderFavouritesList();
