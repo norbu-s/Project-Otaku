@@ -15,6 +15,10 @@ main {
     vertical-align: top;
 }
 
+.card-divider:hover {
+    cursor: pointer;
+}
+
 .fave {
     height: fit-content;
     width: 40vw;
