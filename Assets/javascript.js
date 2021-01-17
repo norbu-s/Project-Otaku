@@ -32,10 +32,6 @@ function storeSearches() {
     localStorage.setItem("storedSearches", JSON.stringify(storedSearches));
 }
 
-function addingFavButton(){
-
-}
-
 // search button click event 
 searchBtn.on("click", function(event) {
     event.preventDefault();
@@ -175,7 +171,7 @@ searchBtn.on("click", function(event) {
                         var restaurantLocationDiv = $("<div>" + restaurantLocation + "</div>");
                         var restaurantPhoneNoDiv = $("<div>" + restaurantPhoneNo + "</div>");
 
-                        var faveBtn = $("<button>" + "Add to Favorite" + "</button>");
+                        var faveBtn = $(`<button class="faveButton">Add to Favorite</button>`);
 
                         resultDiv.append(restaurantNameDiv, cuisineDiv, averageCostForTwoDiv, restaurantLocationDiv, restaurantPhoneNoDiv, faveBtn);
                         resultsDiv.append(resultDiv);
@@ -235,8 +231,9 @@ searchHistoryList.on("click", function(event) {
                             var averageCostForTwoDiv = $("<div>" + "Average Cost For Two: $" + averageCostForTwo + "</div>");
                             var restaurantLocationDiv = $("<div>" + restaurantLocation + "</div>");
                             var restaurantPhoneNoDiv = $("<div>" + restaurantPhoneNo + "</div>");
+                            var faveBtn = $(`<button class="faveButton">Add to Favorite</button>`);;
 
-                            resultDiv.append(restaurantNameDiv, cuisineDiv, averageCostForTwoDiv, restaurantLocationDiv, restaurantPhoneNoDiv);
+                            resultDiv.append(restaurantNameDiv, cuisineDiv, averageCostForTwoDiv, restaurantLocationDiv, restaurantPhoneNoDiv,faveBtn);
                             resultsDiv.append(resultDiv);
                         }
                     }
@@ -245,3 +242,7 @@ searchHistoryList.on("click", function(event) {
         })
     }
 })
+
+faveBtn.onclick(() =>{
+    console.log("This is working")
+});
