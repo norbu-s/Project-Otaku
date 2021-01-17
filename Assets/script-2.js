@@ -77,30 +77,44 @@ document.body.addEventListener("click", function(event) {
 // Creating card from local storage information 
 var cardCounter = 1;
 for (var i = storedSearches.length - 1; i >= 0; i--) {
+    // Individual card div 
     var faveCard = $("<div class='fave card'></div>");
+
+    // Card heading 
     var cardHeadingDiv = $("<div class='fave-name card-divider'>" + storedFaves[i].name + "</div>");
+
+    // Map section
     var viewMapBtn = $("<button id='map-btn" + cardCounter + "' class='map-btn hide'>View on Map</button>");
     var mapDiv = $("<div class='card-section map hide'></div>");
     var mapFrame = $("<iframe id='map" + cardCounter + "' width='100%' height='100%' frameborder='0' style='border:0' src=''></iframe>")
     mapDiv.append(mapFrame);
+    
+    // Image section
     var cardImgDiv = $("<div id='img-div" + cardCounter + "' class='card-section img hide'></div>");
     var uploadImgForm = $("<form action='/action_page.php'></form>");
     var uploadImgBtn = $("<input type='file' id='imgInput" + cardCounter + "' accept='image/*'>");
     uploadImgForm.append(uploadImgBtn);
     var img = $("<img id='img" + cardCounter + "' src='#'>");
     cardImgDiv.append(uploadImgForm, img);
+    
+    // Info section
     var cardInfo = $("<div id='info" + cardCounter + "' class='card-section info hide'></div>");
     var cuisine = $("<div class='cuisine'><strong>Cuisine: </strong>" + storedFaves[i].cuisine + "</div>");
     var cost = $("<div class='cost'><strong>Average Cost For Two: </strong>" + storedFaves[i].cost + "</div>");
     var location = $("<div class='location'><strong>Address: </strong>" + storedFaves[i].location + "</div>");
     var phone = $("<div class='phone'><strong>Phone: </strong>" + storedFaves[i].phone + "</div>");
     cardInfo.append(cuisine, cost, location, phone);
+    
+    // Notes section
     var cardNotes = $("<div id='notes" + cardCounter + "' class='card-section notes hide'></div>");
     var noteLabel = $("<label for='note-input" + cardNumber + "'>Notes:</label>");
     var noteTextArea = $("<textarea type='text' id='note-input" + cardNumber + "' placeholder='Personal notes'></textarea>");
     cardNotes.append(noteLabel, noteTextArea);
-    faveCard.append(cardHeadingDiv, viewMapBtn, mapDiv, cardImgDiv, cardInfo, cardNotes);
 
+    // Append heading and sections to individual card
+    faveCard.append(cardHeadingDiv, viewMapBtn, mapDiv, cardImgDiv, cardInfo, cardNotes);
+    
+    // Append individual card to <div class="cell">
     $(".cell").append(faveCard);
 }
 
