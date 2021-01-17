@@ -180,9 +180,13 @@ searchBtn.on("click", function(event) {
                         data-cuisine="${cuisine}"
                         >Add to Favorite</button>`);;
                         faveBtn.click((event) =>{
-                          console.log(event.target) //this logs the button element itself
-                          console.log(event.target.dataset.name) //this grabs whatever the data-name attribute is storing!
+                          console.log(event.target) 
+                          console.log(event.target.dataset) 
+                   
+
+                        
                         });
+                        
 
                         resultDiv.append(restaurantNameDiv, cuisineDiv, averageCostForTwoDiv, restaurantLocationDiv, restaurantPhoneNoDiv, faveBtn);
                         resultsDiv.append(resultDiv);
@@ -242,6 +246,7 @@ searchHistoryList.on("click", function(event) {
                             var averageCostForTwoDiv = $("<div>" + "Average Cost For Two: $" + averageCostForTwo + "</div>");
                             var restaurantLocationDiv = $("<div>" + restaurantLocation + "</div>");
                             var restaurantPhoneNoDiv = $("<div>" + restaurantPhoneNo + "</div>");
+                            
                             var faveBtn = $(`<button 
                             class="faveButton" 
                             data-name="${restaurantName}"
@@ -250,9 +255,21 @@ searchHistoryList.on("click", function(event) {
                             data-cuisine="${cuisine}"
                             >Add to Favorite</button>`);;
                             faveBtn.click((event) =>{
-                              console.log(event.target) //this logs the button element itself
-                              console.log(event.target.dataset.name) //this grabs whatever the data-name attribute is storing!
+                              console.log(event.target) 
+                              console.log(event.target.dataset) 
+                              var faverestrauntInfo = JSON.parse(localStorage.getItem("faveRestaurant") || []);
+                            //   if (faverestrauntInfo !== null) {
+                            //     storedSearches = updatedStoredSearches;
+                            // }
+                             var faveList = {"name": name.value, "location": location.value, "phone":phone.value, "cuisin":cuisin.value};
+                             faverestrauntInfo.push(faveList);
+                             localStorage.setItem("faveRestaurant", JSON.stringify(faverestrauntInfo));
+                        
+                              console.log(restrauntInfo); 
                             });
+
+
+
                             resultDiv.append(restaurantNameDiv, cuisineDiv, averageCostForTwoDiv, restaurantLocationDiv, restaurantPhoneNoDiv,faveBtn);
                             resultsDiv.append(resultDiv);
                         }
