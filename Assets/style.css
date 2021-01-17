@@ -1,3 +1,7 @@
+.hide {
+    display: none;
+}
+
 body {
     border: none;
     margin: 0;

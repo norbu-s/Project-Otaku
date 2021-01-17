@@ -64,6 +64,13 @@ function storeFaves() {
     localStorage.setItem("storedFaves", JSON.stringify(storedFaves));
 }
 
+// hide/show clear search history btn depending on if there is anything in the list 
+if (storedSearches === []) {
+    $("#clear-search-btn").addClass("hide");
+} else {
+    $("#clear-search-btn").removeClass("hide");
+}
+
 // search button click event 
 searchBtn.on("click", function(event) {
     event.preventDefault();
@@ -117,6 +124,9 @@ searchBtn.on("click", function(event) {
             }
             storeSearches();
             renderSearchHistory();
+            if ($("#clear-search-btn").attr("class") === "hide") {
+                $("#clear-search-btn").removeClass("hide");
+            }
 
             var entityId = response.location_suggestions[0].entity_id;
             var entityType = response.location_suggestions[0].entity_type;
@@ -380,12 +390,14 @@ favesList.on("click", function(event) {
     }
 })
 
-// clear search history list 
-$("#clear-search-btn").on("click", function(event) {
+// clear search history list and storage
+$("#clear-search-btn").on("click", function() {
     var clearConfirm = confirm("Are you sure you want to clear your search history?");
     if (clearConfirm) {
         localStorage.removeItem("storedSearches");
         searchHistoryList.empty();
+        storedSearches = [];
+        $("#clear-search-btn").addClass("hide");
     } else {
         return;
     }
