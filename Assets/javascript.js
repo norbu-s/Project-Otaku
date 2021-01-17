@@ -1,13 +1,68 @@
+var storedSearches = [];
+
 var searchInputEl = $("#zipcode");
 var searchBtn = $("#search-btn");
 var searchHistoryList = $("#search-history-list");
 var resultsDiv = $("#results");
 
+// render the search history list
+initialise();
+
+function renderSearchHistory() {
+    searchHistoryList.empty();
+
+    for (var i = 0; i < storedSearches.length; i++) {
+        var storedLocationBtn = $("<button>" + storedSearches[i] + "</button>");
+        storedLocationBtn.attr("class", "history-btn");
+        searchHistoryList.append(storedLocationBtn);
+    }
+}
+
+function initialise() {
+    var updatedStoredSearches = JSON.parse(localStorage.getItem("storedSearches"));
+    if (updatedStoredSearches !== null) {
+        storedSearches = updatedStoredSearches;
+    }
+
+    renderSearchHistory();
+}
+
+// store searches (on search button click)
+function storeSearches() {
+    localStorage.setItem("storedSearches", JSON.stringify(storedSearches));
+}
+
+// search button click event 
 searchBtn.on("click", function(event) {
     event.preventDefault();
 
+    resultsDiv.empty();
     var searchInput = $("#zipcode").val();
 
+    if (searchInput === "") {
+        console.log("no input");
+        return;
+    }
+
+    // Zomato location API call 
+    /*
+        Country data available: 
+        - India
+        - Australia
+        - Brazil
+        - Canada
+        - Indonesia
+        - New Zealand
+        - Phillipines
+        - Qatar
+        - Singapore
+        - South Africa
+        - Sri Lanka
+        - Turkey
+        - UAE
+        - UK
+        - US
+    */
     $.ajax({
         headers: {"user-key": "9a1b7bbdae3e31891d3b697bed7433bc"},
         url: "https://developers.zomato.com/api/v2.1/locations?query=" + searchInput,
@@ -17,7 +72,20 @@ searchBtn.on("click", function(event) {
             return;
         },
         success: function(response) {
-            console.log(response)
+            console.log(response) 
+            var locationName = response.location_suggestions[0].title.slice(0, response.location_suggestions[0].title.indexOf(","));
+            for (var i = 0; i < storedSearches.length; i++) {
+                if (storedSearches[i] === locationName) {
+                    storedSearches.splice(i, 1);
+                }
+            }
+            storedSearches.push(locationName);
+            if (storedSearches.length > 5) {
+                storedSearches.splice(0, 1);
+            }
+            storeSearches();
+            renderSearchHistory();
+
             var entityId = response.location_suggestions[0].entity_id;
             var entityType = response.location_suggestions[0].entity_type;
     
@@ -73,6 +141,7 @@ searchBtn.on("click", function(event) {
             //     }
             // })
 
+            // Zomato restaurant search API call
             $.ajax({
                 headers: {
                     "Accept": "application/json",
@@ -107,18 +176,65 @@ searchBtn.on("click", function(event) {
                     }
                 }
             })
-
-            // $.ajax({
-            //     headers: {"user-key": "9a1b7bbdae3e31891d3b697bed7433bc"},
-            //     url: "https://developers.zomato.com/api/v2.1/geocode?lat=" + latitude + "&lon=" + longitude,
-            //     method: "GET",
-            //     error: function() {
-            //         alert("Sorry, there was an error loading the data.");
-            //         return;
-            //     },
-            //     success: function(response) {}
-            // })
-
         }
     })
+
+    searchInputEl.val("");
+})
+
+// get API data on search history button click
+searchHistoryList.on("click", function(event) {
+    if (event.target.classList.contains("history-btn")) {
+        resultsDiv.empty();
+        // Zomato location API call
+        var buttonName = event.target.textContent;
+
+        $.ajax({
+            headers: {"user-key": "9a1b7bbdae3e31891d3b697bed7433bc"},
+            url: "https://developers.zomato.com/api/v2.1/locations?query=" + buttonName,
+            method: "GET",
+            error: function() {
+                alert("Sorry, there was an error loading the data.");
+                return;
+            },
+            success: function(response) {
+                var entityId = response.location_suggestions[0].entity_id;
+                var entityType = response.location_suggestions[0].entity_type;
+
+                // Zomato restaurant search API call
+                $.ajax({
+                    headers: {
+                        "Accept": "application/json",
+                        "user-key": "9a1b7bbdae3e31891d3b697bed7433bc"},
+                    url: "https://developers.zomato.com/api/v2.1/search?entity_id=" + entityId + "&entity_type=" + entityType + "&count=10",
+                    method: "GET",
+                    error: function() {
+                        alert("Sorry, there was an error loading the data.");
+                        return;
+                    },
+                    success: function(response) {
+                        for (var i = 0; i < response.restaurants.length; i++) {
+                            var resultDiv = $("<div>");
+                            resultDiv.attr("id", "result-each");
+
+                            var restaurantName = response.restaurants[i].restaurant.name;
+                            var restaurantLocation = response.restaurants[i].restaurant.location.address;
+                            var restaurantPhoneNo = response.restaurants[i].restaurant.phone_numbers;
+                            var averageCostForTwo = response.restaurants[i].restaurant.average_cost_for_two;
+                            var cuisine = response.restaurants[i].restaurant.cuisines;
+
+                            var restaurantNameDiv = $("<div>" + restaurantName + "</div>");
+                            var cuisineDiv = $("<div>" + cuisine + "Cuisine");
+                            var averageCostForTwoDiv = $("<div>" + "Average Cost For Two: $" + averageCostForTwo + "</div>");
+                            var restaurantLocationDiv = $("<div>" + restaurantLocation + "</div>");
+                            var restaurantPhoneNoDiv = $("<div>" + restaurantPhoneNo + "</div>");
+
+                            resultDiv.append(restaurantNameDiv, cuisineDiv, averageCostForTwoDiv, restaurantLocationDiv, restaurantPhoneNoDiv);
+                            resultsDiv.append(resultDiv);
+                        }
+                    }
+                })
+            }
+        })
+    }
 })
