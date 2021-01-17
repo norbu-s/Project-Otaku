@@ -76,7 +76,7 @@ document.body.addEventListener("click", function(event) {
 
 // Creating card from local storage information 
 var cardCounter = 1;
-for (var i = storedSearches.length - 1; i >= 0; i--) {
+for (var i = storedFaves.length - 1; i >= 0; i--) {
     // Individual card div 
     var faveCard = $("<div class='fave card'></div>");
 
@@ -101,9 +101,9 @@ for (var i = storedSearches.length - 1; i >= 0; i--) {
     var cardInfo = $("<div id='info" + cardCounter + "' class='card-section info hide'></div>");
     var cuisine = $("<div class='cuisine'><strong>Cuisine: </strong>" + storedFaves[i].cuisine + "</div>");
     var cost = $("<div class='cost'><strong>Average Cost For Two: </strong>" + storedFaves[i].cost + "</div>");
-    var location = $("<div class='location'><strong>Address: </strong>" + storedFaves[i].location + "</div>");
+    var address = $("<div class='location'><strong>Address: </strong>" + storedFaves[i].location + "</div>");
     var phone = $("<div class='phone'><strong>Phone: </strong>" + storedFaves[i].phone + "</div>");
-    cardInfo.append(cuisine, cost, location, phone);
+    cardInfo.append(cuisine, cost, address, phone);
     
     // Notes section
     var cardNotes = $("<div id='notes" + cardCounter + "' class='card-section notes hide'></div>");
@@ -116,6 +116,7 @@ for (var i = storedSearches.length - 1; i >= 0; i--) {
     
     // Append individual card to <div class="cell">
     $(".cell").append(faveCard);
+    cardCounter++;
 }
 
 // Expanding and minimising card
