@@ -10,11 +10,11 @@ This project aims to create a seamless, easily navigable and handy web applicati
 
 ## Authors
 
- 1. Jessica Hong
+ 1. Norbu Sherpa
 
  2. Tomomi Inoue
 
- 3. Norbu Sherpa
+ 3. Jessica Hong
 
  4. Mustaq Safie
 
