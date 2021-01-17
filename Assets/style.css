@@ -29,7 +29,7 @@ form {
     transition: all 0.2s;
 }
  
-#title-history {
+.sidebar-title {
     font-size: 26px;
 }
 
