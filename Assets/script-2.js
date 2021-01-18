@@ -121,6 +121,28 @@ document.body.addEventListener("click", function(event) {
     if (event.target.classList.contains("map-btn")) {
         var mapNumber = event.target.id[event.target.id.length - 1];
         var mapLocation = event.target.parentElement.firstElementChild.textContent;
+        var specialCharacters = [
+            ["$", "24"],
+            ["&", "26"],
+            ["+", "2B"],
+            [",", "2C"],
+            ["/", "2F"],
+            [":", "3A"],
+            [";", "3B"],
+            ["=", "3D"],
+            ["?", "3F"],
+            ["@", "40"]
+        ]
+
+        console.log(specialCharacters.hasOwnProperty("$"))
+        for (var i = 0; i < mapLocation.length; i++) {
+            for (var j = 0; j < specialCharacters.length; j++) {
+                if (mapLocation[i] === specialCharacters[j][0]) {
+                    mapLocation = mapLocation.substring(0, i) + specialCharacters[j][1] + mapLocation.substring(i + 1, mapLocation.length);
+                }
+            }
+        }
+
         var mapFrame = $("#map" + mapNumber);
         mapFrame.attr("src", "https://www.google.com/maps/embed/v1/place?key=AIzaSyBMo1myYnlmnCYMJc5fwiGiDZPqXar03ps&q=" + mapLocation);
         // can't use certain special characters in URL e.g. &
