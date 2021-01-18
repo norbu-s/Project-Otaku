@@ -345,30 +345,50 @@ searchHistoryList.on("click", function (event) {
                     },
                     success: function (response) {
                         console.log(response)
+                        var resultContainer1 = $("<div id='result-container1'>");
+                        var resultContainer2 = $("<div id='result-container2'>");
+                        resultContainer2.addClass("hide");
+    
                         for (var i = 0; i < response.restaurants.length; i++) {
+                    
                             var resultDiv = $("<div>");
                             resultDiv.attr("class", "result-each");
-                            const restaurant = response.restaurants[i].restaurant;
-
+    
+                            var restaurant = response.restaurants[i].restaurant;
                             var restaurantName = response.restaurants[i].restaurant.name;
                             var restaurantLocation = response.restaurants[i].restaurant.location.address;
                             var restaurantPhoneNo = response.restaurants[i].restaurant.phone_numbers;
                             var averageCostForTwo = response.restaurants[i].restaurant.average_cost_for_two;
                             var cuisine = response.restaurants[i].restaurant.cuisines;
                             var restaurantId = response.restaurants[i].restaurant.id;
-
+    
                             var restaurantNameDiv = $("<div>" + restaurantName + "</div>");
                             var cuisineDiv = $("<div>" + cuisine + "Cuisine");
                             var averageCostForTwoDiv = $("<div>" + "Average Cost For Two: $" + averageCostForTwo + "</div>");
                             var restaurantLocationDiv = $("<div>" + restaurantLocation + "</div>");
                             var restaurantPhoneNoDiv = $("<div>" + restaurantPhoneNo + "</div>");
-
-                            const faveBtn = createFaveBtn(restaurant);
-
+    
+                            var faveBtn = createFaveBtn(restaurant);
+    
                             resultDiv.append(restaurantNameDiv, cuisineDiv, averageCostForTwoDiv, restaurantLocationDiv, restaurantPhoneNoDiv, faveBtn);
-                            resultsDiv.append(resultDiv1, resultDiv2);
                             
+                            if (i < 10) {
+                                resultContainer1.append(resultDiv);
+                            } else {
+                                resultContainer2.append(resultDiv);
+                            }
+    
+                            resultsDiv.append(resultContainer1, resultContainer2);
+                    
                         }
+                        $("#page-btn1").on("click", function() {
+                            $("#result-container2").addClass("hide");
+                            $("#result-container1").removeClass("hide");
+                        })
+                        $("#page-btn2").on("click", function() {
+                            $("#result-container1").addClass("hide");
+                            $("#result-container2").removeClass("hide");
+                        })
                     }
                 })
             }

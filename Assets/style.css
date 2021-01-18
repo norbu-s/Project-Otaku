@@ -245,11 +245,18 @@ a{
     background-color:rgb(201, 64, 64);
 }
 
+/* page btns at bottom of main page */
+
 #page-btn-div {
     text-align: center;
-    border: solid 1px black;
+    padding: 5px
 }
 
 #page-btn-div button {
+    color: green;
     padding: 5px;
+}
+
+#page-btn-div button:hover {
+    font-weight: bold;
 }
