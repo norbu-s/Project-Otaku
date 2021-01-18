@@ -16,8 +16,6 @@ body {
 
 
 /*Top bar layout */
-
-
 form {
     display: inline-block;
 }
@@ -48,21 +46,11 @@ a{
 /*seach section layout*/
 
 #search-btn {
-    /* display: inline-block;
-    padding: 0.35em 1.2em;
-    border: 0.1em solid #FFFFFF;
-    margin: 0 0.3em 0.3em 0;
-    border-radius: 0.12em;
-    box-sizing: border-box;
-    text-decoration: none;
-    /* font-family: 'Roboto',sans-serif; */
-    /* font-weight: 300; */
-    /* color: #FFFFFF; */
-    /* text-align: center;
-    transition: all 0.2s; */ 
     display: inline-block;
-    background-color:#18bc9c;;
-    border-radius: 5px;
+    background-color: #ecdb0e;
+    /* border-color:#ffae00 ;*/
+    border-radius: 5px; 
+    border: solid rgb(248, 209, 37);
     padding: 5px;
    
 }
@@ -104,7 +92,7 @@ a{
 #clear-search-btn { 
     display: block;
     /* color: white; */
-    background-color: rgba(154, 146, 146, 0.7); 
+    background-color: #718a0b;
     border-radius: 10px;
     padding: 10px;
     margin: 3px;
@@ -129,7 +117,7 @@ a{
     margin: 10px;
     padding: 10px;
     background-color: rgba(255,255,255,0.7);
-    border: 1px solid #e7e7e7;;
+    border: 3px solid #e7e7e7;;
     
 }
 .add-fave-btn{
@@ -159,10 +147,11 @@ a{
 
 .history-btn:hover, .fave-btn:hover {
     cursor: pointer;
-    background-color: grey; /*I wanna chenge this colour*/
+    background-color: #718a0b;
 }
 
 .remove-fave-btn {
+   
     background-color:#a5cb0b;
     /* color: white; */
     font-weight: bold;
@@ -170,10 +159,11 @@ a{
     vertical-align: top;
     border-top-right-radius: 10px;
     border-bottom-right-radius: 10px;
+    height: 100%
 } /* work out how to make the height of the remove btn the same as the fave btn */
 
 .remove-fave-btn:hover {
-    background-color: rgb(182, 60, 60); /*Iwanna change this colour*/
+    background-color:  #718a0b;
     cursor: pointer;
 }
 
@@ -183,9 +173,10 @@ a{
 }
 
 #faves{
-    border: 1px solid #e7e7e7;
+    border: 2px solid #e7e7e7;
     margin-right: 10px;
     padding: 10px;
+    height: fit-content;
 }
 
 /* .fav-list{
@@ -195,6 +186,7 @@ a{
 .sidebar-title {
     /* color: white; */
     font-size: 26px;
+    text-align: center;
 }
 
 #search-zipcode {
@@ -264,3 +256,9 @@ a{
 #page-outof {
     font-size: 20px;
 }
+@media only screen and (max-width: 768px) {
+    /* For mobile phones: */
+    .grid-x {
+      width: 100%;
+    }
+  }
