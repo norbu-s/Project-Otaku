@@ -16,8 +16,6 @@ body {
 
 
 /*Top bar layout */
-
-
 form {
     display: inline-block;
 }
@@ -48,21 +46,11 @@ a{
 /*seach section layout*/
 
 #search-btn {
-    /* display: inline-block;
-    padding: 0.35em 1.2em;
-    border: 0.1em solid #FFFFFF;
-    margin: 0 0.3em 0.3em 0;
-    border-radius: 0.12em;
-    box-sizing: border-box;
-    text-decoration: none;
-    /* font-family: 'Roboto',sans-serif; */
-    /* font-weight: 300; */
-    /* color: #FFFFFF; */
-    /* text-align: center;
-    transition: all 0.2s; */ 
     display: inline-block;
     background-color: #ecdb0e;
-    border-radius: 5px;
+    /* border-color:#ffae00 ;*/
+    border-radius: 5px; 
+    border: solid rgb(248, 209, 37);
     padding: 5px;
    
 }
@@ -198,6 +186,7 @@ a{
 .sidebar-title {
     /* color: white; */
     font-size: 26px;
+    text-align: center;
 }
 
 #search-zipcode {
@@ -246,4 +235,8 @@ a{
 
 #clear-search-yes:hover, #clear-search-no:hover {
     background-color:rgb(201, 64, 64);
+}
+
+@media only screen and (max-width: 768px) {
+    width: 100%;
 }

@@ -78,31 +78,37 @@ if (storedSearches.length === 0) {
     $("#clear-search-btn").removeClass("hide");
 }
 function checkIfRestaurantIsInFavourite(restaurantId){
-    const found = storedFaves.find(function (favItem) {
+    let found = storedFaves.find(function (favItem) {
         return favItem.id === restaurantId;
     })
     return found !== undefined;
 }
+
 function createFaveBtn(restaurant) {
 
     let buttonContent = 'Add to Favourite';
     let isDisabled = ``;
+  
 
     if(checkIfRestaurantIsInFavourite(restaurant.id)){
         buttonContent = 'Added';
         isDisabled = `disabled="true"`;
+     
 }
+
 
     var faveBtn = $(`<button 
                         class="add-fave-btn" 
+                        id="id-${restaurant.id}"
                         data-name="${restaurant.name}"
                         data-cost="${restaurant.average_cost_for_two}"
                         data-location="${restaurant.location.address}"
                         data-phone="${restaurant.phone_numbers}"
                         data-cuisine="${restaurant.cuisines}"
                         data-id="${restaurant.id}"
-                        ${isDisabled}
+                        isdisabled="${isDisabled}"
                         >${buttonContent}</button>`);
+                       
 
     faveBtn.click((event) => {
         var dataset = event.target.dataset;
@@ -362,6 +368,10 @@ searchHistoryList.on("click", function (event) {
 favesList.on("click", function (event) {
     if (event.target.classList.contains("remove-fave-btn")) {
         var faveBtnId = event.target.id;
+        var addToFaveBtn = $("#id-" + faveBtnId);
+        addToFaveBtn.text("Add to Favourite");
+        addToFaveBtn.attr("disabled", false);
+        var backToEnable = $("is")
         console.log(faveBtnId)
         for (var i = 0; i < storedFaves.length; i++) {
             if (storedFaves[i].id === faveBtnId) {
@@ -371,7 +381,8 @@ favesList.on("click", function (event) {
         }
         renderFavouritesList();
     }
-})
+
+ })
 
 // clear search history list and storage
 $("#clear-search-btn").on("click", function() {
@@ -390,5 +401,3 @@ $("#clear-search-btn").on("click", function() {
     })
     
 })
-
-
