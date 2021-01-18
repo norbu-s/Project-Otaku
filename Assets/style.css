@@ -260,3 +260,7 @@ a{
 #page-btn-div button:hover {
     font-weight: bold;
 }
+
+#page-outof {
+    font-size: 20px;
+}
