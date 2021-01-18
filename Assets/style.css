@@ -247,6 +247,10 @@ a{
 
 /* page btn styles */ 
 
+#page-outof {
+    font-size: 20px;
+}
+
 #page-btn-div {
     border: solid 1px black;
     padding: 5px;
