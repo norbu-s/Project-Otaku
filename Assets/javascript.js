@@ -7,7 +7,8 @@ var favesList = $("#faves-list");
 var searchHistoryList = $("#search-history-list");
 var resultsDiv = $("#results");
 
-var errorModal = new Foundation.Reveal($('#error-modal'));
+var locationErrorModal = new Foundation.Reveal($("#error-modal"));
+var apiErrorModal = new Foundation.Reveal($("#error-modal2"))
 
 // render the stored items
 initialise();
@@ -110,13 +111,13 @@ searchBtn.on("click", function(event) {
         url: "https://developers.zomato.com/api/v2.1/locations?query=" + searchInput,
         method: "GET",
         error: function() {
-            alert("Sorry, there was an error loading the data.");
+            apiErrorModal.open();
             return;
         },
         success: function(response) {
             console.log(response) 
             if (response.location_suggestions.length === 0) {
-                errorModal.open();
+                locationErrorModal.open();
                 return;
             }
             var locationName = response.location_suggestions[0].title.slice(0, response.location_suggestions[0].title.indexOf(","));
