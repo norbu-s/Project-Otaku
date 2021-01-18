@@ -70,7 +70,7 @@ function storeFaves() {
 }
 
 // hide/show clear search history btn depending on if there is anything in the list 
-if (storedSearches === []) {
+if (storedSearches.length === 0) {
     $("#clear-search-btn").addClass("hide");
 } else {
     $("#clear-search-btn").removeClass("hide");
@@ -369,19 +369,24 @@ favesList.on("click", function(event) {
         renderFavouritesList();
     }
 })
-clearSearchConfirmModal.open();
 
 // clear search history list and storage
 $("#clear-search-btn").on("click", function() {
-    var clearConfirm = confirm("Are you sure you want to clear your search history?");
-    if (clearConfirm) {
+    // var clearConfirm = confirm("Are you sure you want to clear your search history?");
+    clearSearchConfirmModal.open();
+
+    $("#clear-search-yes").on("click", function() {
+        console.log("yes")
         localStorage.removeItem("storedSearches");
         searchHistoryList.empty();
         storedSearches = [];
         $("#clear-search-btn").addClass("hide");
-    } else {
-        return;
-    }
+        $(".reveal-overlay").attr("style", "display: none");
+    })
+    $("#clear-search-no").on("click", function() {
+        $(".reveal-overlay").attr("style", "display: none");
+    })
+    
 })
 
 
