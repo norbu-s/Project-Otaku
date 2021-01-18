@@ -9,7 +9,7 @@ var resultsDiv = $("#results");
 
 var locationErrorModal = new Foundation.Reveal($("#error-modal"));
 var apiErrorModal = new Foundation.Reveal($("#error-modal2"));
-var noInputModal = new Foundation.Reveal($("#error-modal4"));
+var clearSearchConfirmModal = new Foundation.Reveal($("#error-modal3"));
 
 // render the stored items
 initialise();
@@ -369,6 +369,7 @@ favesList.on("click", function(event) {
         renderFavouritesList();
     }
 })
+clearSearchConfirmModal.open();
 
 // clear search history list and storage
 $("#clear-search-btn").on("click", function() {
