@@ -120,8 +120,9 @@ var mapBtns = document.querySelectorAll(".map-btn");
 document.body.addEventListener("click", function(event) {
     if (event.target.classList.contains("map-btn")) {
         var mapNumber = event.target.id[event.target.id.length - 1];
+        var mapLocation = event.target.parentElement.firstElementChild.textContent;
         var mapFrame = $("#map" + mapNumber);
-        mapFrame.attr("src", "https://www.google.com/maps/embed/v1/place?key=AIzaSyBMo1myYnlmnCYMJc5fwiGiDZPqXar03ps&q=Opera+House");
+        mapFrame.attr("src", "https://www.google.com/maps/embed/v1/place?key=AIzaSyBMo1myYnlmnCYMJc5fwiGiDZPqXar03ps&q=" + mapLocation);
         
         var mapDiv = mapFrame.parent();
         if (event.target.textContent === "View on Map") {
