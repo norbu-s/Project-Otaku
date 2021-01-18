@@ -238,5 +238,8 @@ a{
 }
 
 @media only screen and (max-width: 768px) {
-    width: 100%;
-}
+    /* For mobile phones: */
+    .grid-x {
+      width: 100%;
+    }
+  }
