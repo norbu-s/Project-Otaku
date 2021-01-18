@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <!--font-->
+    <!-- Google Fonts-->
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
     <!-- Compressed CSS -->
@@ -15,6 +15,7 @@
 </head>
 
 <body>
+    <!-- Navigation bar / Heading-->
     <div class="top-bar">
         <h1>Covidsafe Restaurants</h1>
         <ul class="menu align-right">
@@ -22,10 +23,13 @@
             <li><a href="#">Favourites</a></li>
         </ul>
     </div>
+    <!-- Foundation container/grid-->
     <div class="grid-x">
         <main>
             <div class="cell">
-                <div class="fave card">
+                <p id="no-fave-msg" class="">You have no favourites.</p>
+                <!-- Card 1 -->
+                <!-- <div class="fave card">
                     <div id="divider1" class="fave-name card-divider">McDonald's</div>
                     <button id="map-btn1" class='map-btn hide'>View on Map</button>
                     <div class="card-section map hide">
@@ -39,13 +43,11 @@
                     ></iframe>
                     </div>
                     <div id="img1" class="card-section img hide">
-                        <!-- <button class="uploadImgBtn">Upload Image</button> -->
-                        <div >
-                            <form action="/action_page.php">
-                                <input type="file" id="imgInput1" accept="image/*">
-                            </form>
-                            <img id="uploadImg1" src="#">
-                        </div>
+                        <button class="uploadImgBtn">Upload Image</button> -->
+                        <!-- <form action="/action_page.php">
+                            <input type="file" id="imgInput1" accept="image/*">
+                        </form>
+                        <img id="uploadImg1" src="#">
                     </div>
                     <div id="info1" class="card-section info hide">
                         <div class="fave-cuisine"><strong>Cuisine: </strong>American</div>
@@ -54,13 +56,12 @@
                         <div class="fave-phone"><strong>Phone: </strong>N/A</div>
                     </div>
                     <div id="notes1" class="card-section notes hide">
-                        <div class="fave-notes">
-                            <label for="fave-note-input">Notes:</label>
-                            <textarea type="text" id="fave-note-input" placeholder="Personal notes"></textarea>
-                        </div>
+                        <label for="fave-note-input">Notes:</label>
+                        <textarea type="text" id="fave-note-input" placeholder="Personal notes"></textarea>
                     </div>
-                </div>
-                <div class="fave card">
+                </div> -->
+                <!-- Card 2 -->
+                <!-- <div class="fave card">
                     <div id="divider2" class="fave-name card-divider">McDonald's</div>
                     <button id="map-btn2" class='map-btn hide'>View on Map</button>
                     <div class="card-section map hide">
@@ -73,9 +74,9 @@
                         src=""
                         ></iframe>
                     </div>
-                    <div id="img2" class="card-section img hide">
+                    <div id="img2" class="card-section img hide"> -->
                         <!-- <button class="uploadImgBtn">Upload Image</button> -->
-                        <div>
+                        <!-- <div>
                             <form action="/action_page.php">
                                 <input type="file" id="imgInput2" accept="image/*">
                             </form>
@@ -94,12 +95,13 @@
                             <textarea type="text" id="fave-note-input" placeholder="Personal notes"></textarea>
                         </div>
                     </div>
-                </div>
+                </div>  -->
             </div>
         </main>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/dist/js/foundation.min.js" integrity="sha256-pRF3zifJRA9jXGv++b06qwtSqX1byFQOLjqa2PTEb2o=" crossorigin="anonymous"></script>   
+    <script src="Assets/javascript.js"></script>
     <script src="Assets/script-2.js"></script>
 </body>
 
