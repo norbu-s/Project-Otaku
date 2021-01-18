@@ -7,6 +7,10 @@ var favesList = $("#faves-list");
 var searchHistoryList = $("#search-history-list");
 var resultsDiv = $("#results");
 
+var locationErrorModal = new Foundation.Reveal($("#error-modal"));
+var apiErrorModal = new Foundation.Reveal($("#error-modal2"));
+var clearSearchConfirmModal = new Foundation.Reveal($("#error-modal3"));
+
 // render the stored items
 initialise();
 
@@ -68,7 +72,7 @@ function storeFaves() {
 }
 
 // hide/show clear search history btn depending on if there is anything in the list 
-if (storedSearches === []) {
+if (storedSearches.length === 0) {
     $("#clear-search-btn").addClass("hide");
 } else {
     $("#clear-search-btn").removeClass("hide");
@@ -115,7 +119,6 @@ searchBtn.on("click", function (event) {
     var searchInput = $("#zipcode").val();
 
     if (searchInput === "") {
-        console.log("no input");
         return;
     }
 
@@ -142,12 +145,17 @@ searchBtn.on("click", function (event) {
         headers: { "user-key": "9a1b7bbdae3e31891d3b697bed7433bc" },
         url: "https://developers.zomato.com/api/v2.1/locations?query=" + searchInput,
         method: "GET",
-        error: function () {
-            alert("Sorry, there was an error loading the data.");
+        error: function() {
+            apiErrorModal.open();
             return;
         },
-        success: function (response) {
-            console.log(response)
+        success: function(response) {
+            console.log(response) 
+            if (response.location_suggestions.length === 0) {
+                locationErrorModal.open();
+                return;
+            }
+
             var locationName = response.location_suggestions[0].title.slice(0, response.location_suggestions[0].title.indexOf(","));
             for (var i = 0; i < storedSearches.length; i++) {
                 if (storedSearches[i] === locationName) {
@@ -227,8 +235,8 @@ searchBtn.on("click", function (event) {
                 },
                 url: "https://developers.zomato.com/api/v2.1/search?entity_id=" + entityId + "&entity_type=" + entityType + "&count=10",
                 method: "GET",
-                error: function () {
-                    alert("Sorry, there was an error loading the data.");
+                error: function() {
+                    apiErrorModal.open();
                     return;
                 },
                 success: function (response) {
@@ -277,8 +285,8 @@ searchHistoryList.on("click", function (event) {
             headers: { "user-key": "9a1b7bbdae3e31891d3b697bed7433bc" },
             url: "https://developers.zomato.com/api/v2.1/locations?query=" + buttonName,
             method: "GET",
-            error: function () {
-                alert("Sorry, there was an error loading the data.");
+            error: function() {
+                apiErrorModal.open();
                 return;
             },
             success: function (response) {
@@ -293,8 +301,8 @@ searchHistoryList.on("click", function (event) {
                     },
                     url: "https://developers.zomato.com/api/v2.1/search?entity_id=" + entityId + "&entity_type=" + entityType + "&count=10",
                     method: "GET",
-                    error: function () {
-                        alert("Sorry, there was an error loading the data.");
+                    error: function() {
+                        apiErrorModal.open();
                         return;
                     },
                     success: function (response) {
@@ -346,14 +354,21 @@ favesList.on("click", function (event) {
 })
 
 // clear search history list and storage
-$("#clear-search-btn").on("click", function () {
-    var clearConfirm = confirm("Are you sure you want to clear your search history?");
-    if (clearConfirm) {
+$("#clear-search-btn").on("click", function() {
+    // var clearConfirm = confirm("Are you sure you want to clear your search history?");
+    clearSearchConfirmModal.open();
+
+    $("#clear-search-yes").on("click", function() {
         localStorage.removeItem("storedSearches");
         searchHistoryList.empty();
         storedSearches = [];
         $("#clear-search-btn").addClass("hide");
-    } else {
-        return;
-    }
+        $(".reveal-overlay").attr("style", "display: none");
+    })
+    $("#clear-search-no").on("click", function() {
+        $(".reveal-overlay").attr("style", "display: none");
+    })
+    
 })
+
+
