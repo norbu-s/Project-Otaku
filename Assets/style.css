@@ -145,6 +145,8 @@ a{
     /* width: 450px; */
 }
 
+/* MODAL STYLES */
+
 #error-modal3 {
     width: 35vw;
     height: 45vh;
@@ -184,5 +186,4 @@ a{
 #clear-search-yes:hover, #clear-search-no:hover {
     background-color:rgb(201, 64, 64);
 }
-
 
