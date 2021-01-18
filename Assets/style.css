@@ -125,7 +125,7 @@ a{
     font-size: 26px;
 }
 
-#result-each {
+.result-each {
     margin: 10px;
     padding: 10px;
     background-color: rgba(255,255,255,0.7);
@@ -243,4 +243,13 @@ a{
 
 #clear-search-yes:hover, #clear-search-no:hover {
     background-color:rgb(201, 64, 64);
+}
+
+#page-btn-div {
+    text-align: center;
+    border: solid 1px black;
+}
+
+#page-btn-div button {
+    padding: 5px;
 }
