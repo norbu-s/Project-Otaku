@@ -7,6 +7,8 @@ var favesList = $("#faves-list");
 var searchHistoryList = $("#search-history-list");
 var resultsDiv = $("#results");
 
+var errorModal = new Foundation.Reveal($('#error-modal'));
+
 // render the stored items
 initialise();
 
@@ -113,6 +115,10 @@ searchBtn.on("click", function(event) {
         },
         success: function(response) {
             console.log(response) 
+            if (response.location_suggestions.length === 0) {
+                errorModal.open();
+                return;
+            }
             var locationName = response.location_suggestions[0].title.slice(0, response.location_suggestions[0].title.indexOf(","));
             for (var i = 0; i < storedSearches.length; i++) {
                 if (storedSearches[i] === locationName) {
@@ -375,3 +381,5 @@ $("#clear-search-btn").on("click", function() {
         return;
     }
 })
+
+
