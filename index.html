@@ -34,16 +34,13 @@
 <!--foundation grid-->
     <div class="grid-x">
         <!--foundation column 1 (search bar & search history)-->
-        <div class="cell medium-4 large-4">
+        <div class="cell medium-3 large-3">
             <div id="search-zipcode">
                 <form>
                     <input type="text" id="zipcode" placeholder="Search a suburb">
                     <button type="submit" id="search-btn">search</button>
                 </form>
-                <div id="faves">
-                    <h2 id="title-faves" class="sidebar-title">Favourites</h2>
-                    <ul id="faves-list"></ul>
-                </div>
+                
                 <div id="search-history">
                     <h2 id="title-history" class="sidebar-title">Search History</h2>
                     <ul id="search-history-list">
@@ -54,7 +51,7 @@
         </div>
 
         <!--foundation column 2 (search results)-->
-        <div class="cell medium-8 large-8">
+        <div class="cell medium-6 large-6">
             <div id="content">
                 <h2 id="nearest-restaurant">Nearest Covidsafe Restaurants</h2>
                 <div id="results"></div>
@@ -97,6 +94,14 @@
                 </div>
             </div>
         </div>
+
+         <!--foundation column 3 (fav list)-->
+    <div class="cell medium-3 large-3">
+        <div id="faves">
+            <h2 id="title-faves" class="sidebar-title">Favourites</h2>
+            <ul id="faves-list"></ul>
+        </div>
+    </div>
     </div>
     
 <!-- Compressed JavaScript -->

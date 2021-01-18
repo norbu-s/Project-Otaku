@@ -29,6 +29,7 @@ function renderFavouritesList() {
 
     for (var i = 0; i < storedFaves.length; i++) {
         var storedFaveLi = $("<li>");
+        storedFaveLi.attr("class", "fav-list")
         var storedFaveBtn = $(`<a 
         href="fave-restaurants.html"
         class="button fave-btn" 
@@ -38,7 +39,7 @@ function renderFavouritesList() {
         data-phone="${storedFaves[i].phone}"
         data-cuisine="${storedFaves[i].cuisine}"
         data-id="${storedFaves[i].id}"
-        >` + storedFaves[i].name+ `</a>`);;
+        >` + storedFaves[i].name + `</a>`);;
         var removeFaveBtn = $("<button id=" + storedFaves[i].id + " class=\"remove-fave-btn\">X</i></button");
         storedFaveLi.append(storedFaveBtn, removeFaveBtn);
 
@@ -58,7 +59,8 @@ function initialise() {
     }
     renderSearchHistory();
     renderFavouritesList();
-;}
+    ;
+}
 
 // store searches/favourites
 function storeSearches() {
@@ -76,8 +78,41 @@ if (storedSearches.length === 0) {
     $("#clear-search-btn").removeClass("hide");
 }
 
+function createFaveBtn(restaurant) {
+
+    var faveBtn = $(`<button 
+                        class="add-fave-btn" 
+                        data-name="${restaurant.name}"
+                        data-cost="${restaurant.average_cost_for_two}"
+                        data-location="${restaurant.location.address}"
+                        data-phone="${restaurant.phone_numbers}"
+                        data-cuisine="${restaurant.cuisines}"
+                        data-id="${restaurant.id}"
+                        >Add to Favorite</button>`);;
+
+    faveBtn.click((event) => {
+        var dataset = event.target.dataset;
+        var faveList = { "name": dataset.name, "cost": dataset.cost, "location": dataset.location, "phone": dataset.phone, "cuisine": dataset.cuisine, "id": dataset.id };
+
+        for (var i = 0; i < storedFaves.length; i++) {
+            if (storedFaves[i].name === faveList.name) {
+                storedFaves.splice(i, 1);
+            }
+        }
+        storedFaves.push(faveList);
+
+        if (storedFaves.length > 4) {
+            storedFaves.splice(0, 1);
+        }
+        storeFaves();
+        renderFavouritesList();
+    });
+
+    return faveBtn;
+};
+
 // search button click event 
-searchBtn.on("click", function(event) {
+searchBtn.on("click", function (event) {
     event.preventDefault();
 
     resultsDiv.empty();
@@ -107,7 +142,7 @@ searchBtn.on("click", function(event) {
         - US
     */
     $.ajax({
-        headers: {"user-key": "9a1b7bbdae3e31891d3b697bed7433bc"},
+        headers: { "user-key": "9a1b7bbdae3e31891d3b697bed7433bc" },
         url: "https://developers.zomato.com/api/v2.1/locations?query=" + searchInput,
         method: "GET",
         error: function() {
@@ -120,6 +155,7 @@ searchBtn.on("click", function(event) {
                 locationErrorModal.open();
                 return;
             }
+
             var locationName = response.location_suggestions[0].title.slice(0, response.location_suggestions[0].title.indexOf(","));
             for (var i = 0; i < storedSearches.length; i++) {
                 if (storedSearches[i] === locationName) {
@@ -138,7 +174,7 @@ searchBtn.on("click", function(event) {
 
             var entityId = response.location_suggestions[0].entity_id;
             var entityType = response.location_suggestions[0].entity_type;
-    
+
             /*
                 NOTE: 
                 - US zipcode via location API 
@@ -154,40 +190,40 @@ searchBtn.on("click", function(event) {
             //     },
             //     success: function(response) {
             //         console.log(response);
-                    /*
-                        NOTE:
-                        - US covid cases API
-                        - How it works: insert zipcode into the query URL and it provides the total cases in the county that zipcode is in 
-                        - Only gives total cases, not current (recovered count is always null)
-                    */
-                    // var zipcode = response.records[0].fields.zip;
-                    // var queryURL = "https://cors-anywhere.herokuapp.com/https://localcoviddata.com/covid19/v1/locations?zipCode=" + zipcode;    
+            /*
+                NOTE:
+                - US covid cases API
+                - How it works: insert zipcode into the query URL and it provides the total cases in the county that zipcode is in 
+                - Only gives total cases, not current (recovered count is always null)
+            */
+            // var zipcode = response.records[0].fields.zip;
+            // var queryURL = "https://cors-anywhere.herokuapp.com/https://localcoviddata.com/covid19/v1/locations?zipCode=" + zipcode;    
 
-                    // $.ajax({ 
-                    //     url: queryURL,
-                    //     method: "GET"
-                    // }).then(function(response) {
-                    //     console.log(response);
-                    //     console.log(response.counties[0].positiveCt);
-                    // })
+            // $.ajax({ 
+            //     url: queryURL,
+            //     method: "GET"
+            // }).then(function(response) {
+            //     console.log(response);
+            //     console.log(response.counties[0].positiveCt);
+            // })
 
-                    /*
-                        NOTE:
-                        - US population via zipcode API 
-                        - Some zipcodes don't return any information 
-                    */
-                    // $.ajax({
-                    //     url: "https://cors-anywhere.herokuapp.com/https://api.census.gov/data/2018/acs/acs5?key=35c1cd1a4206a49849c0f9763eb17e0edf0bb6c9&get=B01003_001E&for=zip%20code%20tabulation%20area:" + zipcode,
-                    //     method: "GET",
-                    //     error: function() {
-                    //         alert("error");
-                    //     },
-                    //     success: function(response) {
-                    //         console.log(response)
-                    //         var zipPopulation = response[1][0];
-                    //         console.log(zipPopulation);
-                    //     }
-                    // })
+            /*
+                NOTE:
+                - US population via zipcode API 
+                - Some zipcodes don't return any information 
+            */
+            // $.ajax({
+            //     url: "https://cors-anywhere.herokuapp.com/https://api.census.gov/data/2018/acs/acs5?key=35c1cd1a4206a49849c0f9763eb17e0edf0bb6c9&get=B01003_001E&for=zip%20code%20tabulation%20area:" + zipcode,
+            //     method: "GET",
+            //     error: function() {
+            //         alert("error");
+            //     },
+            //     success: function(response) {
+            //         console.log(response)
+            //         var zipPopulation = response[1][0];
+            //         console.log(zipPopulation);
+            //     }
+            // })
             //     }
             // })
 
@@ -195,20 +231,22 @@ searchBtn.on("click", function(event) {
             $.ajax({
                 headers: {
                     "Accept": "application/json",
-                    "user-key": "9a1b7bbdae3e31891d3b697bed7433bc"},
+                    "user-key": "9a1b7bbdae3e31891d3b697bed7433bc"
+                },
                 url: "https://developers.zomato.com/api/v2.1/search?entity_id=" + entityId + "&entity_type=" + entityType + "&count=10",
                 method: "GET",
                 error: function() {
                     apiErrorModal.open();
                     return;
                 },
-                success: function(response) {
+                success: function (response) {
                     console.log(response);
 
                     for (var i = 0; i < response.restaurants.length; i++) {
                         var resultDiv = $("<div>");
                         resultDiv.attr("id", "result-each");
 
+                        var restaurant = response.restaurants[i].restaurant;
                         var restaurantName = response.restaurants[i].restaurant.name;
                         var restaurantLocation = response.restaurants[i].restaurant.location.address;
                         var restaurantPhoneNo = response.restaurants[i].restaurant.phone_numbers;
@@ -222,36 +260,7 @@ searchBtn.on("click", function(event) {
                         var restaurantLocationDiv = $("<div>" + restaurantLocation + "</div>");
                         var restaurantPhoneNoDiv = $("<div>" + restaurantPhoneNo + "</div>");
 
-                        // var faveBtn = $(`<button class="faveButton">Add to Favorite</button>`);
-                        var faveBtn = $(`<button 
-                        class="add-fave-btn" 
-                        data-name="${restaurantName}"
-                        data-cost="${averageCostForTwo}"
-                        data-location="${restaurantLocation}"
-                        data-phone="${restaurantPhoneNo}"
-                        data-cuisine="${cuisine}"
-                        data-id="${restaurantId}"
-                        >Add to Favorite</button>`);;
-
-                        faveBtn.click((event) =>{
-                            var dataset = event.target.dataset;
-                            var faveList = {"name": dataset.name, "cost": dataset.cost, "location": dataset.location, "phone": dataset.phone, "cuisine": dataset.cuisine, "id": dataset.id};
-                            
-                            for (var i = 0; i < storedFaves.length; i++) {
-                                if (storedFaves[i].name === faveList.name) {
-                                    storedFaves.splice(i, 1);
-                                }
-                            }
-                            storedFaves.push(faveList);
-
-                            if (storedFaves.length > 4) {
-                                storedFaves.splice(0, 1);
-                            }
-
-                            storeFaves();
-                            renderFavouritesList();
-                        });
-                        
+                        var faveBtn = createFaveBtn(restaurant);
 
                         resultDiv.append(restaurantNameDiv, cuisineDiv, averageCostForTwoDiv, restaurantLocationDiv, restaurantPhoneNoDiv, faveBtn);
                         resultsDiv.append(resultDiv);
@@ -266,21 +275,21 @@ searchBtn.on("click", function(event) {
 })
 
 // get API data on search history button click
-searchHistoryList.on("click", function(event) {
+searchHistoryList.on("click", function (event) {
     if (event.target.classList.contains("history-btn")) {
         resultsDiv.empty();
         // Zomato location API call
         var buttonName = event.target.textContent;
 
         $.ajax({
-            headers: {"user-key": "9a1b7bbdae3e31891d3b697bed7433bc"},
+            headers: { "user-key": "9a1b7bbdae3e31891d3b697bed7433bc" },
             url: "https://developers.zomato.com/api/v2.1/locations?query=" + buttonName,
             method: "GET",
             error: function() {
                 apiErrorModal.open();
                 return;
             },
-            success: function(response) {
+            success: function (response) {
                 var entityId = response.location_suggestions[0].entity_id;
                 var entityType = response.location_suggestions[0].entity_type;
 
@@ -288,18 +297,20 @@ searchHistoryList.on("click", function(event) {
                 $.ajax({
                     headers: {
                         "Accept": "application/json",
-                        "user-key": "9a1b7bbdae3e31891d3b697bed7433bc"},
+                        "user-key": "9a1b7bbdae3e31891d3b697bed7433bc"
+                    },
                     url: "https://developers.zomato.com/api/v2.1/search?entity_id=" + entityId + "&entity_type=" + entityType + "&count=10",
                     method: "GET",
                     error: function() {
                         apiErrorModal.open();
                         return;
                     },
-                    success: function(response) {
+                    success: function (response) {
                         console.log(response)
                         for (var i = 0; i < response.restaurants.length; i++) {
                             var resultDiv = $("<div>");
                             resultDiv.attr("id", "result-each");
+                            const restaurant = response.restaurants[i].restaurant;
 
                             var restaurantName = response.restaurants[i].restaurant.name;
                             var restaurantLocation = response.restaurants[i].restaurant.location.address;
@@ -313,39 +324,11 @@ searchHistoryList.on("click", function(event) {
                             var averageCostForTwoDiv = $("<div>" + "Average Cost For Two: $" + averageCostForTwo + "</div>");
                             var restaurantLocationDiv = $("<div>" + restaurantLocation + "</div>");
                             var restaurantPhoneNoDiv = $("<div>" + restaurantPhoneNo + "</div>");
-                            
-                            var faveBtn = $(`<button 
-                            class="add-fave-btn" 
-                            data-name="${restaurantName}"
-                            data-cost="${averageCostForTwo}"
-                            data-location="${restaurantLocation}"
-                            data-phone="${restaurantPhoneNo}"
-                            data-cuisine="${cuisine}"
-                            data-id="${restaurantId}"
-                            >Add to Favorite</button>`);;
 
-                            faveBtn.click((event) =>{
-                                var dataset = event.target.dataset;
-                                var faveList = {"name": dataset.name, "cost": dataset.cost, "location": dataset.location, "phone": dataset.phone, "cuisine": dataset.cuisine, "id": dataset.id};
-                                
-                                for (var i = 0; i < storedFaves.length; i++) {
-                                    if (storedFaves[i].name === faveList.name) {
-                                        storedFaves.splice(i, 1);
-                                    }
-                                }
-                                storedFaves.push(faveList);
-
-                                if (storedFaves.length > 4) {
-                                    storedFaves.splice(0, 1);
-                                }
-
-                                storeFaves();
-                                renderFavouritesList();
-                            });
+                            const faveBtn = createFaveBtn(restaurant);
 
 
-
-                            resultDiv.append(restaurantNameDiv, cuisineDiv, averageCostForTwoDiv, restaurantLocationDiv, restaurantPhoneNoDiv,faveBtn);
+                            resultDiv.append(restaurantNameDiv, cuisineDiv, averageCostForTwoDiv, restaurantLocationDiv, restaurantPhoneNoDiv, faveBtn);
                             resultsDiv.append(resultDiv);
                         }
                     }
@@ -354,9 +337,9 @@ searchHistoryList.on("click", function(event) {
         })
     }
 })
-  
+
 // delete favourite item 
-favesList.on("click", function(event) {
+favesList.on("click", function (event) {
     if (event.target.classList.contains("remove-fave-btn")) {
         var faveBtnId = event.target.id;
         console.log(faveBtnId)
@@ -376,7 +359,6 @@ $("#clear-search-btn").on("click", function() {
     clearSearchConfirmModal.open();
 
     $("#clear-search-yes").on("click", function() {
-        console.log("yes")
         localStorage.removeItem("storedSearches");
         searchHistoryList.empty();
         storedSearches = [];
