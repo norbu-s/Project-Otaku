@@ -25,6 +25,7 @@ function renderFavouritesList() {
 
     for (var i = 0; i < storedFaves.length; i++) {
         var storedFaveLi = $("<li>");
+        storedFaveLi.attr("class", "fav-list")
         var storedFaveBtn = $(`<a 
         href="fave-restaurants.html"
         class="button fave-btn" 

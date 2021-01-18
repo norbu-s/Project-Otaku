@@ -14,12 +14,41 @@ body {
     background-color: #FFFFFF;
 }
 
+
+/*Top bar layout */
+
+
 form {
     display: inline-block;
 }
 
+.top-bar ul {
+    background-color: #FFFFFF;
+   
+}
+a{
+    color: #0a7b09;
+    font-size: 18px;
+}
+
+
+.top-bar {
+    margin: 10px;
+    padding: 10px;
+    background-color: #FFFFFF;
+    /* background: linear-gradient(10deg, #EEDDDD 0%, #FFEEEE 100%); */
+    /* box-shadow: 0 0 1em rgba(0,0,0,0.3); */
+    border-bottom: solid 4px #a5cb0b;
+    top: 0;
+    height: 4.2em;
+    color: #0a7b09;
+
+}
+
+/*seach section layout*/
+
 #search-btn {
-    display: inline-block;
+    /* display: inline-block;
     padding: 0.35em 1.2em;
     border: 0.1em solid #FFFFFF;
     margin: 0 0.3em 0.3em 0;
@@ -27,24 +56,41 @@ form {
     box-sizing: border-box;
     text-decoration: none;
     /* font-family: 'Roboto',sans-serif; */
-    font-weight: 300;
+    /* font-weight: 300; */
     /* color: #FFFFFF; */
-    text-align: center;
-    transition: all 0.2s;
+    /* text-align: center;
+    transition: all 0.2s; */ 
+    display: inline-block;
+    background-color:#a5cb0b;
+    border-radius: 5px;
+    padding: 5px;
+   
 }
  
-.sidebar-title {
-    /* color: white; */
-    font-size: 26px;
-}
 
-#search-history-list {
+
+#search-history-list { 
     /* margin: 10px; */
     /* padding: 10px; */
     /* background-color: rgba(255,255,255,0.7); */
     /* border: none;
     border-radius: 10px; */
+} 
+#zipcode{
+   display: inline-block;
+   width: auto;
+   margin-right: 10px;
 }
+
+
+#search-zipcode {
+    border: 1px solid #e7e7e7;
+    padding: 10px;
+    margin-left: 10px;
+    /* margin-top: 10px; */
+    /* width: 450px; */
+}
+
 
 .history-btn {
     display: block;
@@ -64,66 +110,15 @@ form {
     margin: 3px;
     width: 100%;
 }
-
 #clear-search-btn:hover {
     cursor: pointer;
     /* background: rgb(70, 70, 70); */
 }
 
-.fave-btn {
-    display: inline-block;
-    background-color: rgba(255,255,255,0.7); 
-    border-top-left-radius: 10px;
-    border-bottom-left-radius: 10px;
-    padding: 10px;
-    margin-bottom: 3px;
-    width: 70%;
-}
 
-.history-btn:hover, .fave-btn:hover {
-    cursor: pointer;
-    background-color: grey;
-}
+/*end search section layout*/
 
-.remove-fave-btn {
-    background-color: grey;
-    /* color: white; */
-    font-weight: bold;
-    padding: 10px;
-    vertical-align: top;
-    border-top-right-radius: 10px;
-    border-bottom-right-radius: 10px;
-} /* work out how to make the height of the remove btn the same as the fave btn */
-
-.remove-fave-btn:hover {
-    background-color: rgb(182, 60, 60);
-    cursor: pointer;
-}
-
-#faves-list {
-    list-style: none;
-}
-
-.top-bar {
-    margin: 10px;
-    padding: 10px;
-    background-color: #FFFFFF;
-    /* background: linear-gradient(10deg, #EEDDDD 0%, #FFEEEE 100%); */
-    /* box-shadow: 0 0 1em rgba(0,0,0,0.3); */
-    border-bottom: solid 4px #a5cb0b;;
-    top: 0;
-    height: 4.2em;
-    color: #0a7b09;
-
-}
-.top-bar ul {
-    background-color: #FFFFFF;
-   
-}
-a{
-    color: #0a7b09;
-    font-size: 18px;
-}
+/*restaurant result layout*/
 
 #nearest-restaurant {
     margin: 10px;
@@ -134,13 +129,69 @@ a{
     margin: 10px;
     padding: 10px;
     background-color: rgba(255,255,255,0.7);
-    border: none;
-    border-radius: 10px;
+    border: 1px solid #e7e7e7;;
+    
+}
+.add-fave-btn{
+    display: inline-block;
+    background-color:#a5cb0b;
+    border-radius: 5px;
+    padding: 5px;
+}
+/*end restraunt result*/
+
+/*fav list layout*/
+
+.fave-btn {
+    display: inline-block;
+    background-color:#a5cb0b;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    padding: 10px;
+    margin-bottom: 3px;
+    width: 70%;
+}
+.history-btn{
+    border-bottom: 1px solid #e7e7e7;;;
 }
 
-
-#search-zipcode {
-    margin-left: 10px;
-    margin-top: 10px;
-    /* width: 450px; */
+.history-btn:hover, .fave-btn:hover {
+    cursor: pointer;
+    background-color: grey; /*I wanna chenge this colour*/
 }
+
+.remove-fave-btn {
+    background-color:#a5cb0b;
+    /* color: white; */
+    font-weight: bold;
+    padding: 10px;
+    vertical-align: top;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+} /* work out how to make the height of the remove btn the same as the fave btn */
+
+.remove-fave-btn:hover {
+    background-color: rgb(182, 60, 60); /*Iwanna change this colour*/
+    cursor: pointer;
+}
+
+#faves-list {
+    list-style: none;
+    
+}
+
+#faves{
+    border: 1px solid #e7e7e7;
+    margin-right: 10px;
+    padding: 10px;
+}
+
+/* .fav-list{
+    background-color:#a5cb0b;
+} */
+
+.sidebar-title {
+    /* color: white; */
+    font-size: 26px;
+}
+
