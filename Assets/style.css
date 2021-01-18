@@ -6,12 +6,12 @@ body {
     border: none;
     margin: 0;
     padding: 0;
-    color: #FFFFFF;
+    color: #33373d;
     font-weight: 300;
     font-family: 'Lato', sans-serif;
     line-height: 1.55;
     overflow-x: hidden;
-    background-color: #0f0919;
+    background-color: #FFFFFF;
 }
 
 form {
@@ -28,13 +28,13 @@ form {
     text-decoration: none;
     /* font-family: 'Roboto',sans-serif; */
     font-weight: 300;
-    color: #FFFFFF;
+    /* color: #FFFFFF; */
     text-align: center;
     transition: all 0.2s;
 }
  
 .sidebar-title {
-    color: white;
+    /* color: white; */
     font-size: 26px;
 }
 
@@ -57,7 +57,7 @@ form {
 
 #clear-search-btn { 
     display: block;
-    color: white;
+    /* color: white; */
     background-color: rgba(154, 146, 146, 0.7); 
     border-radius: 10px;
     padding: 10px;
@@ -67,7 +67,7 @@ form {
 
 #clear-search-btn:hover {
     cursor: pointer;
-    background: rgb(70, 70, 70);
+    /* background: rgb(70, 70, 70); */
 }
 
 .fave-btn {
@@ -87,7 +87,7 @@ form {
 
 .remove-fave-btn {
     background-color: grey;
-    color: white;
+    /* color: white; */
     font-weight: bold;
     padding: 10px;
     vertical-align: top;
@@ -107,13 +107,22 @@ form {
 .top-bar {
     margin: 10px;
     padding: 10px;
-    background-color: #FFEEEE;
-    background: linear-gradient(10deg, #EEDDDD 0%, #FFEEEE 100%);
-    box-shadow: 0 0 1em rgba(0,0,0,0.3);
+    background-color: #FFFFFF;
+    /* background: linear-gradient(10deg, #EEDDDD 0%, #FFEEEE 100%); */
+    /* box-shadow: 0 0 1em rgba(0,0,0,0.3); */
+    border-bottom: solid 4px #a5cb0b;;
     top: 0;
     height: 4.2em;
-    color: #000000;
+    color: #0a7b09;
 
+}
+.top-bar ul {
+    background-color: #FFFFFF;
+   
+}
+a{
+    color: #0a7b09;
+    font-size: 18px;
 }
 
 #nearest-restaurant {
