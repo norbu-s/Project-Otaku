@@ -125,7 +125,7 @@ a{
     font-size: 26px;
 }
 
-#result-each {
+.result-each {
     margin: 10px;
     padding: 10px;
     background-color: rgba(255,255,255,0.7);
@@ -252,7 +252,6 @@ a{
 }
 
 #page-btn-div {
-    border: solid 1px black;
     padding: 5px;
     font-size: 20px;
     text-align: center;
