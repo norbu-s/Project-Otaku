@@ -77,8 +77,21 @@ if (storedSearches.length === 0) {
 } else {
     $("#clear-search-btn").removeClass("hide");
 }
-
+function checkIfRestaurantIsInFavourite(restaurantId){
+    const found = storedFaves.find(function (favItem) {
+        return favItem.id === restaurantId;
+    })
+    return found !== undefined;
+}
 function createFaveBtn(restaurant) {
+
+    let buttonContent = 'Add to Favourite';
+    let isDisabled = ``;
+
+    if(checkIfRestaurantIsInFavourite(restaurant.id)){
+        buttonContent = 'Added';
+        isDisabled = `disabled="true"`;
+    }
 
     var faveBtn = $(`<button 
                         class="add-fave-btn" 
@@ -88,7 +101,8 @@ function createFaveBtn(restaurant) {
                         data-phone="${restaurant.phone_numbers}"
                         data-cuisine="${restaurant.cuisines}"
                         data-id="${restaurant.id}"
-                        >Add to Favorite</button>`);;
+                        ${isDisabled}
+                        >${buttonContent}</button>`);
 
     faveBtn.click((event) => {
         var dataset = event.target.dataset;
@@ -106,6 +120,12 @@ function createFaveBtn(restaurant) {
         }
         storeFaves();
         renderFavouritesList();
+
+        event.target.textContent = "Added";
+        event.target.setAttribute('disabled', true);
+
+
+
     });
 
     return faveBtn;
