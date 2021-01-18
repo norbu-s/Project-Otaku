@@ -34,9 +34,11 @@ for (var i = storedFaves.length - 1; i >= 0; i--) {
     
     // Notes section
     var cardNotes = $("<div id='notes" + cardCounter + "' class='card-section notes hide'></div>");
+    var cardDisplayNote = $("<div class='notes-display' id='displayNote"+[i]+"'></div>");
     var noteLabel = $("<label for='note-input" + cardCounter + "'>Notes:</label>");
-    var noteTextArea = $("<textarea type='text' id='note-input" + cardCounter + "' placeholder='Personal notes'></textarea>");
-    cardNotes.append(noteLabel, noteTextArea);
+    var noteTextArea = $("<textarea type='text' class='input"+[i]+"' id='note-input" + cardCounter + "' placeholder='Personal notes'></textarea>");
+    var submitbutton = $("<button class='note-submit' data-order='"+ [i] +"'>Submit</button>")
+    cardNotes.append(cardDisplayNote, noteLabel, noteTextArea, submitbutton);
 
     // Append heading and sections to individual card
     faveCard.append(cardHeadingDiv, viewMapBtn, mapDiv, cardImgDiv, cardInfo, cardNotes);
@@ -47,6 +49,44 @@ for (var i = storedFaves.length - 1; i >= 0; i--) {
 
     renderImages();
 }
+
+$(".note-submit").each(function() {
+    $(this).click(function(){
+        var target = this.getAttribute("data-order");
+        if (storedFaves[target].notes == null) {
+            storedFaves[target].notes = [];
+        };
+        var inputValue = $(".input"+target).val();
+        storedFaves[target].notes.push(inputValue);
+
+        storeFaves();
+        renderNotes();
+    });
+});
+
+function renderNotes() {
+    var updatedStoredFaves = JSON.parse(localStorage.getItem("storedFaves"));
+    if (updatedStoredFaves !== null) {
+        storedFaves = updatedStoredFaves;
+    }
+
+    $(".notes-display").text('');
+    for (i=0; i < updatedStoredFaves.length; i++) {
+        if (updatedStoredFaves[i].notes !== undefined) {
+            console.log(i);
+            var targetDiv = $("#displayNote"+[i]);
+            var noteArry = updatedStoredFaves[i].notes;
+            for (n=0; n < noteArry.length; n++) {
+                console.log(n + " : " + noteArry[n])
+                var newP = $("<p>Notes: "+noteArry[n]+"</p>");
+                targetDiv.append(newP);
+            }
+        };
+    };
+};
+
+renderNotes();
+
 
 // hiding/showing "You have no favourites message"
 if (storedFaves.length > 0) {
