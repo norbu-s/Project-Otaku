@@ -61,7 +61,7 @@ a{
     /* text-align: center;
     transition: all 0.2s; */ 
     display: inline-block;
-    background-color:#18bc9c;;
+    background-color: #ecdb0e;
     border-radius: 5px;
     padding: 5px;
    
@@ -104,7 +104,7 @@ a{
 #clear-search-btn { 
     display: block;
     /* color: white; */
-    background-color: rgba(154, 146, 146, 0.7); 
+    background-color: #718a0b;
     border-radius: 10px;
     padding: 10px;
     margin: 3px;
@@ -129,7 +129,7 @@ a{
     margin: 10px;
     padding: 10px;
     background-color: rgba(255,255,255,0.7);
-    border: 1px solid #e7e7e7;;
+    border: 3px solid #e7e7e7;;
     
 }
 .add-fave-btn{
@@ -159,7 +159,7 @@ a{
 
 .history-btn:hover, .fave-btn:hover {
     cursor: pointer;
-    background-color: grey; /*I wanna chenge this colour*/
+    background-color: #718a0b;
 }
 
 .remove-fave-btn {
@@ -173,7 +173,7 @@ a{
 } /* work out how to make the height of the remove btn the same as the fave btn */
 
 .remove-fave-btn:hover {
-    background-color: rgb(182, 60, 60); /*Iwanna change this colour*/
+    background-color:  #718a0b;
     cursor: pointer;
 }
 
@@ -183,7 +183,7 @@ a{
 }
 
 #faves{
-    border: 1px solid #e7e7e7;
+    border: 2px solid #e7e7e7;
     margin-right: 10px;
     padding: 10px;
 }
