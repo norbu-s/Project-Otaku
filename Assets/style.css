@@ -163,6 +163,7 @@ a{
 }
 
 .remove-fave-btn {
+   
     background-color:#a5cb0b;
     /* color: white; */
     font-weight: bold;
@@ -170,6 +171,7 @@ a{
     vertical-align: top;
     border-top-right-radius: 10px;
     border-bottom-right-radius: 10px;
+    height: 100%
 } /* work out how to make the height of the remove btn the same as the fave btn */
 
 .remove-fave-btn:hover {
@@ -186,6 +188,7 @@ a{
     border: 2px solid #e7e7e7;
     margin-right: 10px;
     padding: 10px;
+    height: fit-content;
 }
 
 /* .fav-list{

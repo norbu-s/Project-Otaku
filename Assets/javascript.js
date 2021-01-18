@@ -91,7 +91,7 @@ function createFaveBtn(restaurant) {
     if(checkIfRestaurantIsInFavourite(restaurant.id)){
         buttonContent = 'Added';
         isDisabled = `disabled="true"`;
-    }
+}
 
     var faveBtn = $(`<button 
                         class="add-fave-btn" 
