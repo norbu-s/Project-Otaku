@@ -144,3 +144,46 @@ a{
     margin-top: 10px;
     /* width: 450px; */
 }
+
+/* MODAL STYLES */
+
+#error-modal3 {
+    width: 35vw;
+    height: 45vh;
+}
+
+#error-modal3 h3, #error-modal3 p {
+    padding: 0 30px;
+}
+
+#error-modal3 h3 {
+    padding-top: 10px;
+}
+
+#error-modal3 p {
+    padding-bottom: 15px;
+}
+
+#clear-search-modal-btn-div {
+    text-align: center;
+    padding-bottom: 10px;
+}
+
+.clear-search-modal-btn {
+    font-weight: bold;
+    color: white;
+    width: 45%;
+    height: 30px;
+    border: none;
+    background-color: rgb(71, 72, 71);
+    left: 5vw;
+}
+
+#clear-search-yes {
+    background-color: rgb(185, 189, 186)
+}
+
+#clear-search-yes:hover, #clear-search-no:hover {
+    background-color:rgb(201, 64, 64);
+}
+
