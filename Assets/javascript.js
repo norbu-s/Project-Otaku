@@ -8,7 +8,8 @@ var searchHistoryList = $("#search-history-list");
 var resultsDiv = $("#results");
 
 var locationErrorModal = new Foundation.Reveal($("#error-modal"));
-var apiErrorModal = new Foundation.Reveal($("#error-modal2"))
+var apiErrorModal = new Foundation.Reveal($("#error-modal2"));
+var noInputModal = new Foundation.Reveal($("#error-modal4"));
 
 // render the stored items
 initialise();
@@ -83,7 +84,6 @@ searchBtn.on("click", function(event) {
     var searchInput = $("#zipcode").val();
 
     if (searchInput === "") {
-        console.log("no input");
         return;
     }
 
@@ -199,7 +199,7 @@ searchBtn.on("click", function(event) {
                 url: "https://developers.zomato.com/api/v2.1/search?entity_id=" + entityId + "&entity_type=" + entityType + "&count=10",
                 method: "GET",
                 error: function() {
-                    alert("Sorry, there was an error loading the data.");
+                    apiErrorModal.open();
                     return;
                 },
                 success: function(response) {
@@ -277,7 +277,7 @@ searchHistoryList.on("click", function(event) {
             url: "https://developers.zomato.com/api/v2.1/locations?query=" + buttonName,
             method: "GET",
             error: function() {
-                alert("Sorry, there was an error loading the data.");
+                apiErrorModal.open();
                 return;
             },
             success: function(response) {
@@ -292,7 +292,7 @@ searchHistoryList.on("click", function(event) {
                     url: "https://developers.zomato.com/api/v2.1/search?entity_id=" + entityId + "&entity_type=" + entityType + "&count=10",
                     method: "GET",
                     error: function() {
-                        alert("Sorry, there was an error loading the data.");
+                        apiErrorModal.open();
                         return;
                     },
                     success: function(response) {
