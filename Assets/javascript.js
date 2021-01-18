@@ -319,7 +319,7 @@ searchHistoryList.on("click", function (event) {
                         "Accept": "application/json",
                         "user-key": "9a1b7bbdae3e31891d3b697bed7433bc"
                     },
-                    url: "https://developers.zomato.com/api/v2.1/search?entity_id=" + entityId + "&entity_type=" + entityType + "&count=10",
+                    url: "https://developers.zomato.com/api/v2.1/search?entity_id=" + entityId + "&entity_type=" + entityType + "&count=20",
                     method: "GET",
                     error: function() {
                         apiErrorModal.open();
