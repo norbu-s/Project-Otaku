@@ -123,7 +123,7 @@ document.body.addEventListener("click", function(event) {
         var mapLocation = event.target.parentElement.firstElementChild.textContent;
         var mapFrame = $("#map" + mapNumber);
         mapFrame.attr("src", "https://www.google.com/maps/embed/v1/place?key=AIzaSyBMo1myYnlmnCYMJc5fwiGiDZPqXar03ps&q=" + mapLocation);
-        
+        // can't use certain special characters in URL e.g. &
         var mapDiv = mapFrame.parent();
         if (event.target.textContent === "View on Map") {
             event.target.textContent = "Hide Map";
