@@ -296,14 +296,6 @@ searchBtn.on("click", function (event) {
 
                         resultsDiv.append(resultContainer1, resultContainer2);
                     }
-                    $("#page-btn1").on("click", function() {
-                        $("#result-container2").addClass("hide");
-                        $("#result-container1").removeClass("hide");
-                    })
-                    $("#page-btn2").on("click", function() {
-                        $("#result-container1").addClass("hide");
-                        $("#result-container2").removeClass("hide");
-                    })
                 }
             })
         }
@@ -380,17 +372,9 @@ searchHistoryList.on("click", function (event) {
     
                             resultsDiv.append(resultContainer1, resultContainer2);
                             $("#page-outof").removeClass("hide");
-                        }
-                        $("#page-btn1").on("click", function() {
-                            $("#result-container2").addClass("hide");
-                            $("#result-container1").removeClass("hide");
                             $("#page-no").text("1");
-                        })
-                        $("#page-btn2").on("click", function() {
-                            $("#result-container1").addClass("hide");
-                            $("#result-container2").removeClass("hide");
-                            $("#page-no").text("2");
-                        })
+                        }
+               
                     }
                 })
             }
@@ -398,17 +382,21 @@ searchHistoryList.on("click", function (event) {
     }
 })
 
-var test = $("#test")
-
-test.on("click", function() {
-    console.log("hey")
+$("#page-btn1").on("click", function() {
+    $("#result-container2").addClass("hide");
+    $("#result-container1").removeClass("hide");
+    $("#page-no").text("1");
+})
+$("#page-btn2").on("click", function() {
+    $("#result-container1").addClass("hide");
+    $("#result-container2").removeClass("hide");
+    $("#page-no").text("2");
 })
 
 // delete favourite item 
 favesList.on("click", function (event) {
     if (event.target.classList.contains("remove-fave-btn")) {
         var faveBtnId = event.target.id;
-        console.log(faveBtnId)
         for (var i = 0; i < storedFaves.length; i++) {
             if (storedFaves[i].id === faveBtnId) {
                 storedFaves.splice(i, 1);
@@ -436,5 +424,3 @@ $("#clear-search-btn").on("click", function() {
     })
     
 })
-
-
