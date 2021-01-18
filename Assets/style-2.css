@@ -8,6 +8,28 @@ main {
     margin: 50px;
 }
 
+.top-bar{
+    margin: 10px;
+    padding: 10px;
+    background-color: #FFFFFF;
+    /* background: linear-gradient(10deg, #EEDDDD 0%, #FFEEEE 100%); */
+    /* box-shadow: 0 0 1em rgba(0,0,0,0.3); */
+    border-bottom: solid 4px #a5cb0b;
+    top: 0;
+    height: 4.2em;
+    color: #0a7b09;
+
+}
+
+.top-bar ul {
+    background-color: #FFFFFF;
+   
+}
+a{
+    color: #0a7b09;
+    font-size: 18px;
+}
+
 /* no favourites message */
 #no-fave-msg {
     text-align: center;
@@ -32,7 +54,7 @@ main {
     height: fit-content;
     width: 40vw;
     border: solid 2px rgb(94, 92, 92);
-    box-shadow: 10px -5px rgb(255, 177, 60);
+    box-shadow: 10px -5px  #718a0b;
 }
 
 .fave div {
