@@ -359,13 +359,23 @@ searchHistoryList.on("click", function (event) {
                             }
 
                         }
-                        resultsDiv.append(result1Container1, resultContainer2);
+                        resultsDiv.append(resultContainer1, resultContainer2);
 
                     }
                 })
             }
         })
     }
+})
+
+$("#page-btn1").on("click", function() {
+    $("#result-container1").removeClass("hide");
+    $("#result-container2").addClass("hide");
+})
+
+$("#page-btn2").on("click", function() {
+    $("#result-container2").removeClass("hide");
+    $("#result-container1").addClass("hide");
 })
 
 // delete favourite item 
