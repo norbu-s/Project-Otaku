@@ -118,6 +118,8 @@ function createFaveBtn(restaurant) {
             storedFaves.push(faveList);
     
             if (storedFaves.length > 4) {
+                console.log(storedFaves[0].id)
+                $("#id-" + storedFaves[0].id).text("Add to Favourite");
                 storedFaves.splice(0, 1);
             }
             event.target.textContent = "Added";
