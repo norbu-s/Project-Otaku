@@ -33,10 +33,10 @@ for (var i = storedFaves.length - 1; i >= 0; i--) {
     cardInfo.append(cuisine, cost, address, phone);
     
     // Notes section
-    var cardNotes = $("<div id='notes" + cardCounter + "' class='card-section notes'></div>");
+    var cardNotes = $("<div id='notes" + cardCounter + "' class='card-section notes'><strong>Notes:</strong></div>");
     var cardDisplayNote = $("<div class='notes-display' id='displayNote"+[i]+"'></div>");
-    var noteLabel = $("<label for='note-input" + cardCounter + "'>Notes:</label>");
-    var noteTextArea = $("<textarea type='text' class='input"+[i]+"' id='note-input" + cardCounter + "' placeholder='Personal notes'></textarea>");
+    var noteLabel = $("<label for='note-input" + cardCounter + "'></label>");
+    var noteTextArea = $("<textarea type='text' class='input"+[i]+"' id='note-input" + cardCounter + "' placeholder='Add Personal Notes'></textarea>");
     var submitbutton = $("<button class='note-submit-btn' data-order='"+ [i] +"'>SUBMIT</button>")
     cardNotes.append(cardDisplayNote, noteLabel, noteTextArea, submitbutton);
 
@@ -79,14 +79,31 @@ function renderNotes() {
             var noteArry = updatedStoredFaves[i].notes;
             for (n=0; n < noteArry.length; n++) {
                 var notesData = noteArry[n];
-                var newDiv = $("<div class='notes-bar'></div>")
-                var newPDate = $("<p class='notes-date'>("+notesData[0]+")</p>");
-                var newP = $("<p class='notes-text'><strong>Note:</strong> "+notesData[1]+"</p>");
-                newDiv.append(newPDate, newP);
+                    var newDiv = $("<div class='notes-bar'></div>")
+                    var newPDate = $("<p class='notes-date'>("+notesData[0]+")</p>");
+                    var newP = $("<p class='notes-text'>"+notesData[1]+"</p>");
+                    var newDeleteBtn = $("<div class='notes-buttons'><button class='notes-delete-btn' data-target='"+n+"' data-order='"+i+"'>Delete</button></div>");
+                    newDiv.append(newPDate, newP, newDeleteBtn);
                 targetDiv.append(newDiv);
             }
         };
     };
+
+    $(".notes-delete-btn").on("click", function() {
+        event.preventDefault();
+        var target = this.getAttribute("data-target");
+        var order = this.getAttribute("data-order");
+
+        var updatedStoredFaves = JSON.parse(localStorage.getItem("storedFaves"));
+        if (updatedStoredFaves !== null) {
+            storedFaves = updatedStoredFaves;
+        }
+        var targetArry = updatedStoredFaves[order].notes;
+        targetArry.splice(target, 1);
+ 
+        storeFaves(); 
+        renderNotes(); 
+    });
 };
 
 renderNotes();
