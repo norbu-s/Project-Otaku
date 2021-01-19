@@ -137,6 +137,101 @@ function createFaveBtn(restaurant) {
     return faveBtn;
 };
 
+if (storedFaves.length > 0) {
+    renderLastSearched();
+}
+
+// API call for last searched location 
+function renderLastSearched() {
+    $.ajax({
+        headers: { "user-key": "9a1b7bbdae3e31891d3b697bed7433bc" },
+        url: "https://developers.zomato.com/api/v2.1/locations?query=" + storedSearches[storedSearches.length - 1],
+        method: "GET",
+        error: function() {
+            apiErrorModal.open();
+            return;
+        },
+        success: function(response) {
+            console.log(response) 
+            if (response.location_suggestions.length === 0) {
+                locationErrorModal.open();
+                return;
+            }
+
+            var locationName = response.location_suggestions[0].title.slice(0, response.location_suggestions[0].title.indexOf(","));
+            for (var i = 0; i < storedSearches.length; i++) {
+                if (storedSearches[i] === locationName) {
+                    storedSearches.splice(i, 1);
+                }
+            }
+            storedSearches.push(locationName);
+            if (storedSearches.length > 5) {
+                storedSearches.splice(0, 1);
+            }
+            storeSearches();
+            renderSearchHistory();
+            if ($("#clear-search-btn").attr("class") === "hide") {
+                $("#clear-search-btn").removeClass("hide");
+            }
+
+            var entityId = response.location_suggestions[0].entity_id;
+            var entityType = response.location_suggestions[0].entity_type;
+
+            // Zomato restaurant search API call
+            $.ajax({
+                headers: {
+                    "Accept": "application/json",
+                    "user-key": "9a1b7bbdae3e31891d3b697bed7433bc"
+                },
+                url: "https://developers.zomato.com/api/v2.1/search?entity_id=" + entityId + "&entity_type=" + entityType + "&count=20",
+                method: "GET",
+                error: function() {
+                    apiErrorModal.open();
+                    return;
+                },
+                success: function (response) {
+                    console.log(response);
+                    var resultContainer1 = $("<div id='result-container1'></div>");
+                    var resultContainer2 = $("<div id='result-container2'></div>")
+                    resultContainer2.addClass("hide");
+
+                    for (var i = 0; i < response.restaurants.length; i++) {
+                        var resultDiv = $("<div>");
+                        resultDiv.attr("class", "result-each");
+                        const restaurant = response.restaurants[i].restaurant;
+
+                        var restaurantName = response.restaurants[i].restaurant.name;
+                        var restaurantLocation = response.restaurants[i].restaurant.location.address;
+                        var restaurantPhoneNo = response.restaurants[i].restaurant.phone_numbers;
+                        var averageCostForTwo = response.restaurants[i].restaurant.average_cost_for_two;
+                        var cuisine = response.restaurants[i].restaurant.cuisines;
+                        var restaurantId = response.restaurants[i].restaurant.id;
+
+                        var restaurantNameDiv = $("<div>" + restaurantName + "</div>");
+                        var cuisineDiv = $("<div>" + cuisine + "Cuisine");
+                        var averageCostForTwoDiv = $("<div>" + "Average Cost For Two: $" + averageCostForTwo + "</div>");
+                        var restaurantLocationDiv = $("<div>" + restaurantLocation + "</div>");
+                        var restaurantPhoneNoDiv = $("<div>" + restaurantPhoneNo + "</div>");
+
+                        const faveBtn = createFaveBtn(restaurant);
+                        resultDiv.append(restaurantNameDiv, cuisineDiv, averageCostForTwoDiv, restaurantLocationDiv, restaurantPhoneNoDiv, faveBtn);
+
+                        if (i < 10) {
+                            resultContainer1.append(resultDiv);
+                        } else {
+                            resultContainer2.append(resultDiv);
+                        }
+
+                    }
+                    resultsDiv.append(resultContainer1, resultContainer2);
+                    $("#page-no").text("1");
+                }
+            })
+        }
+    })
+}
+
+
 // search button click event 
 searchBtn.on("click", function (event) {
     event.preventDefault();
