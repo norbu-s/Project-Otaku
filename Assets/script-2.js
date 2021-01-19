@@ -94,11 +94,8 @@ function renderFaveCards() {
             } else {
                 cardImgDiv.addClass("hide");
                 if (cardImg.attr("src") !== "#") {
-                    console.log("if")                    
                     showImgBtn.text("Show Image");
                 } else {
-                    console.log("else")                    
-
                     showImgBtn.text("Upload Image");
                 }
             }
@@ -191,6 +188,10 @@ $(function() {
             var reader = new FileReader();
             reader.onload = imageIsLoaded;
             reader.readAsDataURL(this.files[0]);
+            var uploadImgBtn = $("#img" + cardNumber).parent().parent().children()[3];
+            if (typeof uploadImgBtn !== "undefined") {
+                uploadImgBtn.textContent = "Hide Image";
+            }
         }
     });
 });

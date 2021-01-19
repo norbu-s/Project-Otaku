@@ -60,9 +60,6 @@ $(window).on("resize", function() {
         var removeFaveBtn = faveIds[i][1];
         removeFaveBtn.outerHeight(faveBtnHeight);
     }
-
-
-
 })
 
 function initialise() {
