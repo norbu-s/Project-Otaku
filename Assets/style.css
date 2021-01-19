@@ -113,7 +113,7 @@ a{
     font-size: 26px;
 }
 
-#result-each {
+.result-each {
     margin: 10px;
     padding: 10px;
     background-color: rgba(255,255,255,0.7);
@@ -235,6 +235,27 @@ a{
 
 #clear-search-yes:hover, #clear-search-no:hover {
     background-color:rgb(201, 64, 64);
+}
+
+/* page btn styles */ 
+
+#page-outof {
+    font-size: 20px;
+}
+
+#page-btn-div {
+    padding: 5px;
+    font-size: 20px;
+    text-align: center;
+}
+
+.page-btn {
+    color: rgb(6, 91, 6);
+    padding: 5px;
+}
+
+.page-btn:hover {
+    font-weight: bold;
 }
 
 @media only screen and (max-width: 768px) {
