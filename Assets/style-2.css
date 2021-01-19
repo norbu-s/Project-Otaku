@@ -86,3 +86,35 @@ a{
     padding-bottom: 10px;
     border-bottom: solid 1px grey;
 }
+
+/* card notes */
+.notes-bar {
+    background-color: #e6e6e6;
+    padding: 10px;
+    margin: 0 !important;
+    margin-bottom: 2px !important;
+    border-radius: 5px;
+}
+
+.notes-bar p {
+    padding: 0;
+    margin: 0;
+}
+
+.notes-date {
+    color: gray;
+    font-size: 0.8em;
+}
+
+.notes-text strong {
+    font-weight: bold;
+}
+
+.note-submit-btn {
+    display: inline-block;
+    background-color:#a5cb0b;
+    border-radius: 10px;
+    padding: 10px;
+    margin-bottom: 3px;
+
+}
