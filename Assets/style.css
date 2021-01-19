@@ -124,6 +124,11 @@ a{
     padding: 5px;
 }
 
+.restaurant-name{
+    font-weight: bold;
+    font-size: 18px;
+}
+
 
 /*end restraunt result*/
 
