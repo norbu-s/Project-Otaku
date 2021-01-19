@@ -53,7 +53,7 @@
         <!--foundation column 2 (search results)-->
         <div class="cell medium-6 large-6">
             <div id="content">
-                <h2 id="nearest-restaurant">Nearby Restaurants</h2>
+                <h2 id="nearest-restaurant">Nearby Restaurants <span id="page-outof">(Page <span id="page-no">1</span> out of 2)</span></h2>
                 <div id="results"></div>
                 <!-- Foundation modals -->
                 <!-- No locations found alert -->
@@ -103,6 +103,7 @@
             <ul id="faves-list"></ul>
         </div>
     </div>
+
     </div>
 
     <div id="page-btn-div" class="grid-x">
@@ -113,6 +114,13 @@
         </div>
     </div>
     
+    <div id="page-btn-div" class="grid-x">
+        <div class="cell">
+            <a href="#" id="page-btn1" class="page-btn">1</a>
+            |
+            <a href="#" id="page-btn2" class="page-btn">2</a>
+        </div>
+    </div>
 <!-- Compressed JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/dist/js/foundation.min.js" integrity="sha256-pRF3zifJRA9jXGv++b06qwtSqX1byFQOLjqa2PTEb2o=" crossorigin="anonymous"></script>   

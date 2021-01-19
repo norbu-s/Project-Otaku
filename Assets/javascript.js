@@ -276,7 +276,6 @@ searchBtn.on("click", function (event) {
                         var resultDiv = $("<div>");
                         resultDiv.attr("class", "result-each");
 
-                        var restaurant = response.restaurants[i].restaurant;
                         var restaurantName = response.restaurants[i].restaurant.name;
                         var restaurantLocation = response.restaurants[i].restaurant.location.address;
                         var restaurantPhoneNo = response.restaurants[i].restaurant.phone_numbers;
@@ -290,10 +289,8 @@ searchBtn.on("click", function (event) {
                         var restaurantLocationDiv = $("<div>" + restaurantLocation + "</div>");
                         var restaurantPhoneNoDiv = $("<div>" + restaurantPhoneNo + "</div>");
 
-                        var faveBtn = createFaveBtn(restaurant);
-
+                        const faveBtn = createFaveBtn(restaurant);
                         resultDiv.append(restaurantNameDiv, cuisineDiv, averageCostForTwoDiv, restaurantLocationDiv, restaurantPhoneNoDiv, faveBtn);
-                        
                         if (i < 10) {
                             resultContainer1.append(resultDiv);
                         } else {
@@ -302,6 +299,8 @@ searchBtn.on("click", function (event) {
 
                         resultsDiv.append(resultContainer1, resultContainer2);
                     }
+                    resultsDiv.append(resultContainer1, resultContainer2);
+                    $("#page-no").text("1");
                 }
             })
         }
@@ -389,13 +388,14 @@ searchHistoryList.on("click", function (event) {
 })
 
 $("#page-btn1").on("click", function() {
-    $("#result-container2").addClass("hide");
     $("#result-container1").removeClass("hide");
+    $("#result-container2").addClass("hide");
     $("#page-no").text("1");
 })
+
 $("#page-btn2").on("click", function() {
-    $("#result-container1").addClass("hide");
     $("#result-container2").removeClass("hide");
+    $("#result-container1").addClass("hide");
     $("#page-no").text("2");
 })
 
