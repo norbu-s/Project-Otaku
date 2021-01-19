@@ -29,8 +29,8 @@ This project aims to create a seamless, easily navigable and handy web applicati
 
 ## Project Links
 
-1. Project Url -
+1. Project Url - https://norbu-s.github.io/Covid-Safe-Restaurant/
 
-2. Github Repository -
+2. Github Repository - https://github.com/norbu-s/Covid-Safe-Restaurant
 
 ## Application Screenshots
