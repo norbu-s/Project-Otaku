@@ -137,7 +137,7 @@ function createFaveBtn(restaurant) {
     return faveBtn;
 };
 
-if (storedFaves.length > 0) {
+if (storedSearches.length > 0) {
     renderLastSearched();
 }
 
