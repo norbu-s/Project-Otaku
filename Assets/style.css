@@ -274,9 +274,11 @@ a{
     /* For mobile phones: */
   #search-zipcode{
       display: none;
+      max-width: 0;
   }
   #faves{
       display: none;
+      max-width: 0;
   }
   #content{
       width: max-content;
