@@ -239,18 +239,17 @@ searchBtn.on("click", function (event) {
 
     resultsDiv.empty();
     var searchInput = $("#zipcode").val();
-    var numbers = "0123456789";
+    
+    var nums = "0123456789";
 
     if (searchInput === "") {
         return;
-    } 
-
-    for (var i = 0; searchInput.length; i++) {
-        if (numbers.includes(searchInput[i])) {
-            numberInputModal.open()
-            return;
-        }
+    } else if (nums.includes(searchInput[0])) {
+        numberInputModal.open()
+        searchInputEl.val("");
+        return;
     }
+    
 
     // Zomato location API call 
     /*
