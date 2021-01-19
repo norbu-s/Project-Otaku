@@ -73,6 +73,14 @@ function renderFaveCards() {
             renderNotes();
 
         })
+
+        showImgBtn.on("click", function() {
+            if (cardImgDiv.hasClass("hide")) {
+                cardImgDiv.removeClass("hide");
+            } else {
+                cardImgDiv.addClass("hide");
+            }
+        })
         
     }
 }
