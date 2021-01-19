@@ -327,6 +327,7 @@ searchBtn.on("click", function (event) {
                         var restaurantId = response.restaurants[i].restaurant.id;
 
                         var restaurantNameDiv = $("<div>" + restaurantName + "</div>");
+                        restaurantNameDiv.attr("class","restaurant-name" );
                         var cuisineDiv = $("<div>" + cuisine + "Cuisine");
                         var averageCostForTwoDiv = $("<div>" + "Average Cost For Two: $" + averageCostForTwo + "</div>");
                         var restaurantLocationDiv = $("<div>" + restaurantLocation + "</div>");
@@ -401,6 +402,7 @@ searchHistoryList.on("click", function (event) {
                             const restaurant = response.restaurants[i].restaurant;
 
                             var restaurantName = response.restaurants[i].restaurant.name;
+                            
                             var restaurantLocation = response.restaurants[i].restaurant.location.address;
                             var restaurantPhoneNo = response.restaurants[i].restaurant.phone_numbers;
                             var averageCostForTwo = response.restaurants[i].restaurant.average_cost_for_two;
@@ -408,6 +410,7 @@ searchHistoryList.on("click", function (event) {
                             var restaurantId = response.restaurants[i].restaurant.id;
 
                             var restaurantNameDiv = $("<div>" + restaurantName + "</div>");
+                            restaurantNameDiv.attr("class","restaurant-name" );
                             var cuisineDiv = $("<div>" + cuisine + "Cuisine");
                             var averageCostForTwoDiv = $("<div>" + "Average Cost For Two: $" + averageCostForTwo + "</div>");
                             var restaurantLocationDiv = $("<div>" + restaurantLocation + "</div>");
