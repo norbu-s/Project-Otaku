@@ -368,6 +368,12 @@ searchHistoryList.on("click", function (event) {
                 return;
             },
             success: function (response) {
+                storedSearches.splice(storedSearches.indexOf(buttonName), 1);
+                storedSearches.push(buttonName);
+
+                storeSearches();
+                renderSearchHistory();
+
                 var entityId = response.location_suggestions[0].entity_id;
                 var entityType = response.location_suggestions[0].entity_type;
 
