@@ -33,10 +33,12 @@ for (var i = storedFaves.length - 1; i >= 0; i--) {
     cardInfo.append(cuisine, cost, address, phone);
     
     // Notes section
-    var cardNotes = $("<div id='notes" + cardCounter + "' class='card-section notes'></div>");
-    var noteLabel = $("<label for='note-input" + cardCounter + "'>Notes:</label>");
-    var noteTextArea = $("<textarea type='text' id='note-input" + cardCounter + "' placeholder='Personal notes'></textarea>");
-    cardNotes.append(noteLabel, noteTextArea);
+    var cardNotes = $("<div id='notes" + cardCounter + "' class='card-section notes'><strong>Notes:</strong></div>");
+    var cardDisplayNote = $("<div class='notes-display' id='displayNote"+[i]+"'></div>");
+    var noteLabel = $("<label for='note-input" + cardCounter + "'></label>");
+    var noteTextArea = $("<textarea type='text' class='input"+[i]+"' id='note-input" + cardCounter + "' placeholder='Add Personal Notes'></textarea>");
+    var submitbutton = $("<button class='note-submit-btn' data-order='"+ [i] +"'>SUBMIT</button>")
+    cardNotes.append(cardDisplayNote, noteLabel, noteTextArea, submitbutton);
 
     // Append heading and sections to individual card
     faveCard.append(cardHeadingDiv, viewMapBtn, mapDiv, cardImgDiv, cardInfo, cardNotes);
@@ -47,6 +49,65 @@ for (var i = storedFaves.length - 1; i >= 0; i--) {
 
     renderImages();
 }
+
+$(".note-submit-btn").each(function() {
+    $(this).click(function(){
+        var target = this.getAttribute("data-order");
+        if (storedFaves[target].notes == null) {
+            storedFaves[target].notes = [];
+        };
+        var currentDate = moment().format("dddd, MMMM Do YYYY, h:mm:ss a");
+        var inputValue = $(".input"+target).val();
+        var newArry = new Array(currentDate, inputValue)
+        storedFaves[target].notes.push(newArry);
+        storeFaves();
+        renderNotes();
+        $(".input"+target).val("");
+    });
+});
+
+function renderNotes() {
+    var updatedStoredFaves = JSON.parse(localStorage.getItem("storedFaves"));
+    if (updatedStoredFaves !== null) {
+        storedFaves = updatedStoredFaves;
+    }
+
+    $(".notes-display").text('');
+    for (i=0; i < updatedStoredFaves.length; i++) {
+        if (updatedStoredFaves[i].notes !== undefined) {
+            var targetDiv = $("#displayNote"+[i]);
+            var noteArry = updatedStoredFaves[i].notes;
+            for (n=0; n < noteArry.length; n++) {
+                var notesData = noteArry[n];
+                    var newDiv = $("<div class='notes-bar'></div>")
+                    var newPDate = $("<p class='notes-date'>("+notesData[0]+")</p>");
+                    var newP = $("<p class='notes-text'>"+notesData[1]+"</p>");
+                    var newDeleteBtn = $("<div class='notes-buttons'><button class='notes-delete-btn' data-target='"+n+"' data-order='"+i+"'>Delete</button></div>");
+                    newDiv.append(newPDate, newP, newDeleteBtn);
+                targetDiv.append(newDiv);
+            }
+        };
+    };
+
+    $(".notes-delete-btn").on("click", function() {
+        event.preventDefault();
+        var target = this.getAttribute("data-target");
+        var order = this.getAttribute("data-order");
+
+        var updatedStoredFaves = JSON.parse(localStorage.getItem("storedFaves"));
+        if (updatedStoredFaves !== null) {
+            storedFaves = updatedStoredFaves;
+        }
+        var targetArry = updatedStoredFaves[order].notes;
+        targetArry.splice(target, 1);
+ 
+        storeFaves(); 
+        renderNotes(); 
+    });
+};
+
+renderNotes();
+
 
 // hiding/showing "You have no favourites message"
 if (storedFaves.length > 0) {

@@ -86,6 +86,52 @@ a{
     padding-bottom: 10px;
     border-bottom: solid 1px grey;
 }
+/* card notes */
+.notes-display {
+    margin: 0 !important;
+    margin-bottom: 5px !important;
+}
+
+.notes-bar {
+    width: 100%;
+    background-color: #e6e6e6;
+    padding: 10px;
+    margin: 0 !important;
+    margin-bottom: 2px !important;
+    border-radius: 5px;
+}
+
+.notes-buttons {
+    border-top: gray 1px dotted;
+}
+
+.notes-delete-btn {
+    padding: 5px 10px;
+    margin-top: 5px;
+    background-color: rgb(199, 78, 78);
+    color: white;
+    text-align: center;
+    border-radius: 5px;
+}
+
+.notes-bar p {
+    padding: 0;
+    margin: 0;
+}
+
+.notes-date {
+    color: gray;
+    font-size: 0.8em;
+}
+
+.note-submit-btn {
+    display: inline-block;
+    background-color:#a5cb0b;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 3px;
+
+}
 
 @media only screen and (max-width: 768px) {
     /* For mobile phones: */
@@ -98,7 +144,4 @@ a{
     justify-content: center;
     padding: 10px;
 }
-}
-
-
 }
