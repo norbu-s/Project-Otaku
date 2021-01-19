@@ -94,7 +94,7 @@ function createFaveBtn(restaurant) {
         buttonContent = 'Added';
         isDisabled = `disabled="true"`;
      
-}
+    }
 
 
     var faveBtn = $(`<button 
@@ -111,24 +111,37 @@ function createFaveBtn(restaurant) {
                        
 
     faveBtn.click((event) => {
+        var btnText = event.target.textContent;
         var dataset = event.target.dataset;
         var faveList = { "name": dataset.name, "cost": dataset.cost, "location": dataset.location, "phone": dataset.phone, "cuisine": dataset.cuisine, "id": dataset.id };
-
-        for (var i = 0; i < storedFaves.length; i++) {
-            if (storedFaves[i].name === faveList.name) {
-                storedFaves.splice(i, 1);
+         console.log(event.target)
+         console.log(storedFaves)
+        if (btnText === "Add to Favourite") {
+            for (var i = 0; i < storedFaves.length; i++) {
+                if (storedFaves[i].name === faveList.name) {
+                    storedFaves.splice(i, 1);
+                }
             }
-        }
-        storedFaves.push(faveList);
+            storedFaves.push(faveList);
+    
+            if (storedFaves.length > 4) {
+                storedFaves.splice(0, 1);
+            }
+            event.target.textContent = "Added";
 
-        if (storedFaves.length > 4) {
-            storedFaves.splice(0, 1);
+        } else {
+            for (var i = 0; i < storedFaves.length; i++) {
+                if (event.target.id === "id-" + storedFaves[i].id) {
+                    storedFaves.splice(i, 1);
+                };
+            }
+            event.target.textContent = "Add to Favourite";
         }
+
         storeFaves();
         renderFavouritesList();
 
-        event.target.textContent = "Added";
-        event.target.setAttribute('disabled', true);
+        // event.target.setAttribute('disabled', true);
 
 
 
