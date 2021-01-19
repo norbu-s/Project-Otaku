@@ -20,6 +20,8 @@ This project aims to create a seamless, easily navigable and handy web applicati
 
 ## Testing
 
+Open the web application using the link https://norbu-s.github.io/Covid-Safe-Restaurant/
+
 
 ## Links to resources
 
