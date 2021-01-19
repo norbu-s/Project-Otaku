@@ -110,7 +110,7 @@ function createFaveBtn(restaurant) {
 
         if (btnText === "Add to Favourite") {
             for (var i = 0; i < storedFaves.length; i++) {
-                if (storedFaves[i].name === faveList.name) {
+                if (storedFaves[i].location === faveList.location) {
                     storedFaves.splice(i, 1);
                 }
             }
