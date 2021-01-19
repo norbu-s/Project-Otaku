@@ -26,13 +26,17 @@ function renderFaveCards() {
         mapDiv.append(mapFrame);
         
         // Image section
-        var showImgBtn = $("<button class='show-img'>Upload Image</button>");
+        var showImgBtn = $("<button id='show-img" + cardCounter + "' class='show-img'>Upload Image</button>");
         var cardImgDiv = $("<div id='img-div" + cardCounter + "' class='card-section img hide'></div>");
         var uploadImgForm = $("<form action='/action_page.php'></form>");
         var uploadImgBtn = $("<input type='file' id='imgInput" + cardCounter + "' accept='image/*'>");
         uploadImgForm.append(uploadImgBtn);
         var img = $("<img id='img" + cardCounter + "' src='#'>");
         cardImgDiv.append(uploadImgForm, img);
+
+        if (img.attr("src") !== "#") {
+            showImgBtn.text("Show Image");
+        } 
         
         // Info section
         var cardInfo = $("<div id='info" + cardCounter + "' class='card-section info'></div>");
@@ -74,11 +78,26 @@ function renderFaveCards() {
 
         })
 
-        showImgBtn.on("click", function() {
+        showImgBtn.on("click", function(event) {
+            var btnId = event.target.id[event.target.id.length - 1]
+            console.log(btnId);
+            var cardImg = $("#img" + btnId);
+            console.log(cardImg)
+            var cardImgDiv = $("#img-div" + btnId);
             if (cardImgDiv.hasClass("hide")) {
                 cardImgDiv.removeClass("hide");
+                if (cardImg.attr("src") !== "#") {
+                    showImgBtn.text("Hide Image");
+                } else {
+                    showImgBtn.text("Upload Image");
+                }
             } else {
                 cardImgDiv.addClass("hide");
+                if (cardImg.attr("src") !== "#") {
+                    showImgBtn.text("Show Image");
+                } else {
+                    showImgBtn.text("Upload Image");
+                }
             }
         })
         
