@@ -237,6 +237,24 @@ a{
     background-color:rgb(201, 64, 64);
 }
 
+.reveal:focus {
+    outline: none;
+}
+
+#error-modal4 {
+    width: 35%;
+}
+
+#wrong-input-modal-btn-div {
+    text-align: center;
+}
+
+#wrong-input-ok {
+    padding: 6px;
+    width: 100%;
+    background-color: rgb(255, 188, 17);
+}
+
 /* page btn styles */ 
 
 #page-outof {

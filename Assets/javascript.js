@@ -10,6 +10,7 @@ var resultsDiv = $("#results");
 var locationErrorModal = new Foundation.Reveal($("#error-modal"));
 var apiErrorModal = new Foundation.Reveal($("#error-modal2"));
 var clearSearchConfirmModal = new Foundation.Reveal($("#error-modal3"));
+var numberInputModal = new Foundation.Reveal($("#error-modal4"));
 
 // render the stored items
 initialise();
@@ -238,9 +239,17 @@ searchBtn.on("click", function (event) {
 
     resultsDiv.empty();
     var searchInput = $("#zipcode").val();
+    var numbers = "0123456789";
 
     if (searchInput === "") {
         return;
+    } 
+
+    for (var i = 0; searchInput.length; i++) {
+        if (numbers.includes(searchInput[i])) {
+            numberInputModal.open()
+            return;
+        }
     }
 
     // Zomato location API call 
@@ -479,4 +488,10 @@ $("#clear-search-btn").on("click", function() {
         $(".reveal-overlay").attr("style", "display: none");
     })
     
+})
+
+// number input in search 
+$("#wrong-input-ok").on("click", function() {
+    $(".reveal-overlay").attr("style", "display: none");
+
 })
