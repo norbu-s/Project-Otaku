@@ -140,8 +140,8 @@ function renderNotes() {
                     var newDiv = $("<div class='notes-bar'></div>")
                     var newPDate = $("<p class='notes-date'>("+notesData[0]+")</p>");
                     var newP = $("<p class='notes-text'>"+notesData[1]+"</p>");
-                    var newDeleteBtn = $("<div class='notes-buttons'><button class='notes-delete-btn' data-target='"+n+"' data-order='"+i+"'>Delete</button></div>");
-                    newDiv.append(newPDate, newP, newDeleteBtn);
+                    var newDeleteBtn = $("<button class='notes-delete-btn' data-target='"+n+"' data-order='"+i+"'>&times;</button>");
+                    newDiv.append(newPDate, newDeleteBtn, newP);
                 targetDiv.append(newDiv);
             }
         };
