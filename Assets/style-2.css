@@ -70,10 +70,10 @@ a{
 }
 
 .show-img {
-    border: none;
+    border: solid 1px rgb(147, 93, 0);
     color: rgb(147, 93, 0);
     background-color: rgb(249, 224, 181);
-    margin-left: 17px;
+    margin: 10px 0 10px 17px;
 }
 
 .show-img:hover {
@@ -82,7 +82,7 @@ a{
 }
 
 .map-btn {
-    border: none;
+    border: solid 1px rgb(40, 51, 113);
     color: rgb(40, 51, 113);
     background-color: rgb(177, 206, 228);
     margin-left: 15px;
@@ -132,10 +132,6 @@ a{
     margin-bottom: 2px !important;
     border-radius: 5px;
 }
-
-/* .notes-buttons {
-    border-top: gray 1px dotted;
-} */
 
 .notes-delete-btn {
     font-weight: bold;
