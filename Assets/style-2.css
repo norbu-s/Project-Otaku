@@ -63,46 +63,46 @@ a{
 }
 
 .map-btn, .remove-fave-btn, .show-img {
-    border: solid 1px grey;
     border-radius: 4px;
-    margin-top: 5px;
     padding: 6px;
+    margin-top: 5px;
+    cursor: pointer;
 }
 
 .show-img {
     border: none;
     color: rgb(147, 93, 0);
     background-color: rgb(249, 224, 181);
-    margin-left: 15px;
-    cursor: pointer;
+    margin-left: 17px;
 }
 
 .show-img:hover {
     color: white;
-    background-color: rgb(255, 162, 0);
+    background-color: rgb(191, 136, 41);
+}
+
+.map-btn {
+    border: none;
+    color: rgb(40, 51, 113);
+    background-color: rgb(177, 206, 228);
+    margin-left: 15px;
+}
+
+.map-btn:hover {
+    color: white;
+    background-color: rgb(107, 147, 197);
 }
 
 .remove-fave-btn {
+    font-size: 14px;
     color: rgb(198, 79, 79);
     border: solid 1px rgb(198, 79, 79);
-    margin-right: 10px;
-
+    margin-right: 5px;
 }
 
 .remove-fave-btn:hover {
     color: white;
     background-color: rgb(210, 107, 107);
-}
-
-.map-btn {
-    margin-left: 10px;
-    border: none;
-    color: rgb(1, 74, 1);
-    text-decoration: underline;
-}
-
-.map-btn:hover {
-    font-weight: bold;
 }
 
 /* user-uploaded image */
@@ -143,6 +143,11 @@ a{
     color: white;
     text-align: center;
     border-radius: 5px;
+    cursor: pointer;
+}
+
+.notes-delete-btn:hover {
+    background-color: rgb(165, 53, 53);
 }
 
 .notes-bar p {
@@ -156,11 +161,20 @@ a{
 }
 
 .note-submit-btn {
-    display: inline-block;
+    float: right;
     background-color:#a5cb0b;
     border-radius: 5px;
     padding: 10px;
-    margin-bottom: 3px;
+    cursor: pointer;
+}
+
+.note-submit-btn:hover {
+    color: white;
+    background-color: rgb(91, 135, 53);
+}
+
+.clearing-div {
+    height: 30px;
 }
 
 .remove-fave-btn {

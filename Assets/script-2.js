@@ -46,12 +46,13 @@ function renderFaveCards() {
         var cardNotes = $("<div id='notes" + cardCounter + "' class='card-section notes'><strong>Notes:</strong></div>");
         var cardDisplayNote = $("<div class='notes-display' id='displayNote"+[i]+"'></div>");
         var noteLabel = $("<label for='note-input" + cardCounter + "'></label>");
-        var noteTextArea = $("<textarea type='text' class='input"+[i]+"' id='note-input" + cardCounter + "' placeholder='Add Personal Notes'></textarea>");
-        var submitbutton = $("<button class='note-submit-btn' data-order='"+ [i] +"'>SUBMIT</button>")
+        var noteTextArea = $("<textarea type='text' class='input"+[i]+"' class='note-input" + cardCounter + "' placeholder='Add Personal Notes'></textarea>");
+        var submitbutton = $("<button class='note-submit-btn' data-order='"+ [i] +"'>Submit</button>");
+        var clearingDiv = $("<div class='clearing-div'>");
         cardNotes.append(cardDisplayNote, noteLabel, noteTextArea, submitbutton);
     
         // Append heading and sections to individual card
-        faveCard.append(cardHeadingDiv, buttonsDiv, mapDiv, showImgBtn, cardImgDiv, cardInfo, cardNotes);
+        faveCard.append(cardHeadingDiv, buttonsDiv, mapDiv, showImgBtn, cardImgDiv, cardInfo, cardNotes, clearingDiv);
         
         // Append individual card to <div class="cell">
         $(".cell").append(faveCard);
