@@ -58,12 +58,9 @@ a{
 
 
 #search-history-list { 
-    /* margin: 10px; */
-    /* padding: 10px; */
-    /* background-color: rgba(255,255,255,0.7); */
-    /* border: none;
-    border-radius: 10px; */
-} 
+    margin: 0px;  
+}  
+
 #zipcode{
    display: inline-block;
    width: auto;
@@ -127,10 +124,18 @@ a{
     padding: 5px;
 }
 
+.restaurant-name{
+    font-weight: bold;
+    font-size: 18px;
+}
+
 
 /*end restraunt result*/
 
 /*fav list layout*/
+.dropbtn{
+    display: none;
+}
 
 .fave-btn {
     display: inline-block;
@@ -273,9 +278,109 @@ a{
     font-weight: bold;
 }
 
+#view-fav{
+    display: inline-block;
+    background-color: #ecdb0e;
+    /* border-color:#ffae00 ;*/
+    border-radius: 5px; 
+    border: solid rgb(248, 209, 37);
+    padding: 5px;
+    color: black;
+    margin-left: 10px;
+   
+}
+@media only screen and (max-width: 992px){
+    /*Tablet screen*/
+    /* #search-zipcode{
+        display: inline-block;
+    } */
+#zipcode{
+   margin: 3px;
+   width: 80%;
+}
+#search-zipcode{
+    margin: 15px;
+}
+   
+}
+
 @media only screen and (max-width: 768px) {
     /* For mobile phones: */
-    .grid-x {
-      width: 100%;
-    }
+ /* #search-history-list{
+     width: 100%;
+ } */
+#zipcode{
+    width: 60%;
+}
+  #search-zipcode{
+      margin: 10px;
   }
+ 
+  #faves{
+      display: none;
+      max-width: 0;
+  }
+  #content{
+      width: max-content;
+      align-self: center;
+      margin: 0 auto;
+      justify-content: center;
+     
+  }
+  .dropbtn {
+    
+    display: inline-block;
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px;
+    font-size: 14px;
+    border: none;
+    border-radius: 5px;
+  }
+  
+  .dropdown {
+    /* position: relative; */
+    display: inline-block;
+    /* margin: 0;
+    padding: 0; */
+  }
+  
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 30%;
+    /* box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); */
+    z-index: 1;
+    margin: 0;
+    padding: 0px;
+  }
+  .history-btn{
+    display: block;
+    margin-left: 0;
+    border-radius: 5px;
+    padding: 10px;
+    /* margin: 3px; */
+    width: 100%;
+    
+     
+  }
+  
+  /* .dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+  } */
+  #title-history{
+      display: none;
+  }
+  
+  .dropdown-content a:hover {background-color: #ddd;}
+  
+  .dropdown:hover .dropdown-content {display: block;}
+  
+  .dropdown:hover .dropbtn {background-color: #3e8e41;}
+
+  }
+

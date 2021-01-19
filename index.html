@@ -34,18 +34,21 @@
 <!--foundation grid-->
     <div class="grid-x">
         <!--foundation column 1 (search bar & search history)-->
-        <div class="cell medium-3 large-3">
+        <div class="cell medium-3 large-3 ">
             <div id="search-zipcode">
                 <form>
                     <input type="text" id="zipcode" placeholder="Search a suburb">
                     <button type="submit" id="search-btn">search</button>
                 </form>
                 
-                <div id="search-history">
+                <div id="search-history" class="dropdown">
+                    <button class="dropbtn">Search History</button>
+                    <div class="dropdown-content">
                     <h2 id="title-history" class="sidebar-title">Search History</h2>
                     <ul id="search-history-list">
                     </ul>
                     <button id="clear-search-btn">Clear History</button>
+                    </div>
                 </div>
             </div>
         </div>
