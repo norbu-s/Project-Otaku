@@ -31,7 +31,8 @@ function renderFavouritesList() {
     for (var i = 0; i < storedFaves.length; i++) {
         var storedFaveLi = $("<li>");
         storedFaveLi.attr("class", "fav-list")
-        var storedFaveBtn = $(`<a 
+        var storedFaveBtn = $(`<a
+        id="divid-${storedFaves[i].id}" 
         href="fave-restaurants.html"
         class="button fave-btn" 
         data-name="${storedFaves[i].name}"
@@ -41,12 +42,28 @@ function renderFavouritesList() {
         data-cuisine="${storedFaves[i].cuisine}"
         data-id="${storedFaves[i].id}"
         >` + storedFaves[i].name + `</a>`);;
-        var removeFaveBtn = $("<button id=" + storedFaves[i].id + " class=\"remove-fave-btn\">&times;</i></button");
+        var removeFaveBtn = $("<button id='btnid-" + storedFaves[i].id + "' class='remove-fave-btn'>&times;</i></button");
         storedFaveLi.append(storedFaveBtn, removeFaveBtn);
 
         favesList.prepend(storedFaveLi);
     }
 }
+
+$(window).on("resize", function() {
+    var faveIds = [];
+    for (var i = 0; i < storedFaves.length; i++) {
+        faveIds.push([$("#divid-" + storedFaves[i].id), $("#btnid-" + storedFaves[i].id)]);
+    }
+
+    for (var i = 0; i < faveIds.length; i++) {
+        var faveBtnHeight = faveIds[i][0].outerHeight();
+        var removeFaveBtn = faveIds[i][1];
+        removeFaveBtn.outerHeight(faveBtnHeight);
+    }
+
+
+
+})
 
 function initialise() {
     var updatedStoredSearches = JSON.parse(localStorage.getItem("storedSearches"));
@@ -60,7 +77,6 @@ function initialise() {
     }
     renderSearchHistory();
     renderFavouritesList();
-    ;
 }
 
 // store searches/favourites

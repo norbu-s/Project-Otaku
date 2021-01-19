@@ -151,15 +151,12 @@ a{
 }
 
 .remove-fave-btn {
-   
     background-color:#a5cb0b;
-    /* color: white; */
     font-weight: bold;
     padding: 10px;
     vertical-align: top;
     border-top-right-radius: 10px;
     border-bottom-right-radius: 10px;
-    height: 100%
 } /* work out how to make the height of the remove btn the same as the fave btn */
 
 .remove-fave-btn:hover {
