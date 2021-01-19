@@ -26,7 +26,8 @@ function renderFaveCards() {
         mapDiv.append(mapFrame);
         
         // Image section
-        var cardImgDiv = $("<div id='img-div" + cardCounter + "' class='card-section img'></div>");
+        var showImgBtn = $("<button class='show-img'>Upload Image</button>");
+        var cardImgDiv = $("<div id='img-div" + cardCounter + "' class='card-section img hide'></div>");
         var uploadImgForm = $("<form action='/action_page.php'></form>");
         var uploadImgBtn = $("<input type='file' id='imgInput" + cardCounter + "' accept='image/*'>");
         uploadImgForm.append(uploadImgBtn);
@@ -50,7 +51,7 @@ function renderFaveCards() {
         cardNotes.append(cardDisplayNote, noteLabel, noteTextArea, submitbutton);
     
         // Append heading and sections to individual card
-        faveCard.append(cardHeadingDiv, buttonsDiv, mapDiv, cardImgDiv, cardInfo, cardNotes);
+        faveCard.append(cardHeadingDiv, buttonsDiv, mapDiv, showImgBtn, cardImgDiv, cardInfo, cardNotes);
         
         // Append individual card to <div class="cell">
         $(".cell").append(faveCard);
