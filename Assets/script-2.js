@@ -33,11 +33,11 @@ for (var i = storedFaves.length - 1; i >= 0; i--) {
     cardInfo.append(cuisine, cost, address, phone);
     
     // Notes section
-    var cardNotes = $("<div id='notes" + cardCounter + "' class='card-section notes hide'></div>");
+    var cardNotes = $("<div id='notes" + cardCounter + "' class='card-section notes'></div>");
     var cardDisplayNote = $("<div class='notes-display' id='displayNote"+[i]+"'></div>");
     var noteLabel = $("<label for='note-input" + cardCounter + "'>Notes:</label>");
     var noteTextArea = $("<textarea type='text' class='input"+[i]+"' id='note-input" + cardCounter + "' placeholder='Personal notes'></textarea>");
-    var submitbutton = $("<button class='note-submit' data-order='"+ [i] +"'>Submit</button>")
+    var submitbutton = $("<button class='note-submit-btn' data-order='"+ [i] +"'>SUBMIT</button>")
     cardNotes.append(cardDisplayNote, noteLabel, noteTextArea, submitbutton);
 
     // Append heading and sections to individual card
@@ -50,17 +50,19 @@ for (var i = storedFaves.length - 1; i >= 0; i--) {
     renderImages();
 }
 
-$(".note-submit").each(function() {
+$(".note-submit-btn").each(function() {
     $(this).click(function(){
         var target = this.getAttribute("data-order");
         if (storedFaves[target].notes == null) {
             storedFaves[target].notes = [];
         };
+        var currentDate = moment().format("dddd, MMMM Do YYYY, h:mm:ss a");
         var inputValue = $(".input"+target).val();
-        storedFaves[target].notes.push(inputValue);
-
+        var newArry = new Array(currentDate, inputValue)
+        storedFaves[target].notes.push(newArry);
         storeFaves();
         renderNotes();
+        $(".input"+target).val("");
     });
 });
 
@@ -73,13 +75,15 @@ function renderNotes() {
     $(".notes-display").text('');
     for (i=0; i < updatedStoredFaves.length; i++) {
         if (updatedStoredFaves[i].notes !== undefined) {
-            console.log(i);
             var targetDiv = $("#displayNote"+[i]);
             var noteArry = updatedStoredFaves[i].notes;
             for (n=0; n < noteArry.length; n++) {
-                console.log(n + " : " + noteArry[n])
-                var newP = $("<p>Notes: "+noteArry[n]+"</p>");
-                targetDiv.append(newP);
+                var notesData = noteArry[n];
+                var newDiv = $("<div class='notes-bar'></div>")
+                var newPDate = $("<p class='notes-date'>("+notesData[0]+")</p>");
+                var newP = $("<p class='notes-text'><strong>Note:</strong> "+notesData[1]+"</p>");
+                newDiv.append(newPDate, newP);
+                targetDiv.append(newDiv);
             }
         };
     };
