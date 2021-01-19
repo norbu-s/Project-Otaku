@@ -17,7 +17,7 @@ function renderFaveCards() {
         // Button section
         var buttonsDiv = $("<div></div>");
         var viewMapBtn = $("<button id='map-btn" + cardCounter + "' class='map-btn'>View on Map</button>");
-        var removeCardBtn = $("<button id='remove-fave-btn" + storedFaves[i].id + "' class='remove-fave-btn'>Remove</button>");
+        var removeCardBtn = $("<button id='remove-fave-btn" + storedFaves[i].id + "' class='remove-fave-btn'>Remove Favourite</button>");
         buttonsDiv.append(viewMapBtn, removeCardBtn);
     
         // Map section

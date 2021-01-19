@@ -46,10 +46,6 @@ a{
     vertical-align: top;
 }
 
-.card-divider:hover {
-    cursor: pointer;
-}
-
 .fave {
     height: fit-content;
     width: 40vw;
@@ -67,12 +63,46 @@ a{
 }
 
 .map-btn, .remove-fave-btn, .show-img {
-    background: rgb(243, 239, 239);
     border: solid 1px grey;
     border-radius: 4px;
     margin-top: 5px;
-    margin-left: 20px;
     padding: 6px;
+}
+
+.show-img {
+    border: none;
+    color: rgb(147, 93, 0);
+    background-color: rgb(249, 224, 181);
+    margin-left: 15px;
+    cursor: pointer;
+}
+
+.show-img:hover {
+    color: white;
+    background-color: rgb(255, 162, 0);
+}
+
+.remove-fave-btn {
+    color: rgb(198, 79, 79);
+    border: solid 1px rgb(198, 79, 79);
+    margin-right: 10px;
+
+}
+
+.remove-fave-btn:hover {
+    color: white;
+    background-color: rgb(210, 107, 107);
+}
+
+.map-btn {
+    margin-left: 10px;
+    border: none;
+    color: rgb(1, 74, 1);
+    text-decoration: underline;
+}
+
+.map-btn:hover {
+    font-weight: bold;
 }
 
 /* user-uploaded image */
@@ -136,3 +166,4 @@ a{
 .remove-fave-btn {
     float: right;
 }
+
