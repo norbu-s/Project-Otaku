@@ -477,7 +477,7 @@ $("#page-btn2").on("click", function() {
 // delete favourite item 
 favesList.on("click", function (event) {
     if (event.target.classList.contains("remove-fave-btn")) {
-        var faveBtnId = event.target.id;
+        var faveBtnId = event.target.id.substring(6, event.target.id.length);
         var addToFaveBtn = $("#id-" + faveBtnId);
         addToFaveBtn.text("Add to Favourite");
         for (var i = 0; i < storedFaves.length; i++) {
