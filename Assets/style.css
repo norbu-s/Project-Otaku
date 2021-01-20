@@ -41,11 +41,15 @@ body {
     font-size: 18px;
 }
 
+.top-bar a:hover {
+    color: #034502;
+    font-weight: bold;
+}
+
 /* SEARCH SECTION */
 
 form {
     display: inline-block;
-    margin-bottom: 10px;
     padding: 5px;
 }
 
@@ -209,6 +213,7 @@ form {
 .sidebar-title {
     font-size: 26px;
     text-align: center;
+    margin-top: 8px;
 }
 
 #view-fav {
