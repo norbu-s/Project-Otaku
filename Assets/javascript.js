@@ -224,10 +224,6 @@ function renderLastSearched() {
                 method: "GET",
                 error: function() {
                     apiErrorModal.open();
-                    // $("#page-outof").addClass("hide");
-                    // $("#nearest-restaurant").addClass("hide");
-                    // $("#page-btn-div").addClass("hide");
-                    // welcomeMessage();
                     return;
                 },
                 success: function (response) {
@@ -321,10 +317,6 @@ searchBtn.on("click", function (event) {
         method: "GET",
         error: function() {
             apiErrorModal.open();
-            // $("#page-outof").addClass("hide");
-            // $("#nearest-restaurant").addClass("hide");
-            // $("#page-btn-div").addClass("hide");
-            // welcomeMessage();
             return;
         },
         success: function(response) {
@@ -362,10 +354,6 @@ searchBtn.on("click", function (event) {
                 method: "GET",
                 error: function() {
                     apiErrorModal.open();
-                    // $("#page-outof").addClass("hide");
-                    // $("#nearest-restaurant").addClass("hide");
-                    // $("#page-btn-div").addClass("hide");
-                    // welcomeMessage();
                     return;
                 },
                 success: function (response) {
@@ -429,10 +417,6 @@ searchHistoryList.on("click", function (event) {
             method: "GET",
             error: function() {
                 apiErrorModal.open();
-                // $("#page-outof").addClass("hide");
-                // $("#nearest-restaurant").addClass("hide");
-                // $("#page-btn-div").addClass("hide");
-                // welcomeMessage();
                 return;
             },
             success: function (response) {
@@ -455,10 +439,6 @@ searchHistoryList.on("click", function (event) {
                     method: "GET",
                     error: function() {
                         apiErrorModal.open();
-                        // $("#page-outof").addClass("hide");
-                        // $("#nearest-restaurant").addClass("hide");
-                        // $("#page-btn-div").addClass("hide");
-                        // welcomeMessage();
                         return;
                     },
                     success: function (response) {
