@@ -487,7 +487,7 @@ form {
     }
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 615px) {
     .top-bar ul {
         margin-top: 10px;
         margin-bottom: 0;
