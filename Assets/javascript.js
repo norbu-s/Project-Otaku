@@ -12,8 +12,25 @@ var apiErrorModal = new Foundation.Reveal($("#error-modal2"));
 var clearSearchConfirmModal = new Foundation.Reveal($("#error-modal3"));
 var numberInputModal = new Foundation.Reveal($("#error-modal4"));
 
-// render the stored items
+// render the stored search history and favourites list 
 initialise();
+
+// if there are no items in storedSearches, display message
+if (storedSearches.length < 1) {
+    welcomeMessage();
+    $("#nearest-restaurant").addClass("hide");
+    $("#page-of").addClass("hide");
+    $("#page-btn-div").addClass("hide");
+}
+
+function welcomeMessage() {
+    var welcomeDiv = $("<div class='welcome-div'></div>");
+    var welcomeHeading = $("<h1 class='welcome-heading'>Welcome to Restaurant Otaku!</h1>");
+    var welcomeMsg = $("<ol class='welcome-ol'><li><p>Use the searchbar on the left to search a suburb or city for restaurants</p></li><li><p>Click on the <strong>'Add to Favourite'</strong> button on any search result to add it to your favourites list</p></li><li><p>Navigate to the <strong>'Favourites'</strong> page to personalise your favourite cards with images and notes</p></li></ol>")
+   
+    welcomeDiv.append(welcomeHeading, welcomeMsg);
+    resultsDiv.append(welcomeDiv);
+}
 
 function renderSearchHistory() {
     searchHistoryList.empty();
@@ -46,6 +63,9 @@ function renderFavouritesList() {
         storedFaveLi.append(storedFaveBtn, removeFaveBtn);
 
         favesList.prepend(storedFaveLi);
+
+        removeFaveBtn.outerHeight(storedFaveBtn.outerHeight());
+        
     }
 }
 
@@ -120,7 +140,7 @@ function createFaveBtn(restaurant) {
     faveBtn.click((event) => {
         var btnText = event.target.textContent;
         var dataset = event.target.dataset;
-        var faveList = { "name": dataset.name, "cost": dataset.cost, "location": dataset.location, "phone": dataset.phone, "cuisine": dataset.cuisine, "id": dataset.id };
+        var faveList = { "name": dataset.name, "cost": dataset.cost, "location": dataset.location, "phone": dataset.phone, "cuisine": dataset.cuisine, "id": dataset.id, "image": []};
 
         if (btnText === "Add to Favourite") {
             for (var i = 0; i < storedFaves.length; i++) {
@@ -223,7 +243,7 @@ function renderLastSearched() {
                         var cuisine = response.restaurants[i].restaurant.cuisines;
                         var restaurantId = response.restaurants[i].restaurant.id;
 
-                        var restaurantNameDiv = $("<div>" + restaurantName + "</div>");
+                        var restaurantNameDiv = $("<div class='restaurant-name'>" + restaurantName + "</div>");
                         var cuisineDiv = $("<div>" + cuisine + "Cuisine");
                         var averageCostForTwoDiv = $("<div>" + "Average Cost For Two: $" + averageCostForTwo + "</div>");
                         var restaurantLocationDiv = $("<div>" + restaurantLocation + "</div>");
@@ -241,6 +261,9 @@ function renderLastSearched() {
                     }
                     resultsDiv.append(resultContainer1, resultContainer2);
                     $("#page-no").text("1");
+                    $("#page-outof").removeClass("hide");
+                    $("#nearest-restaurant").removeClass("hide");
+                    $("#page-btn-div").removeClass("hide");
                 }
             })
         }
@@ -368,6 +391,9 @@ searchBtn.on("click", function (event) {
                     }
                     resultsDiv.append(resultContainer1, resultContainer2);
                     $("#page-no").text("1");
+                    $("#page-outof").removeClass("hide");
+                    $("#nearest-restaurant").removeClass("hide");
+                    $("#page-btn-div").removeClass("hide");
                 }
             })
         }
@@ -451,7 +477,9 @@ searchHistoryList.on("click", function (event) {
                         }
                         resultsDiv.append(resultContainer1, resultContainer2);
                         $("#page-no").text("1");
-
+                        $("#page-outof").removeClass("hide");
+                        $("#nearest-restaurant").removeClass("hide");
+                        $("#page-btn-div").removeClass("hide");
                     }
                 })
             }
@@ -463,21 +491,22 @@ $("#page-btn1").on("click", function() {
     $("#result-container1").removeClass("hide");
     $("#result-container2").addClass("hide");
     $("#page-no").text("1");
+    $("#page-outof").removeClass("hide");
 })
 
 $("#page-btn2").on("click", function() {
     $("#result-container2").removeClass("hide");
     $("#result-container1").addClass("hide");
     $("#page-no").text("2");
+    $("#page-outof").removeClass("hide");
 })
 
 // delete favourite item 
 favesList.on("click", function (event) {
     if (event.target.classList.contains("remove-fave-btn")) {
-        var faveBtnId = event.target.id;
+        var faveBtnId = event.target.id.substring(6, event.target.id.length);
         var addToFaveBtn = $("#id-" + faveBtnId);
         addToFaveBtn.text("Add to Favourite");
-        console.log(faveBtnId)
         for (var i = 0; i < storedFaves.length; i++) {
             if (storedFaves[i].id === faveBtnId) {
                 storedFaves.splice(i, 1);

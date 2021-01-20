@@ -10,14 +10,15 @@
     <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
     <!-- Compressed CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/dist/css/foundation.min.css" integrity="sha256-ogmFxjqiTMnZhxCqVmcqTvjfe1Y/ec4WaRj/aQPvn+I=" crossorigin="anonymous">
+    <link rel="stylesheet" href="Assets/style.css">
     <link rel="stylesheet" href="Assets/style-2.css">
-    <title>Covidsafe Restaurants</title>
+    <title>Restaurant Otaku</title>
 </head>
 
 <body>
     <!-- Navigation bar / Heading-->
     <div class="top-bar">
-        <h1>Restaurant Otaku</h1>
+        <a href="index.html"><img src="Assets/images/heading-2.png" alt="Restaurant Otaku" height="50px" width="360px"></a>
         <ul class="menu align-right">
             <li><a href="index.html">Restaurant Search</a></li>
             <li><a href="#">Favourites</a></li>
@@ -26,8 +27,8 @@
     <!-- Foundation container/grid-->
     <div class="grid-x">
         <main>
+            <p id="no-fave-msg" class="hide">You have no favourites.</p>
             <div class="cell">
-                <p id="no-fave-msg" class="hide">You have no favourites.</p>
             </div>
         </main>
     </div>

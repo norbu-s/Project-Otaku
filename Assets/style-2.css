@@ -24,6 +24,7 @@ main {
 .top-bar{
     margin: 10px;
     padding: 10px;
+    padding-bottom: 20px;
     background-color: #FFFFFF;
     /* background: linear-gradient(10deg, #EEDDDD 0%, #FFEEEE 100%); */
     /* box-shadow: 0 0 1em rgba(0,0,0,0.3); */
@@ -108,6 +109,7 @@ a{
 
 .remove-fave-btn {
     font-size: 14px;
+    background-color: white;
     color: rgb(198, 79, 79);
     border: solid 1px rgb(198, 79, 79);
     margin-right: 5px;

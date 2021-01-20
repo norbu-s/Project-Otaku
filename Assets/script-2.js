@@ -1,4 +1,4 @@
-var storedImages = [];
+// var storedImages = [];
 initialise();
 
 // Creating card from local storage information 
@@ -9,36 +9,36 @@ function renderFaveCards() {
 
     for (var i = storedFaves.length - 1; i >= 0; i--) {
         // Individual card div 
-        var faveCard = $("<div class='fave card'></div>");
+        var faveCard = $("<div id='card-" + storedFaves[i].id + "' class='fave card'></div>");
     
         // Card heading 
-        var cardHeadingDiv = $("<div id='divider" + cardCounter + "' class='fave-name card-divider'>" + storedFaves[i].name + "</div>");
+        var cardHeadingDiv = $("<div id='divider" + storedFaves[i].id + "' class='fave-name card-divider'>" + storedFaves[i].name + "</div>");
     
         // Button section
         var buttonsDiv = $("<div></div>");
-        var viewMapBtn = $("<button id='map-btn" + cardCounter + "' class='map-btn'>View on Map</button>");
+        var viewMapBtn = $("<button id='map-btn" + storedFaves[i].id + "' class='map-btn'>View on Map</button>");
         var removeCardBtn = $("<button id='remove-fave-btn" + storedFaves[i].id + "' class='remove-fave-btn'>Remove Favourite</button>");
         buttonsDiv.append(viewMapBtn, removeCardBtn);
     
         // Map section
         var mapDiv = $("<div class='card-section map hide'></div>");
-        var mapFrame = $("<iframe id='map" + cardCounter + "' width='100%' height='100%' frameborder='0' style='border:0' src=''></iframe>")
+        var mapFrame = $("<iframe id='map" + storedFaves[i].id + "' width='100%' height='100%' frameborder='0' style='border:0' src=''></iframe>")
         mapDiv.append(mapFrame);
         
         // Image section
-        var showImgBtn = $("<button id='show-img" + cardCounter + "' class='show-img'>Upload Image</button>");
-        var cardImgDiv = $("<div id='img-div" + cardCounter + "' class='card-section img hide'></div>");
+        var showImgBtn = $("<button id='show-img" + storedFaves[i].id + "' class='show-img'>Upload Image (max. 450kb)</button>");
+        var cardImgDiv = $("<div id='img-div" + storedFaves[i].id + "' class='card-section img hide'></div>");
         var uploadImgForm = $("<form action='/action_page.php'></form>");
         var uploadImgBtn = $("<input type='file' id='imgInput" + cardCounter + "' accept='image/*'>");
         uploadImgForm.append(uploadImgBtn);
-        var img = $("<img id='img" + cardCounter + "' src='#'>");
+        var img = $("<img id='img" + storedFaves[i].id + "' src='#'>");
         cardImgDiv.append(uploadImgForm, img);
         
         // Info section
         var cardInfo = $("<div id='info" + cardCounter + "' class='card-section info'></div>");
         var cuisine = $("<div class='cuisine'><strong>Cuisine: </strong>" + storedFaves[i].cuisine + "</div>");
         var cost = $("<div class='cost'><strong>Average Cost For Two: </strong>$" + storedFaves[i].cost + "</div>");
-        var address = $("<div class='location'><strong>Address: </strong>" + storedFaves[i].location + "</div>");
+        var address = $("<div id='address" + storedFaves[i].id + "' class='location'><strong>Address: </strong>" + storedFaves[i].location + "</div>");
         var phone = $("<div class='phone'><strong>Phone: </strong>" + storedFaves[i].phone + "</div>");
         cardInfo.append(cuisine, cost, address, phone);
         
@@ -54,10 +54,10 @@ function renderFaveCards() {
         // Append heading and sections to individual card
         faveCard.append(cardHeadingDiv, buttonsDiv, mapDiv, showImgBtn, cardImgDiv, cardInfo, cardNotes, clearingDiv);
         
+        console.log(cardImgDiv)
         // Append individual card to <div class="cell">
         $(".cell").append(faveCard);
         cardCounter++;
-    
         renderImages();
         if (img.attr("src") !== "#") {
             showImgBtn.text("Hide Image");
@@ -66,7 +66,6 @@ function renderFaveCards() {
 
         $(".remove-fave-btn").on("click", function(event){
             event.preventDefault();
-            console.log("yes")
             var btnId = event.target.id.substring(15, event.target.id.length)
             for (var i = 0; i < storedFaves.length; i++) {
                 if (storedFaves[i].id === btnId) {
@@ -74,29 +73,38 @@ function renderFaveCards() {
                 }
             }
             storeFaves();
-            renderFaveCards();
-            renderNotes();
 
+            $("#card-" + btnId).addClass("hide");
+            // renderFaveCards();
+            // renderImages();
+            // renderNotes();
+
+            if (storedFaves.length > 0) {
+                $("#no-fave-msg").attr("class", "hide");
+            } else {            
+                $("#no-fave-msg").attr("class", "");
+            }
         })
 
         showImgBtn.on("click", function(event) {
-            var btnId = event.target.id[event.target.id.length - 1]
+            var btnId = event.target.id.slice(8, event.target.id.length);
             var cardImg = $("#img" + btnId);
             var cardImgDiv = $("#img-div" + btnId);
             var showImgBtn = $("#show-img" + btnId);
+
             if (cardImgDiv.hasClass("hide")) {
                 cardImgDiv.removeClass("hide");
                 if (cardImg.attr("src") !== "#") {
                     showImgBtn.text("Hide Image");
                 } else {
-                    showImgBtn.text("Upload Image");
+                    showImgBtn.text("Upload Image (max. 450kb)");
                 }
             } else {
                 cardImgDiv.addClass("hide");
                 if (cardImg.attr("src") !== "#") {
                     showImgBtn.text("Show Image");
                 } else {
-                    showImgBtn.text("Upload Image");
+                    showImgBtn.text("Upload Image (max. 450kb)");
                 }
             }
         })
@@ -163,17 +171,21 @@ function renderNotes() {
 
 renderNotes();
 
+noFaveMsg();
 
 // hiding/showing "You have no favourites message"
-if (storedFaves.length > 0) {
-    $("#no-fave-msg").attr("class", "hide");
-} else {
-    $("#no-fave-msg").attr("class", "");
+function noFaveMsg() {
+    if (storedFaves.length > 0) {
+        $("#no-fave-msg").attr("class", "hide");
+    } else {
+        $("#no-fave-msg").attr("class", "");
+    }
 }
 
 // functionality for 'upload image' button
 var cardNumber = 0;
 var cardRestaurant = "";
+var imgCardRefId = "";
 
 $(function() {
     $(":file").change(function(e) {
@@ -184,11 +196,14 @@ $(function() {
 
         if (this.files && this.files[0]) {
             cardNumber = parseInt(e.target.id[e.target.id.length - 1]);
-            cardRestaurant = e.target.parentElement.parentElement.parentElement.firstElementChild.textContent;
+            var imgCardRef = e.target.parentElement.parentElement.parentElement.firstElementChild;
+            imgCardRefId = imgCardRef.id.substring(7, imgCardRef.id.length);
+            console.log(imgCardRefId)
+            // cardRestaurant = e.target.parentElement.parentElement.parentElement.firstElementChild.textContent;
             var reader = new FileReader();
             reader.onload = imageIsLoaded;
             reader.readAsDataURL(this.files[0]);
-            var uploadImgBtn = $("#img" + cardNumber).parent().parent().children()[3];
+            var uploadImgBtn = $("#img" + imgCardRefId).parent().parent().children()[3];
             if (typeof uploadImgBtn !== "undefined") {
                 uploadImgBtn.textContent = "Hide Image";
             }
@@ -197,57 +212,79 @@ $(function() {
 });
 
 function imageIsLoaded(e) {
-    $("#img" + cardNumber).removeAttr("class");
-    $("#img" + cardNumber).attr("src", e.target.result);
-    for (var i = 0; i < storedImages.length; i++) {
-        if (storedImages[i][0] === cardRestaurant) {
-            storedImages.splice(i, 1);
+    $("#img" + imgCardRefId).removeAttr("class");
+    $("#img" + imgCardRefId).attr("src", e.target.result);
+    
+    for (var i = 0; i < storedFaves.length; i++) {
+        if (storedFaves[i].image[0] === imgCardRefId) {
+            storedFaves[i].image.splice(0, 2);
+        }
+        if (storedFaves[i].id === imgCardRefId) {
+            storedFaves[i].image.push(imgCardRefId, e.target.result);
         }
     }
-    storedImages.push([cardRestaurant, e.target.result]);
 
-    storeImages();
+    storeFaves();
+    // for (var i = 0; i < storedImages.length; i++) {
+    //     if (storedImages[i][0] === cardRestaurant) {
+    //         storedImages.splice(i, 1);
+    //     }
+    // }
+    // storedImages.push([cardRestaurant, e.target.result]);
+    // storeImages();
 }
 
 // local storage for saved imgs
 function renderImages() {
-    for (var i = 0; i < storedImages.length; i++) {         
-        var restaurantName = storedImages[i][0];
-        var divContainingRestaurantName = $("div:contains('" + restaurantName + "')")[$("div:contains('" + restaurantName + "')").length - 1];
-        if (typeof divContainingRestaurantName !== "undefined") {
-            var cardNumber = divContainingRestaurantName.id[divContainingRestaurantName.id.length - 1];
-            $("#img" + cardNumber).attr("src", storedImages[i][1]);
+    for (var i = 0; i < storedFaves.length; i++) {
+        if (storedFaves[i].image.length > 0) {
+            var imgCardRefId = storedFaves[i].image[0];
+            var imgData = storedFaves[i].image[1];
+            // if (typeof imgData !== "undefined") {
+                var imgEl = $("#img" + imgCardRefId);
+                imgEl.attr("src", imgData)
+            //}      
         }
     }
+    // for (var i = 0; i < storedImages.length; i++) {         
+    //     var restaurantName = storedImages[i][0];
+    //     var divContainingRestaurantName = $("div:contains('" + restaurantName + "')")[$("div:contains('" + restaurantName + "')").length - 1];
+    //     if (typeof divContainingRestaurantName !== "undefined") {
+    //         var cardNumber = divContainingRestaurantName.id[divContainingRestaurantName.id.length - 1];
+    //         $("#img" + cardNumber).attr("src", storedImages[i][1]);
+    //     }
+    // }
 }
 
-function initialise() {
-    var savedImages = JSON.parse(localStorage.getItem("storedImages"));
-    if (savedImages !== null) {
-        storedImages = savedImages;
-    }
+// function initialise() {
+//     var savedImages = JSON.parse(localStorage.getItem("storedImages"));
+//     if (savedImages !== null) {
+//         storedImages = savedImages;
+//     }
 
-    renderImages();
-}
+//     renderImages();
+// }
 
-function storeImages() {
-    localStorage.setItem("storedImages", JSON.stringify(storedImages));
-}
+// function storeImages() {
+//     localStorage.setItem("storedImages", JSON.stringify(storedImages));
+// }
 
 // Google Maps rendering
 var mapBtns = document.querySelectorAll(".map-btn");
 
 document.body.addEventListener("click", function(event) {
     if (event.target.classList.contains("map-btn")) {
-        var mapNumber = event.target.id[event.target.id.length - 1];
-        var mapLocation = event.target.parentElement.firstElementChild.textContent;
+        // var mapNumber = event.target.id[event.target.id.length - 1];
+        var mapLocationId = event.target.parentElement.firstElementChild.id.substring(7, event.target.parentElement.firstElementChild.id.length);
+        var mapLocation = $("#address" + mapLocationId).text();
+        // console.log(mapLocation.text())
         var specialCharacters = [
             ["$", "24"],
             ["&", "26"],
             ["+", "2B"],
-            [",", "2C"],
+            // [",", "2C"],
             ["/", "2F"],
-            [":", "3A"],
+            // [":", "3A"],
             [";", "3B"],
             ["=", "3D"],
             ["?", "3F"],
@@ -263,8 +300,9 @@ document.body.addEventListener("click", function(event) {
             }
         }
 
-        var mapFrame = $("#map" + mapNumber);
+        var mapFrame = $("#map" + mapLocationId);
         mapFrame.attr("src", "https://www.google.com/maps/embed/v1/place?key=AIzaSyBMo1myYnlmnCYMJc5fwiGiDZPqXar03ps&q=" + mapLocation);
+        console.log(mapFrame.attr("src"))
         // can't use certain special characters in URL e.g. &
         var mapDiv = mapFrame.parent();
         if (event.target.textContent === "View on Map") {
