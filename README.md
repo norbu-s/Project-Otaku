@@ -29,6 +29,9 @@ Open the web application using the link https://norbu-s.github.io/Covid-Safe-Res
 
 [Google Maps Embed API](https://developers.google.com/maps/documentation/embed/get-started)
 
+[Font Awesome](https://fontawesome.com/)
+
+
 ## Project Links
 
 1. Project Url - https://norbu-s.github.io/Covid-Safe-Restaurant/
