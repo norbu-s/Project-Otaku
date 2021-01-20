@@ -49,9 +49,17 @@ body {
 
 /* SEARCH SECTION */
 
+#search-zipcode {
+    border: 2px solid #e7e7e7;
+    padding: 10px;
+    margin-left: 10px;
+    margin-top: 10px;
+}
+
 form {
     display: inline-block;
     padding: 5px;
+    min-width: 95%;
 }
 
 #zipcode {
@@ -62,6 +70,7 @@ form {
     width: auto;
     border-top-left-radius: 10px;
     border-bottom-left-radius: 10px; 
+    width: 85%;
 }
 
 #zipcode:focus {
@@ -78,7 +87,7 @@ form {
     border-top-right-radius: 10px;
     border-bottom-right-radius: 10px; 
     border: none;
-    margin-left: -3px;
+    margin-left: -8px;
     vertical-align: top;
     padding: 5px;
     height: 39px;
@@ -93,13 +102,6 @@ form {
 #search-history-list { 
     margin: 0px;  
 }  
-
-#search-zipcode {
-    border: 2px solid #e7e7e7;
-    padding: 10px;
-    margin-left: 10px;
-    margin-top: 10px;
-}
 
 .history-btn {
     display: block;
@@ -334,18 +336,22 @@ form {
 
 /* Tablet screen */
 @media only screen and (max-width: 992px){
-    /* #search-zipcode{
+    /* #search-zipcode {
         display: inline-block;
     } */
-    #zipcode {
-        margin: 3px;
-        width: 80%;
+    #search-zipcode { 
+        margin: 15px;
+        /* width: 80vw; */
     }
 
-    #search-zipcode{ 
-        margin: 15px;
+    #zipcode {
+        margin: 3px;
+        width: 70%;
     }
-   
+    
+    #search-btn {
+        margin-top: 3px;
+    }
 }
 
 /* Mobile screen */
@@ -353,9 +359,6 @@ form {
     /* #search-history-list{
         width: 100%;
     } */
-    #zipcode {
-        width: 60%;
-    }
 
     #search-zipcode {
         margin: 10px;
