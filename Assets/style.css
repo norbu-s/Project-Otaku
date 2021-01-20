@@ -377,7 +377,6 @@ form {
     }
 
     .dropbtn {
-        
         display: inline-block;
         background-color: #4CAF50;
         color: white;
@@ -390,6 +389,7 @@ form {
     .dropdown {
         /* position: relative; */
         display: inline-block;
+        margin-left: 20px;
         /* margin: 0;
         padding: 0; */
     }

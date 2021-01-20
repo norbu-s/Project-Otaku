@@ -539,5 +539,14 @@ $("#clear-search-btn").on("click", function() {
 // number input in search 
 $("#wrong-input-ok").on("click", function() {
     $(".reveal-overlay").attr("style", "display: none");
+})
 
+$(window).on("resize", function() {
+    if ($(window).width() + 16 < 768) {
+        $("#search-cell").attr("class", "cell medium-12 large-12");
+        $("#result-cell").attr("class", "cell medium-12 large-12");
+    } else {
+        $("#search-cell").attr("class", "cell medium-5 large-5");
+        $("#result-cell").attr("class", "cell medium-6 large-6");
+    }
 })
