@@ -284,7 +284,7 @@ document.body.addEventListener("click", function(event) {
             ["+", "2B"],
             // [",", "2C"],
             ["/", "2F"],
-            [":", "3A"],
+            // [":", "3A"],
             [";", "3B"],
             ["=", "3D"],
             ["?", "3F"],
