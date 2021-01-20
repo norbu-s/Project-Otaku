@@ -45,6 +45,8 @@ body {
 
 form {
     display: inline-block;
+    margin-bottom: 10px;
+    padding: 5px;
 }
 
 #zipcode {
@@ -152,6 +154,16 @@ form {
     background-color:#a5cb0b;
     border-radius: 5px;
     padding: 5px;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+.add-fave-btn:hover {
+    background-color: #708a07;
+}
+
+.add-fave-btn:focus {
+    outline: none;
 }
 
 /* FAVOURITES SECTION */
