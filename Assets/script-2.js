@@ -86,7 +86,7 @@ function renderFaveCards() {
             var cardImg = $("#img" + btnId);
             var cardImgDiv = $("#img-div" + btnId);
             var showImgBtn = $("#show-img" + btnId);
-            
+
             if (cardImgDiv.hasClass("hide")) {
                 cardImgDiv.removeClass("hide");
                 if (cardImg.attr("src") !== "#") {
@@ -168,9 +168,12 @@ renderNotes();
 
 
 // hiding/showing "You have no favourites message"
-if (storedFaves.length > 0) {
+if (storedFaves > 0) {
+    console.log("hide")
     $("#no-fave-msg").attr("class", "hide");
 } else {
+    console.log("show")
+
     $("#no-fave-msg").attr("class", "");
 }
 
@@ -211,7 +214,9 @@ function imageIsLoaded(e) {
         if (storedFaves[i].image[0] === imgCardRefId) {
             storedFaves[i].image.splice(0, 2);
         }
-        storedFaves[i].image.push(imgCardRefId, e.target.result);
+        if (storedFaves[i].id === imgCardRefId) {
+            storedFaves[i].image.push(imgCardRefId, e.target.result);
+        }
     }
 
     storeFaves();
