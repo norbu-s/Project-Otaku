@@ -12,7 +12,7 @@ function renderFaveCards() {
         var faveCard = $("<div class='fave card'></div>");
     
         // Card heading 
-        var cardHeadingDiv = $("<div id='divider" + cardCounter + "' class='fave-name card-divider'>" + storedFaves[i].name + "</div>");
+        var cardHeadingDiv = $("<div id='divider" + storedFaves[i].id + "' class='fave-name card-divider'>" + storedFaves[i].name + "</div>");
     
         // Button section
         var buttonsDiv = $("<div></div>");
@@ -31,7 +31,7 @@ function renderFaveCards() {
         var uploadImgForm = $("<form action='/action_page.php'></form>");
         var uploadImgBtn = $("<input type='file' id='imgInput" + cardCounter + "' accept='image/*'>");
         uploadImgForm.append(uploadImgBtn);
-        var img = $("<img id='img" + cardCounter + "' src='#'>");
+        var img = $("<img id='img" + storedFaves[i].id + "' src='#'>");
         cardImgDiv.append(uploadImgForm, img);
         
         // Info section
@@ -57,7 +57,7 @@ function renderFaveCards() {
         // Append individual card to <div class="cell">
         $(".cell").append(faveCard);
         cardCounter++;
-    
+        console.log(img)
         renderImages();
         if (img.attr("src") !== "#") {
             showImgBtn.text("Hide Image");
@@ -73,8 +73,12 @@ function renderFaveCards() {
                     storedFaves.splice(i, 1);
                 }
             }
+            // for (var i = 0; i < storedImages.length; i++) {
+            //     if (storedImages[i][0] === )
+            // }
             storeFaves();
             renderFaveCards();
+            renderImages();
             renderNotes();
 
         })
@@ -174,6 +178,7 @@ if (storedFaves.length > 0) {
 // functionality for 'upload image' button
 var cardNumber = 0;
 var cardRestaurant = "";
+var imgCardRefId = "";
 
 $(function() {
     $(":file").change(function(e) {
@@ -184,11 +189,14 @@ $(function() {
 
         if (this.files && this.files[0]) {
             cardNumber = parseInt(e.target.id[e.target.id.length - 1]);
-            cardRestaurant = e.target.parentElement.parentElement.parentElement.firstElementChild.textContent;
+            var imgCardRef = e.target.parentElement.parentElement.parentElement.firstElementChild;
+            imgCardRefId = imgCardRef.id.substring(7, imgCardRef.id.length);
+            console.log(imgCardRefId)
+            // cardRestaurant = e.target.parentElement.parentElement.parentElement.firstElementChild.textContent;
             var reader = new FileReader();
             reader.onload = imageIsLoaded;
             reader.readAsDataURL(this.files[0]);
-            var uploadImgBtn = $("#img" + cardNumber).parent().parent().children()[3];
+            var uploadImgBtn = $("#img" + imgCardRefId).parent().parent().children()[3];
             if (typeof uploadImgBtn !== "undefined") {
                 uploadImgBtn.textContent = "Hide Image";
             }
@@ -197,42 +205,61 @@ $(function() {
 });
 
 function imageIsLoaded(e) {
-    $("#img" + cardNumber).removeAttr("class");
-    $("#img" + cardNumber).attr("src", e.target.result);
-    for (var i = 0; i < storedImages.length; i++) {
-        if (storedImages[i][0] === cardRestaurant) {
-            storedImages.splice(i, 1);
+    $("#img" + imgCardRefId).removeAttr("class");
+    $("#img" + imgCardRefId).attr("src", e.target.result);
+    
+    for (var i = 0; i < storedFaves.length; i++) {
+        if (storedFaves[i].image[0] === imgCardRefId) {
+            storedFaves[i].image.splice(0, 2);
         }
+        storedFaves[i].image.push(imgCardRefId, e.target.result);
     }
-    storedImages.push([cardRestaurant, e.target.result]);
 
-    storeImages();
+    storeFaves();
+    // for (var i = 0; i < storedImages.length; i++) {
+    //     if (storedImages[i][0] === cardRestaurant) {
+    //         storedImages.splice(i, 1);
+    //     }
+    // }
+    // storedImages.push([cardRestaurant, e.target.result]);
+    // storeImages();
 }
 
 // local storage for saved imgs
 function renderImages() {
-    for (var i = 0; i < storedImages.length; i++) {         
-        var restaurantName = storedImages[i][0];
-        var divContainingRestaurantName = $("div:contains('" + restaurantName + "')")[$("div:contains('" + restaurantName + "')").length - 1];
-        if (typeof divContainingRestaurantName !== "undefined") {
-            var cardNumber = divContainingRestaurantName.id[divContainingRestaurantName.id.length - 1];
-            $("#img" + cardNumber).attr("src", storedImages[i][1]);
+    for (var i = 0; i < storedFaves.length; i++) {
+        if (storedFaves[i].image.length > 0) {
+            var imgCardRefId = storedFaves[i].image[0];
+            var imgData = storedFaves[i].image[1];
+            console.log(imgCardRefId)
+            // if (typeof imgData !== "undefined") {
+                var imgEl = $("#img" + imgCardRefId);
+                imgEl.attr("src", imgData)
+            //}      
         }
     }
+    // for (var i = 0; i < storedImages.length; i++) {         
+    //     var restaurantName = storedImages[i][0];
+    //     var divContainingRestaurantName = $("div:contains('" + restaurantName + "')")[$("div:contains('" + restaurantName + "')").length - 1];
+    //     if (typeof divContainingRestaurantName !== "undefined") {
+    //         var cardNumber = divContainingRestaurantName.id[divContainingRestaurantName.id.length - 1];
+    //         $("#img" + cardNumber).attr("src", storedImages[i][1]);
+    //     }
+    // }
 }
 
-function initialise() {
-    var savedImages = JSON.parse(localStorage.getItem("storedImages"));
-    if (savedImages !== null) {
-        storedImages = savedImages;
-    }
+// function initialise() {
+//     var savedImages = JSON.parse(localStorage.getItem("storedImages"));
+//     if (savedImages !== null) {
+//         storedImages = savedImages;
+//     }
 
-    renderImages();
-}
+//     renderImages();
+// }
 
-function storeImages() {
-    localStorage.setItem("storedImages", JSON.stringify(storedImages));
-}
+// function storeImages() {
+//     localStorage.setItem("storedImages", JSON.stringify(storedImages));
+// }
 
 // Google Maps rendering
 var mapBtns = document.querySelectorAll(".map-btn");

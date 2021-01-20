@@ -120,7 +120,7 @@ function createFaveBtn(restaurant) {
     faveBtn.click((event) => {
         var btnText = event.target.textContent;
         var dataset = event.target.dataset;
-        var faveList = { "name": dataset.name, "cost": dataset.cost, "location": dataset.location, "phone": dataset.phone, "cuisine": dataset.cuisine, "id": dataset.id };
+        var faveList = { "name": dataset.name, "cost": dataset.cost, "location": dataset.location, "phone": dataset.phone, "cuisine": dataset.cuisine, "id": dataset.id, "image": []};
 
         if (btnText === "Add to Favourite") {
             for (var i = 0; i < storedFaves.length; i++) {
