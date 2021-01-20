@@ -226,7 +226,7 @@ function renderLastSearched() {
                         var cuisine = response.restaurants[i].restaurant.cuisines;
                         var restaurantId = response.restaurants[i].restaurant.id;
 
-                        var restaurantNameDiv = $("<div>" + restaurantName + "</div>");
+                        var restaurantNameDiv = $("<div class='restaurant-name'>" + restaurantName + "</div>");
                         var cuisineDiv = $("<div>" + cuisine + "Cuisine");
                         var averageCostForTwoDiv = $("<div>" + "Average Cost For Two: $" + averageCostForTwo + "</div>");
                         var restaurantLocationDiv = $("<div>" + restaurantLocation + "</div>");
