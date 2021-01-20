@@ -29,12 +29,11 @@ body {
     top: 0;
     height: 4.2em;
     color: #0a7b09;
-
 }
 
 .top-bar ul {
     background-color: #FFFFFF;
-   
+    margin-bottom: -25px;
 }
 
 .top-bar a {
@@ -335,7 +334,7 @@ form {
 /* ------------MEDIA QUERIES------------- */
 
 /* Tablet screen */
-@media only screen and (max-width: 992px){
+@media only screen and (max-width: 992px) and (min-width: 768px) {
     /* #search-zipcode {
         display: inline-block;
     } */
@@ -359,9 +358,33 @@ form {
     /* #search-history-list{
         width: 100%;
     } */
+    .top-bar a {
+        font-size: 15px;
+        padding: 5px;
+        padding-bottom: -25px;
+    }
+
+    .top-bar {
+        margin: 5px;
+        padding: 5px;
+        background-color: #FFFFFF;
+        border-bottom: solid 4px #a5cb0b;
+        height: max-content;
+        color: #0a7b09;
+    }    
+
+    .top-bar ul {
+        width: fit-content;
+        margin-bottom: 0;
+    }
 
     #search-zipcode {
+        text-align: center;
         margin: 10px;
+    }
+
+    #zipcode {
+        width: 50%;
     }
     
     #faves {
