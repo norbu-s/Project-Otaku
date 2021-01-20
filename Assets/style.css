@@ -29,12 +29,11 @@ body {
     top: 0;
     height: 4.2em;
     color: #0a7b09;
-
 }
 
 .top-bar ul {
     background-color: #FFFFFF;
-   
+    margin-bottom: -25px;
 }
 
 .top-bar a {
@@ -49,19 +48,29 @@ body {
 
 /* SEARCH SECTION */
 
+#search-zipcode {
+    border: 2px solid #e7e7e7;
+    padding: 10px;
+    margin-left: 10px;
+    margin-top: 10px;
+}
+
 form {
+    text-align: center;
     display: inline-block;
     padding: 5px;
+    min-width: 95%;
 }
 
 #zipcode {
     display: inline-block;
-    background-color: rgb(255, 243, 191);
+    background-color: rgb(255, 246, 207);
     border: none;
     box-shadow: none;
     width: auto;
     border-top-left-radius: 10px;
     border-bottom-left-radius: 10px; 
+    width: 85%;
 }
 
 #zipcode:focus {
@@ -74,11 +83,11 @@ form {
 
 #search-btn {
     display: inline-block;
-    background-color: rgb(255, 243, 191);
+    background-color: rgb(255, 246, 207);
     border-top-right-radius: 10px;
     border-bottom-right-radius: 10px; 
     border: none;
-    margin-left: -3px;
+    margin-left: -8px;
     vertical-align: top;
     padding: 5px;
     height: 39px;
@@ -94,13 +103,6 @@ form {
     margin: 0px;  
 }  
 
-#search-zipcode {
-    border: 2px solid #e7e7e7;
-    padding: 10px;
-    margin-left: 10px;
-    margin-top: 10px;
-}
-
 .history-btn {
     display: block;
     background-color: rgba(255,255,255,0.7); 
@@ -111,10 +113,13 @@ form {
     width: 100%;
 }
 
-.history-btn:hover, .fave-btn:hover {
+.history-btn:hover {
     cursor: pointer;
+    background-color: rgb(201, 227, 171);
+}
+
+.fave-btn:hover {
     background-color: #718a0b;
-    color: white;
 }
 
 #clear-search-btn { 
@@ -191,6 +196,8 @@ form {
     outline: none;
 }
 
+
+
 /* FAVOURITES SECTION */
 
 #faves {
@@ -240,20 +247,33 @@ form {
 
 #view-fav {
     font-size: 15px;
-    display: inline-block;
+    display: block;
     background-color: rgb(248, 209, 37);
     border-radius: 10px; 
     border: none;
-    padding: 5px; 
+    padding: 4px; 
     color: black; 
-    width: 85%;  
+    width: 150px; 
+    margin: 5px auto;
+}
+
+#view-fav:hover {
+    background-color: rgb(218, 178, 0);
 }
 
 /* MODAL STYLES */
 
+#error-modal {
+    width: 450px;
+}
+
+#error-modal2 {
+    width: 350px;
+}
+
 #error-modal3 {
-    width: 35vw;
-    height: 25vh;
+    width: 400px;
+    height: 220px;
 }
 
 #error-modal3 h3, #error-modal3 p {
@@ -284,7 +304,7 @@ form {
 }
 
 #clear-search-yes {
-    background-color: rgb(152, 196, 244)
+    background-color: rgb(152, 196, 244);
 }
 
 #clear-search-yes:hover, #clear-search-no:hover {
@@ -299,14 +319,24 @@ form {
     width: 35%;
 }
 
-#wrong-input-modal-btn-div {
+.modal-ok-btn-div {
     text-align: center;
 }
 
-#wrong-input-ok {
+.modal-ok {
     padding: 6px;
-    width: 100%;
-    background-color: rgb(255, 188, 17);
+    width: 35%;
+    background-color: rgb(152, 196, 244);
+}
+
+.modal-ok:hover {
+    color: white;
+    background-color:rgb(7, 21, 66);
+}
+
+#error-modal5 {
+    width: 400px;
+    height: 105px;
 }
 
 /* PAGE SUBHEADING AND BUTTONS */ 
@@ -319,6 +349,7 @@ form {
     padding: 5px;
     font-size: 20px;
     text-align: center;
+    margin-bottom: 25px;
 }
 
 .page-btn {
@@ -333,19 +364,23 @@ form {
 /* ------------MEDIA QUERIES------------- */
 
 /* Tablet screen */
-@media only screen and (max-width: 992px){
-    /* #search-zipcode{
+@media only screen and (max-width: 992px) and (min-width: 768px) {
+    /* #search-zipcode {
         display: inline-block;
     } */
-    #zipcode {
-        margin: 3px;
-        width: 80%;
+    #search-zipcode { 
+        margin: 15px;
+        /* width: 80vw; */
     }
 
-    #search-zipcode{ 
-        margin: 15px;
+    #zipcode {
+        margin: 3px;
+        width: 70%;
     }
-   
+    
+    #search-btn {
+        margin-top: 3px;
+    }
 }
 
 /* Mobile screen */
@@ -353,12 +388,39 @@ form {
     /* #search-history-list{
         width: 100%;
     } */
-    #zipcode {
-        width: 60%;
+
+    .top-bar a {
+        font-size: 15px;
+        padding: 5px;
+        padding-bottom: -25px;
+    }
+
+    .top-bar {
+        margin: 5px;
+        padding: 5px;
+        background-color: #FFFFFF;
+        border-bottom: solid 4px #a5cb0b;
+        height: max-content;
+        color: #0a7b09;
+    }    
+
+    .top-bar ul {
+        width: fit-content;
+    }
+
+    .welcome-div {
+        padding: 20px;
+        margin: 10px auto;
+        width: 80vw;
     }
 
     #search-zipcode {
+        text-align: center;
         margin: 10px;
+    }
+
+    #zipcode {
+        width: 50%;
     }
     
     #faves {
@@ -373,8 +435,11 @@ form {
         justify-content: center;
     }
 
+    #clear-search-btn {
+        width: 96%;
+    }
+
     .dropbtn {
-        
         display: inline-block;
         background-color: #4CAF50;
         color: white;
@@ -387,6 +452,7 @@ form {
     .dropdown {
         /* position: relative; */
         display: inline-block;
+        margin-left: 20px;
         /* margin: 0;
         padding: 0; */
     }
@@ -402,13 +468,12 @@ form {
         padding: 0px;
     }
 
-    .history-btn{
+    .history-btn {
         display: block;
-        margin-left: 0;
         border-radius: 5px;
         padding: 10px;
-        /* margin: 3px; */
-        width: 100%;
+        margin: 3px;
+        width: 96%;
     }
     
     /* .dropdown-content a {
@@ -417,6 +482,8 @@ form {
         text-decoration: none;
         display: block;
     } */
+
+    
 
     #title-history {
         display: none;
@@ -432,6 +499,22 @@ form {
     
     .dropdown:hover .dropbtn {
         background-color: #3e8e41;
+    }
+
+    #content {
+        margin: 0px;
+        width: 100%;
+    }
+
+    .results-each {
+        width: 80vw;
+    }
+}
+
+@media only screen and (max-width: 615px) {
+    .top-bar ul {
+        margin-top: 10px;
+        margin-bottom: 0;
     }
 }
 

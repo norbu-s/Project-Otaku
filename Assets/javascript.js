@@ -11,6 +11,7 @@ var locationErrorModal = new Foundation.Reveal($("#error-modal"));
 var apiErrorModal = new Foundation.Reveal($("#error-modal2"));
 var clearSearchConfirmModal = new Foundation.Reveal($("#error-modal3"));
 var numberInputModal = new Foundation.Reveal($("#error-modal4"));
+var noInputModal = new Foundation.Reveal($("#error-modal5"));
 
 // render the stored search history and favourites list 
 initialise();
@@ -185,10 +186,10 @@ function renderLastSearched() {
         method: "GET",
         error: function() {
             apiErrorModal.open();
+            welcomeMessage();
             return;
         },
         success: function(response) {
-            console.log(response) 
             if (response.location_suggestions.length === 0) {
                 locationErrorModal.open();
                 return;
@@ -223,10 +224,13 @@ function renderLastSearched() {
                 method: "GET",
                 error: function() {
                     apiErrorModal.open();
+                    // $("#page-outof").addClass("hide");
+                    // $("#nearest-restaurant").addClass("hide");
+                    // $("#page-btn-div").addClass("hide");
+                    // welcomeMessage();
                     return;
                 },
                 success: function (response) {
-                    console.log(response);
                     var resultContainer1 = $("<div id='result-container1'></div>");
                     var resultContainer2 = $("<div id='result-container2'></div>")
                     resultContainer2.addClass("hide");
@@ -275,19 +279,22 @@ function renderLastSearched() {
 searchBtn.on("click", function (event) {
     event.preventDefault();
 
-    resultsDiv.empty();
     var searchInput = $("#zipcode").val();
     
     var nums = "0123456789";
 
     if (searchInput === "") {
+        noInputModal.open();
         return;
-    } else if (nums.includes(searchInput[0])) {
-        numberInputModal.open()
-        searchInputEl.val("");
-        return;
+    } 
+
+    for (var i = 0; i < searchInput.length; i++) {
+        if (nums.includes(searchInput[i])) {
+            numberInputModal.open();
+            searchInputEl.val("");
+            return;
+        }
     }
-    
 
     // Zomato location API call 
     /*
@@ -314,10 +321,15 @@ searchBtn.on("click", function (event) {
         method: "GET",
         error: function() {
             apiErrorModal.open();
+            // $("#page-outof").addClass("hide");
+            // $("#nearest-restaurant").addClass("hide");
+            // $("#page-btn-div").addClass("hide");
+            // welcomeMessage();
             return;
         },
         success: function(response) {
-            console.log(response) 
+            resultsDiv.empty();
+
             if (response.location_suggestions.length === 0) {
                 locationErrorModal.open();
                 return;
@@ -352,6 +364,10 @@ searchBtn.on("click", function (event) {
                 method: "GET",
                 error: function() {
                     apiErrorModal.open();
+                    // $("#page-outof").addClass("hide");
+                    // $("#nearest-restaurant").addClass("hide");
+                    // $("#page-btn-div").addClass("hide");
+                    // welcomeMessage();
                     return;
                 },
                 success: function (response) {
@@ -405,7 +421,6 @@ searchBtn.on("click", function (event) {
 // get API data on search history button click
 searchHistoryList.on("click", function (event) {
     if (event.target.classList.contains("history-btn")) {
-        resultsDiv.empty();
         // Zomato location API call
         var buttonName = event.target.textContent;
 
@@ -415,6 +430,10 @@ searchHistoryList.on("click", function (event) {
             method: "GET",
             error: function() {
                 apiErrorModal.open();
+                // $("#page-outof").addClass("hide");
+                // $("#nearest-restaurant").addClass("hide");
+                // $("#page-btn-div").addClass("hide");
+                // welcomeMessage();
                 return;
             },
             success: function (response) {
@@ -437,10 +456,15 @@ searchHistoryList.on("click", function (event) {
                     method: "GET",
                     error: function() {
                         apiErrorModal.open();
+                        // $("#page-outof").addClass("hide");
+                        // $("#nearest-restaurant").addClass("hide");
+                        // $("#page-btn-div").addClass("hide");
+                        // welcomeMessage();
                         return;
                     },
                     success: function (response) {
-                        console.log(response)
+                        resultsDiv.empty();
+
                         var resultContainer1 = $("<div id='result-container1'></div>");
                         var resultContainer2 = $("<div id='result-container2'></div>")
                         resultContainer2.addClass("hide");
@@ -537,7 +561,34 @@ $("#clear-search-btn").on("click", function() {
 })
 
 // number input in search 
-$("#wrong-input-ok").on("click", function() {
+$(".modal-ok").on("click", function() {
     $(".reveal-overlay").attr("style", "display: none");
-
 })
+
+// grid layout changes on resize
+responsiveCells();
+$(window).on("resize", function() {
+    if ($(window).width() + 14 < 768) {
+        $("#search-cell").attr("class", "cell medium-12 large-12");
+        $("#result-cell").attr("class", "cell medium-12 large-12");
+    } else if ($(window).width() + 14 > 1200) {
+        $("#search-cell").attr("class", "cell medium-3 large-3");
+        $("#result-cell").attr("class", "cell medium-6 large-6");
+    } else {
+        $("#search-cell").attr("class", "cell medium-4 large-4");
+        $("#result-cell").attr("class", "cell medium-5 large-5");
+    }
+});
+
+function responsiveCells() {
+    if ($(window).width() + 16 < 768) {
+        $("#search-cell").attr("class", "cell medium-12 large-12");
+        $("#result-cell").attr("class", "cell medium-12 large-12");
+    } else if ($(window).width() + 14 > 1200) {
+        $("#search-cell").attr("class", "cell medium-3 large-3");
+        $("#result-cell").attr("class", "cell medium-6 large-6");
+    } else {
+        $("#search-cell").attr("class", "cell medium-4 large-4");
+        $("#result-cell").attr("class", "cell medium-5 large-5");
+    }
+}
