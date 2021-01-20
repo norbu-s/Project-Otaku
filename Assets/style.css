@@ -141,7 +141,7 @@ form {
 /* RESTAURANT RESULTS */
 
 #results {
-    margin: bottom: 50px;
+    margin-bottom: 50px;
 }
 
 .welcome-div {
@@ -369,6 +369,7 @@ form {
     /* #search-history-list{
         width: 100%;
     } */
+
     .top-bar a {
         font-size: 15px;
         padding: 5px;
@@ -474,6 +475,15 @@ form {
     
     .dropdown:hover .dropbtn {
         background-color: #3e8e41;
+    }
+
+    #content {
+        margin: 0px;
+        width: 100%;
+    }
+
+    .results-each {
+        width: 80vw;
     }
 }
 
