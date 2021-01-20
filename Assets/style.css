@@ -272,8 +272,8 @@ form {
 }
 
 #error-modal3 {
-    width: 300px;
-    height: 260px;
+    width: 400px;
+    height: 220px;
 }
 
 #error-modal3 h3, #error-modal3 p {
@@ -319,24 +319,24 @@ form {
     width: 35%;
 }
 
-#wrong-input-modal-btn-div {
+.modal-ok-btn-div {
     text-align: center;
 }
 
-#wrong-input-ok {
+.modal-ok {
     padding: 6px;
-    width: 100%;
+    width: 35%;
     background-color: rgb(152, 196, 244);
 }
 
-#wrong-input-ok:hover {
+.modal-ok:hover {
     color: white;
     background-color:rgb(7, 21, 66);
 }
 
 #error-modal5 {
     width: 400px;
-    height: 80px;
+    height: 105px;
 }
 
 /* PAGE SUBHEADING AND BUTTONS */ 
