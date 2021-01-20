@@ -23,6 +23,7 @@ body {
 .top-bar {
     margin: 10px;
     padding: 10px;
+    padding-bottom: 20px;
     background-color: #FFFFFF;
     border-bottom: solid 4px #a5cb0b;
     top: 0;
@@ -224,7 +225,7 @@ form {
     border: none;
     padding: 5px; 
     color: black; 
-    width: 70%;  
+    width: 85%;  
 }
 
 /* MODAL STYLES */

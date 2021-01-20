@@ -244,6 +244,8 @@ function renderLastSearched() {
                     }
                     resultsDiv.append(resultContainer1, resultContainer2);
                     $("#page-no").text("1");
+                    $("#page-outof").removeClass("hide");
+
                 }
             })
         }
@@ -466,12 +468,14 @@ $("#page-btn1").on("click", function() {
     $("#result-container1").removeClass("hide");
     $("#result-container2").addClass("hide");
     $("#page-no").text("1");
+    $("#page-outof").removeClass("hide");
 })
 
 $("#page-btn2").on("click", function() {
     $("#result-container2").removeClass("hide");
     $("#result-container1").addClass("hide");
     $("#page-no").text("2");
+    $("#page-outof").removeClass("hide");
 })
 
 // delete favourite item 
