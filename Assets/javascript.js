@@ -186,6 +186,7 @@ function renderLastSearched() {
         method: "GET",
         error: function() {
             apiErrorModal.open();
+            console.log("here")
             welcomeMessage();
             return;
         },
@@ -320,6 +321,7 @@ searchBtn.on("click", function (event) {
             return;
         },
         success: function(response) {
+            console.log(response);
             if (response.location_suggestions.length === 0) {
                 locationErrorModal.open();
                 return;
@@ -354,6 +356,9 @@ searchBtn.on("click", function (event) {
                 method: "GET",
                 error: function() {
                     apiErrorModal.open();
+                    storedSearches.splice(storedSearches.length - 1, 1);
+                    storeSearches();
+                    renderSearchHistory();
                     return;
                 },
                 success: function (response) {
