@@ -112,10 +112,13 @@ form {
     width: 100%;
 }
 
-.history-btn:hover, .fave-btn:hover {
+.history-btn:hover {
     cursor: pointer;
+    background-color: rgb(255, 245, 199);
+}
+
+.fave-btn:hover {
     background-color: #718a0b;
-    color: white;
 }
 
 #clear-search-btn { 
@@ -248,6 +251,10 @@ form {
     padding: 5px; 
     color: black; 
     width: 85%;  
+}
+
+#view-fav:hover {
+    background-color: rgb(218, 178, 0);
 }
 
 /* MODAL STYLES */
