@@ -10,6 +10,7 @@ var resultsDiv = $("#results");
 var locationErrorModal = new Foundation.Reveal($("#error-modal"));
 var apiErrorModal = new Foundation.Reveal($("#error-modal2"));
 var clearSearchConfirmModal = new Foundation.Reveal($("#error-modal3"));
+var numberInputModal = new Foundation.Reveal($("#error-modal4"));
 
 // render the stored items
 initialise();
@@ -30,7 +31,8 @@ function renderFavouritesList() {
     for (var i = 0; i < storedFaves.length; i++) {
         var storedFaveLi = $("<li>");
         storedFaveLi.attr("class", "fav-list")
-        var storedFaveBtn = $(`<a 
+        var storedFaveBtn = $(`<a
+        id="divid-${storedFaves[i].id}" 
         href="fave-restaurants.html"
         class="button fave-btn" 
         data-name="${storedFaves[i].name}"
@@ -40,12 +42,25 @@ function renderFavouritesList() {
         data-cuisine="${storedFaves[i].cuisine}"
         data-id="${storedFaves[i].id}"
         >` + storedFaves[i].name + `</a>`);;
-        var removeFaveBtn = $("<button id=" + storedFaves[i].id + " class=\"remove-fave-btn\">X</i></button");
+        var removeFaveBtn = $("<button id='btnid-" + storedFaves[i].id + "' class='remove-fave-btn'>&times;</i></button");
         storedFaveLi.append(storedFaveBtn, removeFaveBtn);
 
         favesList.prepend(storedFaveLi);
     }
 }
+
+$(window).on("resize", function() {
+    var faveIds = [];
+    for (var i = 0; i < storedFaves.length; i++) {
+        faveIds.push([$("#divid-" + storedFaves[i].id), $("#btnid-" + storedFaves[i].id)]);
+    }
+
+    for (var i = 0; i < faveIds.length; i++) {
+        var faveBtnHeight = faveIds[i][0].outerHeight();
+        var removeFaveBtn = faveIds[i][1];
+        removeFaveBtn.outerHeight(faveBtnHeight);
+    }
+})
 
 function initialise() {
     var updatedStoredSearches = JSON.parse(localStorage.getItem("storedSearches"));
@@ -59,7 +74,6 @@ function initialise() {
     }
     renderSearchHistory();
     renderFavouritesList();
-    ;
 }
 
 // store searches/favourites
@@ -117,6 +131,8 @@ function createFaveBtn(restaurant) {
             storedFaves.push(faveList);
     
             if (storedFaves.length > 4) {
+                console.log(storedFaves[0].id)
+                $("#id-" + storedFaves[0].id).text("Add to Favourite");
                 storedFaves.splice(0, 1);
             }
             event.target.textContent = "Added";
@@ -238,10 +254,17 @@ searchBtn.on("click", function (event) {
 
     resultsDiv.empty();
     var searchInput = $("#zipcode").val();
+    
+    var nums = "0123456789";
 
     if (searchInput === "") {
         return;
+    } else if (nums.includes(searchInput[0])) {
+        numberInputModal.open()
+        searchInputEl.val("");
+        return;
     }
+    
 
     // Zomato location API call 
     /*
@@ -482,4 +505,10 @@ $("#clear-search-btn").on("click", function() {
         $(".reveal-overlay").attr("style", "display: none");
     })
     
+})
+
+// number input in search 
+$("#wrong-input-ok").on("click", function() {
+    $(".reveal-overlay").attr("style", "display: none");
+
 })

@@ -59,10 +59,6 @@ a{
     vertical-align: top;
 }
 
-.card-divider:hover {
-    cursor: pointer;
-}
-
 .fave {
     height: fit-content;
     width: 40vw;
@@ -79,13 +75,47 @@ a{
     height: 30vh;
 }
 
-.map-btn {
-    background: rgb(243, 239, 239);
-    border: solid 1px grey;
+.map-btn, .remove-fave-btn, .show-img {
     border-radius: 4px;
-    margin-top: 5px;
-    margin-left: 20px;
     padding: 6px;
+    margin-top: 5px;
+    cursor: pointer;
+}
+
+.show-img {
+    border: solid 1px rgb(147, 93, 0);
+    color: rgb(147, 93, 0);
+    background-color: rgb(249, 224, 181);
+    margin: 10px 0 10px 17px;
+}
+
+.show-img:hover {
+    color: white;
+    background-color: rgb(191, 136, 41);
+}
+
+.map-btn {
+    border: solid 1px rgb(40, 51, 113);
+    color: rgb(40, 51, 113);
+    background-color: rgb(177, 206, 228);
+    margin-left: 15px;
+}
+
+.map-btn:hover {
+    color: white;
+    background-color: rgb(107, 147, 197);
+}
+
+.remove-fave-btn {
+    font-size: 14px;
+    color: rgb(198, 79, 79);
+    border: solid 1px rgb(198, 79, 79);
+    margin-right: 5px;
+}
+
+.remove-fave-btn:hover {
+    color: white;
+    background-color: rgb(210, 107, 107);
 }
 
 /* user-uploaded image */
@@ -107,6 +137,7 @@ a{
 
 .notes-bar {
     width: 100%;
+    height: 100%;
     background-color: #e6e6e6;
     padding: 10px;
     margin: 0 !important;
@@ -114,17 +145,21 @@ a{
     border-radius: 5px;
 }
 
-.notes-buttons {
-    border-top: gray 1px dotted;
-}
-
 .notes-delete-btn {
-    padding: 5px 10px;
-    margin-top: 5px;
+    font-weight: bold;
+    font-size: 16px;
+    width: 20px;
+    height: 20px;
     background-color: rgb(199, 78, 78);
     color: white;
     text-align: center;
-    border-radius: 5px;
+    border-radius: 3px;
+    cursor: pointer;
+    float: right;
+}
+
+.notes-delete-btn:hover {
+    background-color: rgb(165, 53, 53);
 }
 
 .notes-bar p {
@@ -133,18 +168,32 @@ a{
 }
 
 .notes-date {
+    display: inline-block;
     color: gray;
     font-size: 0.8em;
 }
 
 .note-submit-btn {
-    display: inline-block;
+    float: right;
     background-color:#a5cb0b;
     border-radius: 5px;
     padding: 10px;
-    margin-bottom: 3px;
-
+    cursor: pointer;
 }
+
+.note-submit-btn:hover {
+    color: white;
+    background-color: rgb(91, 135, 53);
+}
+
+.clearing-div {
+    height: 30px;
+}
+
+.remove-fave-btn {
+    float: right;
+}
+
 
 @media only screen and (max-width: 768px) {
     /* For mobile phones: */
