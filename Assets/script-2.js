@@ -1,4 +1,5 @@
-var storedImages = [];
+// var storedImages = [];
+var imgStatus = "show";
 initialise();
 
 // Creating card from local storage information 
@@ -9,7 +10,7 @@ function renderFaveCards() {
 
     for (var i = storedFaves.length - 1; i >= 0; i--) {
         // Individual card div 
-        var faveCard = $("<div class='fave card'></div>");
+        var faveCard = $("<div id='card-" + storedFaves[i].id + "' class='fave card'></div>");
     
         // Card heading 
         var cardHeadingDiv = $("<div id='divider" + storedFaves[i].id + "' class='fave-name card-divider'>" + storedFaves[i].name + "</div>");
@@ -62,6 +63,7 @@ function renderFaveCards() {
         if (img.attr("src") !== "#") {
             showImgBtn.text("Hide Image");
             cardImgDiv.removeClass("hide");
+            imgStatus = "show";
         } 
 
         $(".remove-fave-btn").on("click", function(event){
@@ -73,14 +75,16 @@ function renderFaveCards() {
                     storedFaves.splice(i, 1);
                 }
             }
-            // for (var i = 0; i < storedImages.length; i++) {
-            //     if (storedImages[i][0] === )
-            // }
             storeFaves();
-            renderFaveCards();
-            renderImages();
-            renderNotes();
 
+            $("#card-" + btnId).addClass("hide");
+            // renderFaveCards();
+            // renderImages();
+            // renderNotes();
+
+            if (imgStatus === "hide") {
+                cardImgDiv.addClass("hide");
+            }
         })
 
         showImgBtn.on("click", function(event) {
@@ -90,6 +94,7 @@ function renderFaveCards() {
             var showImgBtn = $("#show-img" + btnId);
             if (cardImgDiv.hasClass("hide")) {
                 cardImgDiv.removeClass("hide");
+                imgStatus = "show";
                 if (cardImg.attr("src") !== "#") {
                     showImgBtn.text("Hide Image");
                 } else {
@@ -97,6 +102,7 @@ function renderFaveCards() {
                 }
             } else {
                 cardImgDiv.addClass("hide");
+                imgStatus = "hide";
                 if (cardImg.attr("src") !== "#") {
                     showImgBtn.text("Show Image");
                 } else {
