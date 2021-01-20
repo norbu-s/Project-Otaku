@@ -328,8 +328,6 @@ searchBtn.on("click", function (event) {
             return;
         },
         success: function(response) {
-            resultsDiv.empty();
-
             if (response.location_suggestions.length === 0) {
                 locationErrorModal.open();
                 return;
@@ -371,7 +369,8 @@ searchBtn.on("click", function (event) {
                     return;
                 },
                 success: function (response) {
-                    console.log(response);
+                    resultsDiv.empty();
+
                     var resultContainer1 = $("<div id='result-container1'></div>");
                     var resultContainer2 = $("<div id='result-container2'></div>")
                     resultContainer2.addClass("hide");
