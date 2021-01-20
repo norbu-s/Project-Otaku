@@ -140,6 +140,10 @@ form {
 
 /* RESTAURANT RESULTS */
 
+#results {
+    margin: bottom: 50px;
+}
+
 .welcome-div {
     background-color: rgb(255, 243, 209);
     border: solid 2px rgb(255, 228, 159);
