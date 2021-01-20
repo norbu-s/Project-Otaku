@@ -247,13 +247,14 @@ form {
 
 #view-fav {
     font-size: 15px;
-    display: inline-block;
+    display: block;
     background-color: rgb(248, 209, 37);
     border-radius: 10px; 
     border: none;
-    padding: 5px; 
+    padding: 4px; 
     color: black; 
-    width: 85%;  
+    width: 150px; 
+    margin: 5px auto;
 }
 
 #view-fav:hover {
@@ -263,8 +264,8 @@ form {
 /* MODAL STYLES */
 
 #error-modal3 {
-    width: 35vw;
-    height: 25vh;
+    width: 300px;
+    height: 260px;
 }
 
 #error-modal3 h3, #error-modal3 p {

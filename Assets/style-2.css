@@ -1,47 +1,6 @@
-/* hidden elements*/
-.hide {
-    display: none;
-}
-
-body {
-    border: none;
-    margin: 0;
-    padding: 0;
-    color: #33373d;
-    font-weight: 300;
-    font-family: 'Lato', sans-serif;
-    line-height: 1.55;
-    overflow-x: hidden;
-    background-color: #FFFFFF;
-}
-
-
 /* main content */
 main {
     margin: 50px;
-}
-
-.top-bar{
-    margin: 10px;
-    padding: 10px;
-    padding-bottom: 20px;
-    background-color: #FFFFFF;
-    /* background: linear-gradient(10deg, #EEDDDD 0%, #FFEEEE 100%); */
-    /* box-shadow: 0 0 1em rgba(0,0,0,0.3); */
-    border-bottom: solid 4px #a5cb0b;
-    top: 0;
-    height: 4.2em;
-    color: #0a7b09;
-
-}
-
-.top-bar ul {
-    background-color: #FFFFFF;
-   
-}
-a{
-    color: #0a7b09;
-    font-size: 18px;
 }
 
 /* no favourites message */
@@ -60,11 +19,15 @@ a{
     vertical-align: top;
 }
 
+.card-divider {
+    background-color: rgb(245, 243, 243);
+}
+
 .fave {
     height: fit-content;
     width: 40vw;
-    border: solid 2px rgb(94, 92, 92);
-    box-shadow: 10px -5px  #718a0b;
+    border: solid 2px rgb(70, 70, 70);
+    box-shadow: 10px -7px  #8ac4a1;
 }
 
 .fave div {
@@ -177,7 +140,7 @@ a{
 
 .note-submit-btn {
     float: right;
-    background-color:#a5cb0b;
+    background-color:#b8ce5d;
     border-radius: 5px;
     padding: 10px;
     cursor: pointer;
