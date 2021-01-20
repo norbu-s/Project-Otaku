@@ -64,7 +64,7 @@ form {
 
 #zipcode {
     display: inline-block;
-    background-color: rgb(255, 243, 191);
+    background-color: rgb(255, 246, 207);
     border: none;
     box-shadow: none;
     width: auto;
@@ -83,7 +83,7 @@ form {
 
 #search-btn {
     display: inline-block;
-    background-color: rgb(255, 243, 191);
+    background-color: rgb(255, 246, 207);
     border-top-right-radius: 10px;
     border-bottom-right-radius: 10px; 
     border: none;
@@ -115,7 +115,7 @@ form {
 
 .history-btn:hover {
     cursor: pointer;
-    background-color: rgb(255, 245, 199);
+    background-color: rgb(201, 227, 171);
 }
 
 .fave-btn:hover {
