@@ -186,6 +186,7 @@ function renderLastSearched() {
         method: "GET",
         error: function() {
             apiErrorModal.open();
+            console.log("here")
             welcomeMessage();
             return;
         },
@@ -224,10 +225,6 @@ function renderLastSearched() {
                 method: "GET",
                 error: function() {
                     apiErrorModal.open();
-                    // $("#page-outof").addClass("hide");
-                    // $("#nearest-restaurant").addClass("hide");
-                    // $("#page-btn-div").addClass("hide");
-                    // welcomeMessage();
                     return;
                 },
                 success: function (response) {
@@ -321,15 +318,10 @@ searchBtn.on("click", function (event) {
         method: "GET",
         error: function() {
             apiErrorModal.open();
-            // $("#page-outof").addClass("hide");
-            // $("#nearest-restaurant").addClass("hide");
-            // $("#page-btn-div").addClass("hide");
-            // welcomeMessage();
             return;
         },
         success: function(response) {
-            resultsDiv.empty();
-
+            console.log(response);
             if (response.location_suggestions.length === 0) {
                 locationErrorModal.open();
                 return;
@@ -364,14 +356,14 @@ searchBtn.on("click", function (event) {
                 method: "GET",
                 error: function() {
                     apiErrorModal.open();
-                    // $("#page-outof").addClass("hide");
-                    // $("#nearest-restaurant").addClass("hide");
-                    // $("#page-btn-div").addClass("hide");
-                    // welcomeMessage();
+                    storedSearches.splice(storedSearches.length - 1, 1);
+                    storeSearches();
+                    renderSearchHistory();
                     return;
                 },
                 success: function (response) {
-                    console.log(response);
+                    resultsDiv.empty();
+
                     var resultContainer1 = $("<div id='result-container1'></div>");
                     var resultContainer2 = $("<div id='result-container2'></div>")
                     resultContainer2.addClass("hide");
@@ -430,10 +422,6 @@ searchHistoryList.on("click", function (event) {
             method: "GET",
             error: function() {
                 apiErrorModal.open();
-                // $("#page-outof").addClass("hide");
-                // $("#nearest-restaurant").addClass("hide");
-                // $("#page-btn-div").addClass("hide");
-                // welcomeMessage();
                 return;
             },
             success: function (response) {
@@ -456,10 +444,6 @@ searchHistoryList.on("click", function (event) {
                     method: "GET",
                     error: function() {
                         apiErrorModal.open();
-                        // $("#page-outof").addClass("hide");
-                        // $("#nearest-restaurant").addClass("hide");
-                        // $("#page-btn-div").addClass("hide");
-                        // welcomeMessage();
                         return;
                     },
                     success: function (response) {
