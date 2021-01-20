@@ -321,6 +321,11 @@ form {
     background-color: rgb(255, 188, 17);
 }
 
+#error-modal5 {
+    width: 300px;
+    height: 80px;
+}
+
 /* PAGE SUBHEADING AND BUTTONS */ 
 
 #page-outof {

@@ -11,7 +11,9 @@ var locationErrorModal = new Foundation.Reveal($("#error-modal"));
 var apiErrorModal = new Foundation.Reveal($("#error-modal2"));
 var clearSearchConfirmModal = new Foundation.Reveal($("#error-modal3"));
 var numberInputModal = new Foundation.Reveal($("#error-modal4"));
+var noInputModal = new Foundation.Reveal($("#error-modal5"));
 
+noInputModal.open()
 // render the stored search history and favourites list 
 initialise();
 
