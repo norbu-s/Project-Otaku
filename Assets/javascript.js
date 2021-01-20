@@ -46,6 +46,9 @@ function renderFavouritesList() {
         storedFaveLi.append(storedFaveBtn, removeFaveBtn);
 
         favesList.prepend(storedFaveLi);
+
+        removeFaveBtn.outerHeight(storedFaveBtn.outerHeight());
+        
     }
 }
 
@@ -477,7 +480,6 @@ favesList.on("click", function (event) {
         var faveBtnId = event.target.id;
         var addToFaveBtn = $("#id-" + faveBtnId);
         addToFaveBtn.text("Add to Favourite");
-        console.log(faveBtnId)
         for (var i = 0; i < storedFaves.length; i++) {
             if (storedFaves[i].id === faveBtnId) {
                 storedFaves.splice(i, 1);
