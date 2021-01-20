@@ -54,7 +54,6 @@ function renderFaveCards() {
         // Append heading and sections to individual card
         faveCard.append(cardHeadingDiv, buttonsDiv, mapDiv, showImgBtn, cardImgDiv, cardInfo, cardNotes, clearingDiv);
         
-        console.log(cardImgDiv)
         // Append individual card to <div class="cell">
         $(".cell").append(faveCard);
         cardCounter++;
@@ -133,24 +132,23 @@ function renderNotes() {
     var updatedStoredFaves = JSON.parse(localStorage.getItem("storedFaves"));
     if (updatedStoredFaves !== null) {
         storedFaves = updatedStoredFaves;
-    }
-
-    $(".notes-display").text('');
-    for (i=0; i < updatedStoredFaves.length; i++) {
-        if (updatedStoredFaves[i].notes !== undefined) {
-            var targetDiv = $("#displayNote"+[i]);
-            var noteArry = updatedStoredFaves[i].notes;
-            for (n=0; n < noteArry.length; n++) {
-                var notesData = noteArry[n];
-                    var newDiv = $("<div class='notes-bar'></div>")
-                    var newPDate = $("<p class='notes-date'>("+notesData[0]+")</p>");
-                    var newP = $("<p class='notes-text'>"+notesData[1]+"</p>");
-                    var newDeleteBtn = $("<button class='notes-delete-btn' data-target='"+n+"' data-order='"+i+"'>&times;</button>");
-                    newDiv.append(newPDate, newDeleteBtn, newP);
-                targetDiv.append(newDiv);
-            }
+        $(".notes-display").text('');
+        for (i=0; i < updatedStoredFaves.length; i++) {
+            if (updatedStoredFaves[i].notes !== undefined) {
+                var targetDiv = $("#displayNote"+[i]);
+                var noteArry = updatedStoredFaves[i].notes;
+                for (n=0; n < noteArry.length; n++) {
+                    var notesData = noteArry[n];
+                        var newDiv = $("<div class='notes-bar'></div>")
+                        var newPDate = $("<p class='notes-date'>("+notesData[0]+")</p>");
+                        var newP = $("<p class='notes-text'>"+notesData[1]+"</p>");
+                        var newDeleteBtn = $("<button class='notes-delete-btn' data-target='"+n+"' data-order='"+i+"'>&times;</button>");
+                        newDiv.append(newPDate, newDeleteBtn, newP);
+                    targetDiv.append(newDiv);
+                }
+            };
         };
-    };
+    }
 
     $(".notes-delete-btn").on("click", function() {
         event.preventDefault();
