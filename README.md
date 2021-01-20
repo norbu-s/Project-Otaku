@@ -25,9 +25,24 @@ Open the web application using the link https://norbu-s.github.io/Covid-Safe-Res
 
 ## Links to resources
 
-[Zomato API](https://developers.zomato.com/api?lang=id)
+1. [Zomato API](https://developers.zomato.com/api?lang=id)
 
-[Google Maps Embed API](https://developers.google.com/maps/documentation/embed/get-started)
+2. [Google Maps Embed API](https://developers.google.com/maps/documentation/embed/get-started)
+
+3. https://developer.mozilla.org/en-US/
+
+4. https://www.w3schools.com/js/
+
+5. https://get.foundation/sites/docs/card.html
+
+6. https://catswhocode.com/how-to-make-a-responsive-website/
+
+7. https://fonts.google.com/
+
+8. https://momentjs.com/
+
+9. https://jquery.com/
+
 
 [Font Awesome](https://fontawesome.com/)
 
@@ -39,3 +54,4 @@ Open the web application using the link https://norbu-s.github.io/Covid-Safe-Res
 2. Github Repository - https://github.com/norbu-s/Covid-Safe-Restaurant
 
 ## Application Screenshots
+![Screen Shot 2021-01-20 at 9 09 37 pm](https://user-images.githubusercontent.com/73917485/105160073-e8c44980-5b63-11eb-9526-6384cf1b0a71.png)
