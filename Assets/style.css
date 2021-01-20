@@ -416,6 +416,10 @@ form {
         justify-content: center;
     }
 
+    #clear-search-btn {
+        width: 96%;
+    }
+
     .dropbtn {
         display: inline-block;
         background-color: #4CAF50;
@@ -445,13 +449,12 @@ form {
         padding: 0px;
     }
 
-    .history-btn{
+    .history-btn {
         display: block;
-        margin-left: 0;
         border-radius: 5px;
         padding: 10px;
-        /* margin: 3px; */
-        width: 100%;
+        margin: 3px;
+        width: 96%;
     }
     
     /* .dropdown-content a {
@@ -460,6 +463,8 @@ form {
         text-decoration: none;
         display: block;
     } */
+
+    
 
     #title-history {
         display: none;
