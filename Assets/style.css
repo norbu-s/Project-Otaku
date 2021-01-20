@@ -56,6 +56,7 @@ body {
 }
 
 form {
+    text-align: center;
     display: inline-block;
     padding: 5px;
     min-width: 95%;
@@ -140,10 +141,6 @@ form {
 
 /* RESTAURANT RESULTS */
 
-#results {
-    margin-bottom: 50px;
-}
-
 .welcome-div {
     background-color: rgb(255, 243, 209);
     border: solid 2px rgb(255, 228, 159);
@@ -198,6 +195,8 @@ form {
 .add-fave-btn:focus {
     outline: none;
 }
+
+
 
 /* FAVOURITES SECTION */
 
@@ -331,6 +330,7 @@ form {
     padding: 5px;
     font-size: 20px;
     text-align: center;
+    margin-bottom: 25px;
 }
 
 .page-btn {

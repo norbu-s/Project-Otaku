@@ -547,6 +547,9 @@ $(window).on("resize", function() {
     if ($(window).width() + 14 < 768) {
         $("#search-cell").attr("class", "cell medium-12 large-12");
         $("#result-cell").attr("class", "cell medium-12 large-12");
+    } else if ($(window).width() + 14 > 1200) {
+        $("#search-cell").attr("class", "cell medium-3 large-3");
+        $("#result-cell").attr("class", "cell medium-6 large-6");
     } else {
         $("#search-cell").attr("class", "cell medium-4 large-4");
         $("#result-cell").attr("class", "cell medium-5 large-5");
@@ -557,6 +560,9 @@ function responsiveCells() {
     if ($(window).width() + 16 < 768) {
         $("#search-cell").attr("class", "cell medium-12 large-12");
         $("#result-cell").attr("class", "cell medium-12 large-12");
+    } else if ($(window).width() + 14 > 1200) {
+        $("#search-cell").attr("class", "cell medium-3 large-3");
+        $("#result-cell").attr("class", "cell medium-6 large-6");
     } else {
         $("#search-cell").attr("class", "cell medium-4 large-4");
         $("#result-cell").attr("class", "cell medium-5 large-5");
