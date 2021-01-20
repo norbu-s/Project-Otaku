@@ -196,6 +196,7 @@ form {
 #faves {
     border: 2px solid #e7e7e7;
     height: fit-content;
+    margin-right: 10px;
 }
 
 #faves-list {

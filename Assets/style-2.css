@@ -108,6 +108,7 @@ a{
 
 .remove-fave-btn {
     font-size: 14px;
+    background-color: white;
     color: rgb(198, 79, 79);
     border: solid 1px rgb(198, 79, 79);
     margin-right: 5px;

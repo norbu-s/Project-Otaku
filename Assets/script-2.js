@@ -26,7 +26,7 @@ function renderFaveCards() {
         mapDiv.append(mapFrame);
         
         // Image section
-        var showImgBtn = $("<button id='show-img" + storedFaves[i].id + "' class='show-img'>Upload Image</button>");
+        var showImgBtn = $("<button id='show-img" + storedFaves[i].id + "' class='show-img'>Upload Image (max. 450kb)</button>");
         var cardImgDiv = $("<div id='img-div" + storedFaves[i].id + "' class='card-section img hide'></div>");
         var uploadImgForm = $("<form action='/action_page.php'></form>");
         var uploadImgBtn = $("<input type='file' id='imgInput" + cardCounter + "' accept='image/*'>");
@@ -97,14 +97,14 @@ function renderFaveCards() {
                 if (cardImg.attr("src") !== "#") {
                     showImgBtn.text("Hide Image");
                 } else {
-                    showImgBtn.text("Upload Image");
+                    showImgBtn.text("Upload Image (max. 450kb)");
                 }
             } else {
                 cardImgDiv.addClass("hide");
                 if (cardImg.attr("src") !== "#") {
                     showImgBtn.text("Show Image");
                 } else {
-                    showImgBtn.text("Upload Image");
+                    showImgBtn.text("Upload Image (max. 450kb)");
                 }
             }
         })
