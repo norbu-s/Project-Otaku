@@ -26,7 +26,7 @@ if (storedSearches.length < 1) {
 function welcomeMessage() {
     var welcomeDiv = $("<div class='welcome-div'></div>");
     var welcomeHeading = $("<h1 class='welcome-heading'>Welcome to Restaurant Otaku!</h1>");
-    var welcomeMsg = $("<ol class='welcome-ol'><li><p>Use the searchbar on the left to search for restaurants in a suburb or city</p></li><li><p>Click on the <strong>'Add to Favourite'</strong> button on any search result to add it to your favourites list</p></li><li><p>Navigate to the <strong>'Favourites'</strong> page to personalise your favourite cards with images and notes</p></li></ol>")
+    var welcomeMsg = $("<ol class='welcome-ol'><li><p>Use the searchbar on the left to search a suburb or city for restaurants</p></li><li><p>Click on the <strong>'Add to Favourite'</strong> button on any search result to add it to your favourites list</p></li><li><p>Navigate to the <strong>'Favourites'</strong> page to personalise your favourite cards with images and notes</p></li></ol>")
    
     welcomeDiv.append(welcomeHeading, welcomeMsg);
     resultsDiv.append(welcomeDiv);

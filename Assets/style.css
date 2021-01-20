@@ -279,16 +279,16 @@ form {
     width: 45%;
     height: 30px;
     border: none;
-    background-color: rgb(71, 72, 71);
+    background-color: rgb(55, 99, 211);
     left: 5vw;
 }
 
 #clear-search-yes {
-    background-color: rgb(185, 189, 186)
+    background-color: rgb(152, 196, 244)
 }
 
 #clear-search-yes:hover, #clear-search-no:hover {
-    background-color:rgb(201, 64, 64);
+    background-color:rgb(7, 21, 66);
 }
 
 .reveal:focus {

@@ -16,13 +16,13 @@ function renderFaveCards() {
     
         // Button section
         var buttonsDiv = $("<div></div>");
-        var viewMapBtn = $("<button id='map-btn" + cardCounter + "' class='map-btn'>View on Map</button>");
+        var viewMapBtn = $("<button id='map-btn" + storedFaves[i].id + "' class='map-btn'>View on Map</button>");
         var removeCardBtn = $("<button id='remove-fave-btn" + storedFaves[i].id + "' class='remove-fave-btn'>Remove Favourite</button>");
         buttonsDiv.append(viewMapBtn, removeCardBtn);
     
         // Map section
         var mapDiv = $("<div class='card-section map hide'></div>");
-        var mapFrame = $("<iframe id='map" + cardCounter + "' width='100%' height='100%' frameborder='0' style='border:0' src=''></iframe>")
+        var mapFrame = $("<iframe id='map" + storedFaves[i].id + "' width='100%' height='100%' frameborder='0' style='border:0' src=''></iframe>")
         mapDiv.append(mapFrame);
         
         // Image section
@@ -38,7 +38,7 @@ function renderFaveCards() {
         var cardInfo = $("<div id='info" + cardCounter + "' class='card-section info'></div>");
         var cuisine = $("<div class='cuisine'><strong>Cuisine: </strong>" + storedFaves[i].cuisine + "</div>");
         var cost = $("<div class='cost'><strong>Average Cost For Two: </strong>$" + storedFaves[i].cost + "</div>");
-        var address = $("<div class='location'><strong>Address: </strong>" + storedFaves[i].location + "</div>");
+        var address = $("<div id='address" + storedFaves[i].id + "' class='location'><strong>Address: </strong>" + storedFaves[i].location + "</div>");
         var phone = $("<div class='phone'><strong>Phone: </strong>" + storedFaves[i].phone + "</div>");
         cardInfo.append(cuisine, cost, address, phone);
         
@@ -274,13 +274,15 @@ var mapBtns = document.querySelectorAll(".map-btn");
 
 document.body.addEventListener("click", function(event) {
     if (event.target.classList.contains("map-btn")) {
-        var mapNumber = event.target.id[event.target.id.length - 1];
-        var mapLocation = event.target.parentElement.firstElementChild.textContent;
+        // var mapNumber = event.target.id[event.target.id.length - 1];
+        var mapLocationId = event.target.parentElement.firstElementChild.id.substring(7, event.target.parentElement.firstElementChild.id.length);
+        var mapLocation = $("#address" + mapLocationId).text();
+        // console.log(mapLocation.text())
         var specialCharacters = [
             ["$", "24"],
             ["&", "26"],
             ["+", "2B"],
-            [",", "2C"],
+            // [",", "2C"],
             ["/", "2F"],
             [":", "3A"],
             [";", "3B"],
@@ -298,8 +300,9 @@ document.body.addEventListener("click", function(event) {
             }
         }
 
-        var mapFrame = $("#map" + mapNumber);
+        var mapFrame = $("#map" + mapLocationId);
         mapFrame.attr("src", "https://www.google.com/maps/embed/v1/place?key=AIzaSyBMo1myYnlmnCYMJc5fwiGiDZPqXar03ps&q=" + mapLocation);
+        console.log(mapFrame.attr("src"))
         // can't use certain special characters in URL e.g. &
         var mapDiv = mapFrame.parent();
         if (event.target.textContent === "View on Map") {
