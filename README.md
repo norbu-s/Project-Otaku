@@ -46,7 +46,7 @@ Open the web application using the link https://norbu-s.github.io/Covid-Safe-Res
 
 8. [Google Fonts](https://fonts.google.com/)
 
-9  [Font Awesome](https://fontawesome.com/)
+9. [Font Awesome](https://fontawesome.com/)
 
 
 ## Project Links
