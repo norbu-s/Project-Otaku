@@ -382,7 +382,12 @@ form {
 
     .top-bar ul {
         width: fit-content;
-        margin-bottom: 0;
+    }
+
+    .welcome-div {
+        padding: 20px;
+        margin: 10px auto;
+        width: 80vw;
     }
 
     #search-zipcode {
@@ -465,6 +470,13 @@ form {
     
     .dropdown:hover .dropbtn {
         background-color: #3e8e41;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .top-bar ul {
+        margin-top: 10px;
+        margin-bottom: 0;
     }
 }
 
