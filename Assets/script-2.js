@@ -1,5 +1,4 @@
 // var storedImages = [];
-var imgStatus = "show";
 initialise();
 
 // Creating card from local storage information 
@@ -27,8 +26,8 @@ function renderFaveCards() {
         mapDiv.append(mapFrame);
         
         // Image section
-        var showImgBtn = $("<button id='show-img" + cardCounter + "' class='show-img'>Upload Image</button>");
-        var cardImgDiv = $("<div id='img-div" + cardCounter + "' class='card-section img hide'></div>");
+        var showImgBtn = $("<button id='show-img" + storedFaves[i].id + "' class='show-img'>Upload Image</button>");
+        var cardImgDiv = $("<div id='img-div" + storedFaves[i].id + "' class='card-section img hide'></div>");
         var uploadImgForm = $("<form action='/action_page.php'></form>");
         var uploadImgBtn = $("<input type='file' id='imgInput" + cardCounter + "' accept='image/*'>");
         uploadImgForm.append(uploadImgBtn);
@@ -55,15 +54,14 @@ function renderFaveCards() {
         // Append heading and sections to individual card
         faveCard.append(cardHeadingDiv, buttonsDiv, mapDiv, showImgBtn, cardImgDiv, cardInfo, cardNotes, clearingDiv);
         
+        console.log(cardImgDiv)
         // Append individual card to <div class="cell">
         $(".cell").append(faveCard);
         cardCounter++;
-        console.log(img)
         renderImages();
         if (img.attr("src") !== "#") {
             showImgBtn.text("Hide Image");
             cardImgDiv.removeClass("hide");
-            imgStatus = "show";
         } 
 
         $(".remove-fave-btn").on("click", function(event){
@@ -81,20 +79,16 @@ function renderFaveCards() {
             // renderFaveCards();
             // renderImages();
             // renderNotes();
-
-            if (imgStatus === "hide") {
-                cardImgDiv.addClass("hide");
-            }
         })
 
         showImgBtn.on("click", function(event) {
-            var btnId = event.target.id[event.target.id.length - 1]
+            var btnId = event.target.id.slice(8, event.target.id.length);
             var cardImg = $("#img" + btnId);
             var cardImgDiv = $("#img-div" + btnId);
             var showImgBtn = $("#show-img" + btnId);
+            
             if (cardImgDiv.hasClass("hide")) {
                 cardImgDiv.removeClass("hide");
-                imgStatus = "show";
                 if (cardImg.attr("src") !== "#") {
                     showImgBtn.text("Hide Image");
                 } else {
@@ -102,7 +96,6 @@ function renderFaveCards() {
                 }
             } else {
                 cardImgDiv.addClass("hide");
-                imgStatus = "hide";
                 if (cardImg.attr("src") !== "#") {
                     showImgBtn.text("Show Image");
                 } else {
@@ -237,7 +230,6 @@ function renderImages() {
         if (storedFaves[i].image.length > 0) {
             var imgCardRefId = storedFaves[i].image[0];
             var imgData = storedFaves[i].image[1];
-            console.log(imgCardRefId)
             // if (typeof imgData !== "undefined") {
                 var imgEl = $("#img" + imgCardRefId);
                 imgEl.attr("src", imgData)
