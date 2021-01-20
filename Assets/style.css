@@ -136,6 +136,26 @@ form {
 
 /* RESTAURANT RESULTS */
 
+.welcome-div {
+    background-color: rgb(255, 243, 209);
+    border: solid 2px rgb(255, 228, 159);
+    padding: 20px;
+    margin: 20px 30px;
+}
+
+.welcome-heading {
+    font-size: 30px;
+    margin-bottom: 20px;
+}
+
+.welcome-ol {
+    font-weight: bold;
+}
+
+.welcome-ol p {
+    font-weight: normal;
+}
+
 #nearest-restaurant {
     margin: 10px;
     font-size: 26px;

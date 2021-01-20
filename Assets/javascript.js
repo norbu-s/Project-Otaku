@@ -12,8 +12,26 @@ var apiErrorModal = new Foundation.Reveal($("#error-modal2"));
 var clearSearchConfirmModal = new Foundation.Reveal($("#error-modal3"));
 var numberInputModal = new Foundation.Reveal($("#error-modal4"));
 
-// render the stored items
+// render the stored search history and favourites list 
 initialise();
+
+// if there are no items in storedSearches, display message
+if (storedSearches.length < 1) {
+    console.log("yes")
+    welcomeMessage();
+    $("#nearest-restaurant").addClass("hide");
+    $("#page-of").addClass("hide");
+    $("#page-btn-div").addClass("hide");
+}
+
+function welcomeMessage() {
+    var welcomeDiv = $("<div class='welcome-div'></div>");
+    var welcomeHeading = $("<h1 class='welcome-heading'>Welcome to Restaurant Otaku!</h1>");
+    var welcomeMsg = $("<ol class='welcome-ol'><li><p>Use the searchbar on the left to search for restaurants in a suburb or city</p></li><li><p>Click on the 'Add to Favourite' button on any search result to add it to your favourites list</p></li><li><p>Navigate to the 'Favourites' page to personalise your favourite cards with images and notes</p></li></ol>")
+   
+    welcomeDiv.append(welcomeHeading, welcomeMsg);
+    resultsDiv.append(welcomeDiv);
+}
 
 function renderSearchHistory() {
     searchHistoryList.empty();
@@ -245,7 +263,8 @@ function renderLastSearched() {
                     resultsDiv.append(resultContainer1, resultContainer2);
                     $("#page-no").text("1");
                     $("#page-outof").removeClass("hide");
-
+                    $("#nearest-restaurant").removeClass("hide");
+                    $("#page-btn-div").removeClass("hide");
                 }
             })
         }
@@ -373,6 +392,9 @@ searchBtn.on("click", function (event) {
                     }
                     resultsDiv.append(resultContainer1, resultContainer2);
                     $("#page-no").text("1");
+                    $("#page-outof").removeClass("hide");
+                    $("#nearest-restaurant").removeClass("hide");
+                    $("#page-btn-div").removeClass("hide");
                 }
             })
         }
@@ -456,7 +478,9 @@ searchHistoryList.on("click", function (event) {
                         }
                         resultsDiv.append(resultContainer1, resultContainer2);
                         $("#page-no").text("1");
-
+                        $("#page-outof").removeClass("hide");
+                        $("#nearest-restaurant").removeClass("hide");
+                        $("#page-btn-div").removeClass("hide");
                     }
                 })
             }
