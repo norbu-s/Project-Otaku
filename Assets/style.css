@@ -118,6 +118,7 @@ form {
     border-radius: 10px;
     padding: 10px;
     margin: 3px;
+    margin-top: 7px;
     width: 100%;
     cursor: pointer;
 }
@@ -155,6 +156,15 @@ form {
 
 /* FAVOURITES SECTION */
 
+#faves {
+    border: 2px solid #e7e7e7;
+    height: fit-content;
+}
+
+#faves-list {
+    list-style: none;
+}
+
 .dropbtn {
     display: none;
 }
@@ -167,7 +177,7 @@ form {
     border-bottom-left-radius: 10px;
     padding: 10px;
     margin-bottom: 3px;
-    width: 70%;
+    width: 80%;
 }
 
 .remove-fave-btn {
@@ -182,18 +192,6 @@ form {
 .remove-fave-btn:hover {
     background-color:  #718a0b;
     cursor: pointer;
-}
-
-#faves-list {
-    list-style: none;
-    text-align: center;
-}
-
-#faves {
-    border: 2px solid #e7e7e7;
-    margin-right: 10px;
-    padding: 10px;
-    height: fit-content;
 }
 
 .sidebar-title {
