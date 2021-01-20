@@ -1,4 +1,4 @@
-# Covid-Safe-Restaurant
+# Restaurant Otaku
 
 ## Project Description
 
