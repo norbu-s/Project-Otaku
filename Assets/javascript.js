@@ -565,7 +565,7 @@ $(window).on("resize", function() {
 });
 
 function responsiveCells() {
-    if ($(window).width() + 16 < 768) {
+    if ($(window).width() + 14 < 768) {
         $("#search-cell").attr("class", "cell medium-12 large-12");
         $("#result-cell").attr("class", "cell medium-12 large-12");
     } else if ($(window).width() + 14 > 1200) {
