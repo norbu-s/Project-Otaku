@@ -66,7 +66,6 @@ function renderFaveCards() {
 
         $(".remove-fave-btn").on("click", function(event){
             event.preventDefault();
-            console.log("yes")
             var btnId = event.target.id.substring(15, event.target.id.length)
             for (var i = 0; i < storedFaves.length; i++) {
                 if (storedFaves[i].id === btnId) {
@@ -79,6 +78,12 @@ function renderFaveCards() {
             // renderFaveCards();
             // renderImages();
             // renderNotes();
+
+            if (storedFaves.length > 0) {
+                $("#no-fave-msg").attr("class", "hide");
+            } else {            
+                $("#no-fave-msg").attr("class", "");
+            }
         })
 
         showImgBtn.on("click", function(event) {
@@ -166,15 +171,15 @@ function renderNotes() {
 
 renderNotes();
 
+noFaveMsg();
 
 // hiding/showing "You have no favourites message"
-if (storedFaves > 0) {
-    console.log("hide")
-    $("#no-fave-msg").attr("class", "hide");
-} else {
-    console.log("show")
-
-    $("#no-fave-msg").attr("class", "");
+function noFaveMsg() {
+    if (storedFaves.length > 0) {
+        $("#no-fave-msg").attr("class", "hide");
+    } else {
+        $("#no-fave-msg").attr("class", "");
+    }
 }
 
 // functionality for 'upload image' button
