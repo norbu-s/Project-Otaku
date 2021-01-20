@@ -13,7 +13,6 @@ var clearSearchConfirmModal = new Foundation.Reveal($("#error-modal3"));
 var numberInputModal = new Foundation.Reveal($("#error-modal4"));
 var noInputModal = new Foundation.Reveal($("#error-modal5"));
 
-noInputModal.open()
 // render the stored search history and favourites list 
 initialise();
 
@@ -187,6 +186,7 @@ function renderLastSearched() {
         method: "GET",
         error: function() {
             apiErrorModal.open();
+            welcomeMessage();
             return;
         },
         success: function(response) {
@@ -225,6 +225,10 @@ function renderLastSearched() {
                 method: "GET",
                 error: function() {
                     apiErrorModal.open();
+                    $("#page-outof").addClass("hide");
+                    $("#nearest-restaurant").addClass("hide");
+                    $("#page-btn-div").addClass("hide");
+                    welcomeMessage();
                     return;
                 },
                 success: function (response) {
@@ -277,19 +281,24 @@ function renderLastSearched() {
 searchBtn.on("click", function (event) {
     event.preventDefault();
 
-    resultsDiv.empty();
     var searchInput = $("#zipcode").val();
     
     var nums = "0123456789";
 
     if (searchInput === "") {
+        noInputModal.open();
         return;
-    } else if (nums.includes(searchInput[0])) {
-        numberInputModal.open()
-        searchInputEl.val("");
-        return;
-    }
+    } 
     
+    for (var i = 0; i < searchInput.length; i++) {
+        if (nums.includes(searchInput[i])) {
+            numberInputModal.open();
+            searchInputEl.val("");
+            return;
+        }
+    }
+
+    resultsDiv.empty();
 
     // Zomato location API call 
     /*
@@ -316,10 +325,13 @@ searchBtn.on("click", function (event) {
         method: "GET",
         error: function() {
             apiErrorModal.open();
+            $("#page-outof").addClass("hide");
+            $("#nearest-restaurant").addClass("hide");
+            $("#page-btn-div").addClass("hide");
+            welcomeMessage();
             return;
         },
         success: function(response) {
-            console.log(response) 
             if (response.location_suggestions.length === 0) {
                 locationErrorModal.open();
                 return;
@@ -354,6 +366,10 @@ searchBtn.on("click", function (event) {
                 method: "GET",
                 error: function() {
                     apiErrorModal.open();
+                    $("#page-outof").addClass("hide");
+                    $("#nearest-restaurant").addClass("hide");
+                    $("#page-btn-div").addClass("hide");
+                    welcomeMessage();
                     return;
                 },
                 success: function (response) {
@@ -417,6 +433,10 @@ searchHistoryList.on("click", function (event) {
             method: "GET",
             error: function() {
                 apiErrorModal.open();
+                $("#page-outof").addClass("hide");
+                $("#nearest-restaurant").addClass("hide");
+                $("#page-btn-div").addClass("hide");
+                welcomeMessage();
                 return;
             },
             success: function (response) {
@@ -439,6 +459,10 @@ searchHistoryList.on("click", function (event) {
                     method: "GET",
                     error: function() {
                         apiErrorModal.open();
+                        $("#page-outof").addClass("hide");
+                        $("#nearest-restaurant").addClass("hide");
+                        $("#page-btn-div").addClass("hide");
+                        welcomeMessage();
                         return;
                     },
                     success: function (response) {
