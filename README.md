@@ -75,7 +75,3 @@ Open the web application using the link https://norbu-s.github.io/Covid-Safe-Res
 ![Main page on mobile](Assets/images/screenshot-mobile.png)
 
 ![Main page on mobile](Assets/images/screenshot-mobile-2.png)
-
-
-
-
