@@ -281,9 +281,7 @@ document.body.addEventListener("click", function(event) {
             ["$", "24"],
             ["&", "26"],
             ["+", "2B"],
-            // [",", "2C"],
             ["/", "2F"],
-            // [":", "3A"],
             [";", "3B"],
             ["=", "3D"],
             ["?", "3F"],
@@ -300,7 +298,6 @@ document.body.addEventListener("click", function(event) {
 
         var mapFrame = $("#map" + mapLocationId);
         mapFrame.attr("src", "https://www.google.com/maps/embed/v1/place?key=AIzaSyBMo1myYnlmnCYMJc5fwiGiDZPqXar03ps&q=" + mapLocation);
-        // can't use certain special characters in URL e.g. &
         var mapDiv = mapFrame.parent();
         if (event.target.textContent === "View on Map") {
             event.target.textContent = "Hide Map";

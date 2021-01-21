@@ -15,10 +15,10 @@
     integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf"
     crossorigin="anonymous"
     />  
-    <!-- Compressed CSS -->
+    <!-- Foundation CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/dist/css/foundation.min.css" integrity="sha256-ogmFxjqiTMnZhxCqVmcqTvjfe1Y/ec4WaRj/aQPvn+I=" crossorigin="anonymous">
+    <!-- CSS file -->
     <link rel="stylesheet" href="Assets/style.css">
-
     <title>Restaurant Otaku</title>
 </head>
 
@@ -31,9 +31,9 @@
         </ul>
     </div>
 
-<!--foundation grid-->
+    <!-- Foundation grid -->
     <div class="grid-x">
-        <!--foundation column 1 (search bar & search history)-->
+        <!-- Foundation column 1 (search section) -->
         <div id="search-cell" class="cell medium-4 large-4 ">
             <div id="search-zipcode">
                 <form>
@@ -53,7 +53,7 @@
             </div>
         </div>
 
-        <!--foundation column 2 (search results)-->
+        <!-- Foundation column 2 (search results) -->
         <div id="result-cell" class="cell medium-5 large-5">
             <div id="content">
                 <h2 id="nearest-restaurant">Nearby Restaurants <span id="page-outof" class="hide">(Page <span id="page-no">1</span> out of 2)</span></h2>
@@ -101,7 +101,7 @@
                         <button id="clear-search-no" class="clear-search-modal-btn">No</button>
                     </div>
                 </div>
-                <!-- Invalid input alert -->
+                <!-- Numbers in input alert -->
                 <div id="error-modal4" class="reveal" data-reveal>
                     <p>
                         <strong>Invalid input.</strong>
@@ -115,7 +115,7 @@
                         <button class="modal-ok">OK</button>
                     </div>
                 </div>
-                <!-- Invalid input alert -->
+                <!-- No input alert -->
                 <div id="error-modal5" class="reveal" data-reveal>
                     <p>
                         Please search for a suburb or city.
@@ -130,16 +130,16 @@
             </div>
         </div>
 
-         <!--foundation column 3 (fav list)-->
+         <!-- Foundation column 3 (favourites section) -->
         <div id="fave cell" class="cell medium-3 large-3">
             <div id="faves">
                 <h2 id="title-faves" class="sidebar-title">Favourites <a id="view-fav" href="fave-restaurants.html">View Favourites</a></h2>
                 <ul id="faves-list"></ul>
             </div>
         </div>
-
     </div>
     
+    <!-- Page buttons -->
     <div id="page-btn-div" class="grid-x">
         <div class="cell">
             <a href="#" id="page-btn1" class="page-btn">1</a>
@@ -147,9 +147,12 @@
             <a href="#" id="page-btn2" class="page-btn">2</a>
         </div>
     </div>
-<!-- Compressed JavaScript -->
+
+    <!-- jQuery -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!-- Foundation JavaScript -->
     <script src="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/dist/js/foundation.min.js" integrity="sha256-pRF3zifJRA9jXGv++b06qwtSqX1byFQOLjqa2PTEb2o=" crossorigin="anonymous"></script>   
+    <!-- JavaScript files -->    
     <script src="Assets/javascript.js"></script>
 </body>
 
