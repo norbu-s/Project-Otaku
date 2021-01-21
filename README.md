@@ -57,4 +57,25 @@ Open the web application using the link https://norbu-s.github.io/Covid-Safe-Res
 
 
 ## Application Screenshots
-![Screen Shot 2021-01-20 at 9 09 37 pm](https://user-images.githubusercontent.com/73917485/105160073-e8c44980-5b63-11eb-9526-6384cf1b0a71.png)
+
+### Desktop screens
+
+![Main page on desktop](Assets/images/screenshot-desktop.png)
+
+![Favourites page on desktop](Assets/images/screenshot-desktop-2.png)
+
+### Tablet & Laptop screens 
+
+![Main page on tablet](Assets/images/screenshot-tablet.png)
+
+![Favourites page on tablet](Assets/images/screenshot-tablet-2.png)
+
+### Mobile screens 
+
+![Main page on mobile](Assets/images/screenshot-mobile.png)
+
+![Main page on mobile](Assets/images/screenshot-mobile-2.png)
+
+
+
+
