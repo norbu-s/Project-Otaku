@@ -162,13 +162,14 @@ main {
 
 @media only screen and (max-width: 768px) {
     /* For mobile phones: */
-.fave{
-    width: 450px;
-    justify-content: center;
-    margin: 10px;
-}
-.grid-x{
-    justify-content: center;
-    padding: 10px;
-}
+    .fave {
+        width: 90vw;
+        justify-content: center;
+        margin: 10px;
+    }
+
+    .grid-x{
+        justify-content: center;
+        padding: 10px;
+    }
 }
