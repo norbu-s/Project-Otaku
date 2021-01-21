@@ -22,6 +22,7 @@ main {
 
 .card-divider {
     background-color: rgb(245, 243, 243);
+    cursor: pointer;
 }
 
 .fave {

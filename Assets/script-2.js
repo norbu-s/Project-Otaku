@@ -15,7 +15,7 @@ function renderFaveCards() {
         var cardHeadingDiv = $("<div id='divider" + storedFaves[i].id + "' class='fave-name card-divider'>" + storedFaves[i].name + "</div>");
     
         // Button section
-        var buttonsDiv = $("<div></div>");
+        var buttonsDiv = $("<div id='btndiv" + storedFaves[i].id + "'></div>");
         var viewMapBtn = $("<button id='map-btn" + storedFaves[i].id + "' class='map-btn'>View on Map</button>");
         var removeCardBtn = $("<button id='remove-fave-btn" + storedFaves[i].id + "' class='remove-fave-btn'>Remove Favourite</button>");
         buttonsDiv.append(viewMapBtn, removeCardBtn);
@@ -31,11 +31,11 @@ function renderFaveCards() {
         var uploadImgForm = $("<form action='/action_page.php'></form>");
         var uploadImgBtn = $("<input type='file' id='imgInput" + cardCounter + "' accept='image/*'>");
         uploadImgForm.append(uploadImgBtn);
-        var img = $("<img id='img" + storedFaves[i].id + "' src='#' alt='User-uploaded image'>");
+        var img = $("<img id='img" + storedFaves[i].id + "' src='#'>");
         cardImgDiv.append(uploadImgForm, img);
         
         // Info section
-        var cardInfo = $("<div id='info" + cardCounter + "' class='card-section info'></div>");
+        var cardInfo = $("<div id='info" + storedFaves[i].id + "' class='card-section info'></div>");
         var cuisine = $("<div class='cuisine'><strong>Cuisine: </strong>" + storedFaves[i].cuisine + "</div>");
         var cost = $("<div class='cost'><strong>Average Cost For Two: </strong>$" + storedFaves[i].cost + "</div>");
         var address = $("<div id='address" + storedFaves[i].id + "' class='location'><strong>Address: </strong>" + storedFaves[i].location + "</div>");
@@ -43,12 +43,12 @@ function renderFaveCards() {
         cardInfo.append(cuisine, cost, address, phone);
         
         // Notes section
-        var cardNotes = $("<div id='notes" + cardCounter + "' class='card-section notes'><strong>Notes:</strong></div>");
-        var cardDisplayNote = $("<div class='notes-display' id='displayNote"+[i]+"'></div>");
+        var cardNotes = $("<div id='notes" + storedFaves[i].id + "' class='card-section notes'><strong>Notes:</strong></div>");
+        var cardDisplayNote = $("<div class='notes-display' id='displayNote" + [i] + "'></div>");
         var noteLabel = $("<label for='note-input" + cardCounter + "'></label>");
-        var noteTextArea = $("<textarea type='text' class='input"+[i]+"' class='note-input" + cardCounter + "' placeholder='Add Personal Notes'></textarea>");
+        var noteTextArea = $("<textarea type='text' class='input" + [i] + "' class='note-input" + cardCounter + "' placeholder='Add Personal Notes'></textarea>");
         var submitbutton = $("<button class='note-submit-btn' data-order='"+ [i] +"'>Submit</button>");
-        var clearingDiv = $("<div class='clearing-div'>");
+        var clearingDiv = $("<div id='clearing-div" + storedFaves[i].id + "' class='clearing-div'>");
         cardNotes.append(cardDisplayNote, noteLabel, noteTextArea, submitbutton);
     
         // Append heading and sections to individual card
@@ -290,7 +290,6 @@ document.body.addEventListener("click", function(event) {
             ["@", "40"]
         ]
 
-        console.log(specialCharacters.hasOwnProperty("$"))
         for (var i = 0; i < mapLocation.length; i++) {
             for (var j = 0; j < specialCharacters.length; j++) {
                 if (mapLocation[i] === specialCharacters[j][0]) {
@@ -301,7 +300,6 @@ document.body.addEventListener("click", function(event) {
 
         var mapFrame = $("#map" + mapLocationId);
         mapFrame.attr("src", "https://www.google.com/maps/embed/v1/place?key=AIzaSyBMo1myYnlmnCYMJc5fwiGiDZPqXar03ps&q=" + mapLocation);
-        console.log(mapFrame.attr("src"))
         // can't use certain special characters in URL e.g. &
         var mapDiv = mapFrame.parent();
         if (event.target.textContent === "View on Map") {
@@ -317,23 +315,37 @@ document.body.addEventListener("click", function(event) {
 /* Remove restaurant from faves when remove btn is clickd */
 
 
-/*Expanding and minimising card
-var cardStatus = "closed";
+// Expanding and minimising card
+var cardStatus = "opened";
 $(".card-divider").on("click", function(event) {
-    var cardNumber = event.target.id[event.target.id.length - 1];
+    var cardNumber = event.target.id.substring(7, event.target.id.length);
+    if ($("#btndiv" + cardNumber).hasClass("hide")) {
+        cardStatus = "closed";
+    } else {
+        cardStatus = "opened";
+    }
+    
     if (cardStatus === "closed") {
         cardStatus = "opened";
-        $("#map-btn" + cardNumber).removeClass("hide");
+        $("#btndiv" + cardNumber).removeClass("hide");
         $("#map-btn" + cardNumber).text("View on Map");
-        $("#img-div" + cardNumber).removeClass("hide");
+        $("#show-img" + cardNumber).removeClass("hide");
+        if ($("#img" + cardNumber).attr("src") !== "#") {
+            $("#show-img" + cardNumber).text("Show Image");
+        } else {
+            $("#show-img" + cardNumber).text("Upload Image (max. 450kb)");
+        }
         $("#info" + cardNumber).removeClass("hide");
         $("#notes" + cardNumber).removeClass("hide");
+        $("#clearing-div" + cardNumber).removeClass("hide");
     } else {
         cardStatus = "closed";
-        $("#map-btn" + cardNumber).addClass("hide");
+        $("#btndiv" + cardNumber).addClass("hide");
         $("#map" + cardNumber).parent().addClass("hide");
+        $("#show-img" + cardNumber).addClass("hide");
         $("#img-div" + cardNumber).addClass("hide");
         $("#info" + cardNumber).addClass("hide");
         $("#notes" + cardNumber).addClass("hide");
+        $("#clearing-div" + cardNumber).addClass("hide");
     }
-})*/
+})
