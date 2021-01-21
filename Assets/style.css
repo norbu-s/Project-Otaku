@@ -516,5 +516,9 @@ form {
         margin-top: 10px;
         margin-bottom: 0;
     }
+
+    #page-outof {
+        font-size: 16px;
+    }
 }
 
