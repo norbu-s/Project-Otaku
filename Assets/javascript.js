@@ -14,6 +14,7 @@ var numberInputModal = new Foundation.Reveal($("#error-modal4"));
 var noInputModal = new Foundation.Reveal($("#error-modal5"));
 
 // render the stored search history and favourites list 
+responsiveCells();
 initialise();
 
 // if there are no items in storedSearches, display message
@@ -550,12 +551,11 @@ $(".modal-ok").on("click", function() {
 })
 
 // grid layout changes on resize
-responsiveCells();
 $(window).on("resize", function() {
-    if ($(window).width() + 14 < 768) {
+    if ($(window).width() <= 768) {
         $("#search-cell").attr("class", "cell medium-12 large-12");
         $("#result-cell").attr("class", "cell medium-12 large-12");
-    } else if ($(window).width() + 14 > 1200) {
+    } else if ($(window).width() >= 1200) {
         $("#search-cell").attr("class", "cell medium-3 large-3");
         $("#result-cell").attr("class", "cell medium-6 large-6");
     } else {
@@ -565,10 +565,10 @@ $(window).on("resize", function() {
 });
 
 function responsiveCells() {
-    if ($(window).width() + 14 < 768) {
+    if ($(window).width() <= 768) {
         $("#search-cell").attr("class", "cell medium-12 large-12");
         $("#result-cell").attr("class", "cell medium-12 large-12");
-    } else if ($(window).width() + 14 > 1200) {
+    } else if ($(window).width() >= 1200) {
         $("#search-cell").attr("class", "cell medium-3 large-3");
         $("#result-cell").attr("class", "cell medium-6 large-6");
     } else {

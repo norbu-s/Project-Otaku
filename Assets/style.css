@@ -423,13 +423,17 @@ form {
         width: 50%;
     }
     
+    #fave-cell {
+        display: none;
+    }
+
     #faves {
         display: none;
         max-width: 0;
     }
 
     #content {
-        width: max-content;
+        width: 100%;
         align-self: center;
         margin: 0 auto;
         justify-content: center;
@@ -483,8 +487,6 @@ form {
         display: block;
     } */
 
-    
-
     #title-history {
         display: none;
     }
@@ -522,3 +524,12 @@ form {
     }
 }
 
+@media print, screen and (min-width: 40em) {
+    .grid-x>.medium-12 {
+        width: 100% !important;
+    }
+
+    .grid-x>.large-12 {
+        width: 100% !important;
+    }
+}
