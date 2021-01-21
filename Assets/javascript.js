@@ -7,17 +7,19 @@ var favesList = $("#faves-list");
 var searchHistoryList = $("#search-history-list");
 var resultsDiv = $("#results");
 
+// Foundation modals
 var locationErrorModal = new Foundation.Reveal($("#error-modal"));
 var apiErrorModal = new Foundation.Reveal($("#error-modal2"));
 var clearSearchConfirmModal = new Foundation.Reveal($("#error-modal3"));
 var numberInputModal = new Foundation.Reveal($("#error-modal4"));
 var noInputModal = new Foundation.Reveal($("#error-modal5"));
 
-// render the stored search history and favourites list 
 responsiveCells();
+$(window).on("resize", responsiveCells);
+
 initialise();
 
-// if there are no items in storedSearches, display message
+// If there are no items in search history, display welcome message
 if (storedSearches.length < 1) {
     welcomeMessage();
     $("#nearest-restaurant").addClass("hide");
@@ -25,6 +27,7 @@ if (storedSearches.length < 1) {
     $("#page-btn-div").addClass("hide");
 }
 
+// Welcome message 
 function welcomeMessage() {
     var welcomeDiv = $("<div class='welcome-div'></div>");
     var welcomeHeading = $("<h1 class='welcome-heading'>Welcome to Restaurant Otaku!</h1>");
@@ -34,6 +37,7 @@ function welcomeMessage() {
     resultsDiv.append(welcomeDiv);
 }
 
+// Render stored searches to search history list
 function renderSearchHistory() {
     searchHistoryList.empty();
 
@@ -44,6 +48,7 @@ function renderSearchHistory() {
     }
 }
 
+// Render stored favourites to favourites list
 function renderFavouritesList() {
     favesList.empty();
 
@@ -67,10 +72,10 @@ function renderFavouritesList() {
         favesList.prepend(storedFaveLi);
 
         removeFaveBtn.outerHeight(storedFaveBtn.outerHeight());
-        
     }
 }
 
+// Responsiveness: Ensure that the favourite buttons and the remove favourite buttons are always the same height
 $(window).on("resize", function() {
     var faveIds = [];
     for (var i = 0; i < storedFaves.length; i++) {
@@ -84,6 +89,7 @@ $(window).on("resize", function() {
     }
 })
 
+// Render search history and favourites list upon opening web page
 function initialise() {
     var updatedStoredSearches = JSON.parse(localStorage.getItem("storedSearches"));
     if (updatedStoredSearches !== null) {
@@ -98,21 +104,24 @@ function initialise() {
     renderFavouritesList();
 }
 
-// store searches/favourites
+// Save searches to local storage
 function storeSearches() {
     localStorage.setItem("storedSearches", JSON.stringify(storedSearches));
 }
 
+// Save favourites to local storage
 function storeFaves() {
     localStorage.setItem("storedFaves", JSON.stringify(storedFaves));
 }
 
-// hide/show clear search history btn depending on if there is anything in the list 
+// Hide/show clear search history button depending on if there is anything in search history
 if (storedSearches.length === 0) {
     $("#clear-search-btn").addClass("hide");
 } else {
     $("#clear-search-btn").removeClass("hide");
 }
+
+// Check if a search result is saved to favourites
 function checkIfRestaurantIsInFavourite(restaurantId){
     let found = storedFaves.find(function (favItem) {
         return favItem.id === restaurantId;
@@ -120,6 +129,7 @@ function checkIfRestaurantIsInFavourite(restaurantId){
     return found !== undefined;
 }
 
+// Create 'Add to Favourite' buttons for each search result
 function createFaveBtn(restaurant) {
 
     let buttonContent = 'Add to Favourite';
@@ -138,7 +148,7 @@ function createFaveBtn(restaurant) {
                         data-id="${restaurant.id}"
                         >${buttonContent}</button>`);
                        
-
+    // Save restaurant to favourite on 'Add to Favourites' button click
     faveBtn.click((event) => {
         var btnText = event.target.textContent;
         var dataset = event.target.dataset;
@@ -179,7 +189,7 @@ if (storedSearches.length > 0) {
     renderLastSearched();
 }
 
-// API call for last searched location 
+// Make API call for last searched location and render
 function renderLastSearched() {
     $.ajax({
         headers: { "user-key": "9a1b7bbdae3e31891d3b697bed7433bc" },
@@ -273,7 +283,7 @@ function renderLastSearched() {
 }
 
 
-// search button click event 
+// Make API call to search for location on search button click
 searchBtn.on("click", function (event) {
     event.preventDefault();
 
@@ -295,24 +305,6 @@ searchBtn.on("click", function (event) {
     }
 
     // Zomato location API call 
-    /*
-        Country data available: 
-        - India
-        - Australia
-        - Brazil
-        - Canada
-        - Indonesia
-        - New Zealand
-        - Phillipines
-        - Qatar
-        - Singapore
-        - South Africa
-        - Sri Lanka
-        - Turkey
-        - UAE
-        - UK
-        - US
-    */
     $.ajax({
         headers: { "user-key": "9a1b7bbdae3e31891d3b697bed7433bc" },
         url: "https://developers.zomato.com/api/v2.1/locations?query=" + searchInput,
@@ -411,12 +403,12 @@ searchBtn.on("click", function (event) {
     searchInputEl.val("");
 })
 
-// get API data on search history button click
+// Make API call on search history button click
 searchHistoryList.on("click", function (event) {
     if (event.target.classList.contains("history-btn")) {
-        // Zomato location API call
         var buttonName = event.target.textContent;
 
+        // Zomato location API call
         $.ajax({
             headers: { "user-key": "9a1b7bbdae3e31891d3b697bed7433bc" },
             url: "https://developers.zomato.com/api/v2.1/locations?query=" + buttonName,
@@ -496,6 +488,7 @@ searchHistoryList.on("click", function (event) {
     }
 })
 
+// Change between page 1 and 2 of search results
 $("#page-btn1").on("click", function() {
     $("#result-container1").removeClass("hide");
     $("#result-container2").addClass("hide");
@@ -510,7 +503,7 @@ $("#page-btn2").on("click", function() {
     $("#page-outof").removeClass("hide");
 })
 
-// delete favourite item 
+// Delete favourite item from favourites on remove favourite button click 
 favesList.on("click", function (event) {
     if (event.target.classList.contains("remove-fave-btn")) {
         var faveBtnId = event.target.id.substring(6, event.target.id.length);
@@ -524,12 +517,10 @@ favesList.on("click", function (event) {
         }
         renderFavouritesList();
     }
+})
 
- })
-
-// clear search history list and storage
+// Clear search history list and storage on clear history button click
 $("#clear-search-btn").on("click", function() {
-    // var clearConfirm = confirm("Are you sure you want to clear your search history?");
     clearSearchConfirmModal.open();
 
     $("#clear-search-yes").on("click", function() {
@@ -542,28 +533,14 @@ $("#clear-search-btn").on("click", function() {
     $("#clear-search-no").on("click", function() {
         $(".reveal-overlay").attr("style", "display: none");
     })
-    
 })
 
-// number input in search 
+// OK button functionality for modals 
 $(".modal-ok").on("click", function() {
     $(".reveal-overlay").attr("style", "display: none");
 })
 
-// grid layout changes on resize
-$(window).on("resize", function() {
-    if ($(window).width() <= 768) {
-        $("#search-cell").attr("class", "cell medium-12 large-12");
-        $("#result-cell").attr("class", "cell medium-12 large-12");
-    } else if ($(window).width() >= 1200) {
-        $("#search-cell").attr("class", "cell medium-3 large-3");
-        $("#result-cell").attr("class", "cell medium-6 large-6");
-    } else {
-        $("#search-cell").attr("class", "cell medium-4 large-4");
-        $("#result-cell").attr("class", "cell medium-5 large-5");
-    }
-});
-
+// Responsiveness: Foundation column sizes change at specified breakpoints
 function responsiveCells() {
     if ($(window).width() <= 768) {
         $("#search-cell").attr("class", "cell medium-12 large-12");
