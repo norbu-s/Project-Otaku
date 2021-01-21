@@ -55,6 +55,8 @@ Open the web application using the link https://norbu-s.github.io/Covid-Safe-Res
 
 2. Github Repository - https://github.com/norbu-s/Covid-Safe-Restaurant
 
+3. Presentation - https://docs.google.com/presentation/d/13OJRzDyKJnPH8hX9Oeu7KBEiyI5FBBdLljsr6YqIxbA/edit?usp=sharing
+
 
 ## Application Screenshots
 
