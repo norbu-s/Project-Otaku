@@ -118,6 +118,7 @@ $(".note-submit-btn").each(function() {
         if (storedFaves[target].notes == null) {
             storedFaves[target].notes = [];
         };
+
         var currentDate = moment().format("dddd, MMMM Do YYYY, h:mm:ss a");
         var inputValue = $(".input"+target).val();
         var newArry = new Array(currentDate, inputValue)

@@ -1,6 +1,7 @@
 /* main content */
 main {
-    margin: 50px;
+    width: 100vw;
+    margin: 50px 30px;
 }
 
 /* no favourites message */
@@ -171,5 +172,11 @@ main {
     .grid-x{
         justify-content: center;
         padding: 10px;
+    }
+}
+
+@media only screen and (min-width: 1200px) {
+    .fave {
+        width: 27vw;
     }
 }
