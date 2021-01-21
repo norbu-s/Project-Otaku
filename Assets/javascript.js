@@ -13,6 +13,7 @@ var apiErrorModal = new Foundation.Reveal($("#error-modal2"));
 var clearSearchConfirmModal = new Foundation.Reveal($("#error-modal3"));
 var numberInputModal = new Foundation.Reveal($("#error-modal4"));
 var noInputModal = new Foundation.Reveal($("#error-modal5"));
+var imageTooLargeModal = new Foundation.Reveal($("#error-modal6"));
 
 responsiveCells();
 $(window).on("resize", responsiveCells);
@@ -163,7 +164,6 @@ function createFaveBtn(restaurant) {
             storedFaves.push(faveList);
     
             if (storedFaves.length > 4) {
-                console.log(storedFaves[0].id)
                 $("#id-" + storedFaves[0].id).text("Add to Favourite");
                 storedFaves.splice(0, 1);
             }
@@ -197,7 +197,6 @@ function renderLastSearched() {
         method: "GET",
         error: function() {
             apiErrorModal.open();
-            console.log("here")
             welcomeMessage();
             return;
         },
@@ -314,7 +313,6 @@ searchBtn.on("click", function (event) {
             return;
         },
         success: function(response) {
-            console.log(response);
             if (response.location_suggestions.length === 0) {
                 locationErrorModal.open();
                 return;
