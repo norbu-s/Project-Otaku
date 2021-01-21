@@ -1,9 +1,10 @@
-// var storedImages = [];
 initialise();
 
-// Creating card from local storage information 
+// Create fave card from stored favourites information 
 var cardCounter = 1;
 renderFaveCards();
+renderNotes();
+
 function renderFaveCards() {
     $(".cell").empty();
 
@@ -15,7 +16,7 @@ function renderFaveCards() {
         var cardHeadingDiv = $("<div id='divider" + storedFaves[i].id + "' class='fave-name card-divider'>" + storedFaves[i].name + "</div>");
     
         // Button section
-        var buttonsDiv = $("<div></div>");
+        var buttonsDiv = $("<div id='btndiv" + storedFaves[i].id + "'></div>");
         var viewMapBtn = $("<button id='map-btn" + storedFaves[i].id + "' class='map-btn'>View on Map</button>");
         var removeCardBtn = $("<button id='remove-fave-btn" + storedFaves[i].id + "' class='remove-fave-btn'>Remove Favourite</button>");
         buttonsDiv.append(viewMapBtn, removeCardBtn);
@@ -35,7 +36,7 @@ function renderFaveCards() {
         cardImgDiv.append(uploadImgForm, img);
         
         // Info section
-        var cardInfo = $("<div id='info" + cardCounter + "' class='card-section info'></div>");
+        var cardInfo = $("<div id='info" + storedFaves[i].id + "' class='card-section info'></div>");
         var cuisine = $("<div class='cuisine'><strong>Cuisine: </strong>" + storedFaves[i].cuisine + "</div>");
         var cost = $("<div class='cost'><strong>Average Cost For Two: </strong>$" + storedFaves[i].cost + "</div>");
         var address = $("<div id='address" + storedFaves[i].id + "' class='location'><strong>Address: </strong>" + storedFaves[i].location + "</div>");
@@ -43,12 +44,12 @@ function renderFaveCards() {
         cardInfo.append(cuisine, cost, address, phone);
         
         // Notes section
-        var cardNotes = $("<div id='notes" + cardCounter + "' class='card-section notes'><strong>Notes:</strong></div>");
-        var cardDisplayNote = $("<div class='notes-display' id='displayNote"+[i]+"'></div>");
+        var cardNotes = $("<div id='notes" + storedFaves[i].id + "' class='card-section notes'><strong>Notes:</strong></div>");
+        var cardDisplayNote = $("<div class='notes-display' id='displayNote" + [i] + "'></div>");
         var noteLabel = $("<label for='note-input" + cardCounter + "'></label>");
-        var noteTextArea = $("<textarea type='text' class='input"+[i]+"' class='note-input" + cardCounter + "' placeholder='Add Personal Notes'></textarea>");
+        var noteTextArea = $("<textarea type='text' class='input" + [i] + "' class='note-input" + cardCounter + "' placeholder='Add Personal Notes'></textarea>");
         var submitbutton = $("<button class='note-submit-btn' data-order='"+ [i] +"'>Submit</button>");
-        var clearingDiv = $("<div class='clearing-div'>");
+        var clearingDiv = $("<div id='clearing-div" + storedFaves[i].id + "' class='clearing-div'>");
         cardNotes.append(cardDisplayNote, noteLabel, noteTextArea, submitbutton);
     
         // Append heading and sections to individual card
@@ -63,6 +64,7 @@ function renderFaveCards() {
             cardImgDiv.removeClass("hide");
         } 
 
+        // Hide card on remove button click
         $(".remove-fave-btn").on("click", function(event){
             event.preventDefault();
             var btnId = event.target.id.substring(15, event.target.id.length)
@@ -74,9 +76,6 @@ function renderFaveCards() {
             storeFaves();
 
             $("#card-" + btnId).addClass("hide");
-            // renderFaveCards();
-            // renderImages();
-            // renderNotes();
 
             if (storedFaves.length > 0) {
                 $("#no-fave-msg").attr("class", "hide");
@@ -85,6 +84,7 @@ function renderFaveCards() {
             }
         })
 
+        // Show image on 'upload/show image' button click
         showImgBtn.on("click", function(event) {
             var btnId = event.target.id.slice(8, event.target.id.length);
             var cardImg = $("#img" + btnId);
@@ -107,17 +107,17 @@ function renderFaveCards() {
                 }
             }
         })
-        
     }
 }
 
-
+// Save note to stored favourites in local storage
 $(".note-submit-btn").each(function() {
     $(this).click(function(){
         var target = this.getAttribute("data-order");
         if (storedFaves[target].notes == null) {
             storedFaves[target].notes = [];
         };
+
         var currentDate = moment().format("dddd, MMMM Do YYYY, h:mm:ss a");
         var inputValue = $(".input"+target).val();
         var newArry = new Array(currentDate, inputValue)
@@ -128,6 +128,7 @@ $(".note-submit-btn").each(function() {
     });
 });
 
+// Render notes to fave card
 function renderNotes() {
     var updatedStoredFaves = JSON.parse(localStorage.getItem("storedFaves"));
     if (updatedStoredFaves !== null) {
@@ -150,8 +151,8 @@ function renderNotes() {
         };
     }
 
+    // Delete note on remove note button click
     $(".notes-delete-btn").on("click", function() {
-        event.preventDefault();
         var target = this.getAttribute("data-target");
         var order = this.getAttribute("data-order");
 
@@ -167,11 +168,9 @@ function renderNotes() {
     });
 };
 
-renderNotes();
-
 noFaveMsg();
 
-// hiding/showing "You have no favourites message"
+// Hide/Show "You have no favourites message"
 function noFaveMsg() {
     if (storedFaves.length > 0) {
         $("#no-fave-msg").attr("class", "hide");
@@ -180,7 +179,7 @@ function noFaveMsg() {
     }
 }
 
-// functionality for 'upload image' button
+// Upload image functionality
 var cardNumber = 0;
 var cardRestaurant = "";
 var imgCardRefId = "";
@@ -196,8 +195,7 @@ $(function() {
             cardNumber = parseInt(e.target.id[e.target.id.length - 1]);
             var imgCardRef = e.target.parentElement.parentElement.parentElement.firstElementChild;
             imgCardRefId = imgCardRef.id.substring(7, imgCardRef.id.length);
-            console.log(imgCardRefId)
-            // cardRestaurant = e.target.parentElement.parentElement.parentElement.firstElementChild.textContent;
+
             var reader = new FileReader();
             reader.onload = imageIsLoaded;
             reader.readAsDataURL(this.files[0]);
@@ -209,6 +207,7 @@ $(function() {
     });
 });
 
+// Show image and save to favourites in local storage
 function imageIsLoaded(e) {
     $("#img" + imgCardRefId).removeAttr("class");
     $("#img" + imgCardRefId).attr("src", e.target.result);
@@ -223,73 +222,39 @@ function imageIsLoaded(e) {
     }
 
     storeFaves();
-    // for (var i = 0; i < storedImages.length; i++) {
-    //     if (storedImages[i][0] === cardRestaurant) {
-    //         storedImages.splice(i, 1);
-    //     }
-    // }
-    // storedImages.push([cardRestaurant, e.target.result]);
-    // storeImages();
 }
 
-// local storage for saved imgs
+// Render stored images 
 function renderImages() {
     for (var i = 0; i < storedFaves.length; i++) {
         if (storedFaves[i].image.length > 0) {
             var imgCardRefId = storedFaves[i].image[0];
             var imgData = storedFaves[i].image[1];
-            // if (typeof imgData !== "undefined") {
-                var imgEl = $("#img" + imgCardRefId);
-                imgEl.attr("src", imgData)
-            //}      
+            var imgEl = $("#img" + imgCardRefId);
+            imgEl.attr("src", imgData)
         }
     }
-    // for (var i = 0; i < storedImages.length; i++) {         
-    //     var restaurantName = storedImages[i][0];
-    //     var divContainingRestaurantName = $("div:contains('" + restaurantName + "')")[$("div:contains('" + restaurantName + "')").length - 1];
-    //     if (typeof divContainingRestaurantName !== "undefined") {
-    //         var cardNumber = divContainingRestaurantName.id[divContainingRestaurantName.id.length - 1];
-    //         $("#img" + cardNumber).attr("src", storedImages[i][1]);
-    //     }
-    // }
 }
 
-// function initialise() {
-//     var savedImages = JSON.parse(localStorage.getItem("storedImages"));
-//     if (savedImages !== null) {
-//         storedImages = savedImages;
-//     }
+// Google Maps Embed API functionality
 
-//     renderImages();
-// }
-
-// function storeImages() {
-//     localStorage.setItem("storedImages", JSON.stringify(storedImages));
-// }
-
-// Google Maps rendering
 var mapBtns = document.querySelectorAll(".map-btn");
-
 document.body.addEventListener("click", function(event) {
     if (event.target.classList.contains("map-btn")) {
-        // var mapNumber = event.target.id[event.target.id.length - 1];
         var mapLocationId = event.target.parentElement.firstElementChild.id.substring(7, event.target.parentElement.firstElementChild.id.length);
         var mapLocation = $("#address" + mapLocationId).text();
-        // console.log(mapLocation.text())
         var specialCharacters = [
             ["$", "24"],
             ["&", "26"],
             ["+", "2B"],
-            // [",", "2C"],
             ["/", "2F"],
-            // [":", "3A"],
             [";", "3B"],
             ["=", "3D"],
             ["?", "3F"],
             ["@", "40"]
         ]
 
-        console.log(specialCharacters.hasOwnProperty("$"))
+        // *Note: Some special characters cause issues in the API call URL 
         for (var i = 0; i < mapLocation.length; i++) {
             for (var j = 0; j < specialCharacters.length; j++) {
                 if (mapLocation[i] === specialCharacters[j][0]) {
@@ -300,8 +265,6 @@ document.body.addEventListener("click", function(event) {
 
         var mapFrame = $("#map" + mapLocationId);
         mapFrame.attr("src", "https://www.google.com/maps/embed/v1/place?key=AIzaSyBMo1myYnlmnCYMJc5fwiGiDZPqXar03ps&q=" + mapLocation);
-        console.log(mapFrame.attr("src"))
-        // can't use certain special characters in URL e.g. &
         var mapDiv = mapFrame.parent();
         if (event.target.textContent === "View on Map") {
             event.target.textContent = "Hide Map";
@@ -313,26 +276,37 @@ document.body.addEventListener("click", function(event) {
     }
 })
 
-/* Remove restaurant from faves when remove btn is clickd */
-
-
-/*Expanding and minimising card
-var cardStatus = "closed";
+// Expand and minimise fave cards
+var cardStatus = "opened";
 $(".card-divider").on("click", function(event) {
-    var cardNumber = event.target.id[event.target.id.length - 1];
+    var cardNumber = event.target.id.substring(7, event.target.id.length);
+    if ($("#btndiv" + cardNumber).hasClass("hide")) {
+        cardStatus = "closed";
+    } else {
+        cardStatus = "opened";
+    }
+    
     if (cardStatus === "closed") {
         cardStatus = "opened";
-        $("#map-btn" + cardNumber).removeClass("hide");
+        $("#btndiv" + cardNumber).removeClass("hide");
         $("#map-btn" + cardNumber).text("View on Map");
-        $("#img-div" + cardNumber).removeClass("hide");
+        $("#show-img" + cardNumber).removeClass("hide");
+        if ($("#img" + cardNumber).attr("src") !== "#") {
+            $("#show-img" + cardNumber).text("Show Image");
+        } else {
+            $("#show-img" + cardNumber).text("Upload Image (max. 450kb)");
+        }
         $("#info" + cardNumber).removeClass("hide");
         $("#notes" + cardNumber).removeClass("hide");
+        $("#clearing-div" + cardNumber).removeClass("hide");
     } else {
         cardStatus = "closed";
-        $("#map-btn" + cardNumber).addClass("hide");
+        $("#btndiv" + cardNumber).addClass("hide");
         $("#map" + cardNumber).parent().addClass("hide");
+        $("#show-img" + cardNumber).addClass("hide");
         $("#img-div" + cardNumber).addClass("hide");
         $("#info" + cardNumber).addClass("hide");
         $("#notes" + cardNumber).addClass("hide");
+        $("#clearing-div" + cardNumber).addClass("hide");
     }
-})*/
+})
