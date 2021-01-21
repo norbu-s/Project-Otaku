@@ -187,7 +187,7 @@ var imgCardRefId = "";
 $(function() {
     $(":file").change(function(e) {
         if (this.files[0].size > 450000) {
-            console.log("max file size is 450kb");
+            imageTooLargeModal.open();
             return;
         }
 
