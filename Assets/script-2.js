@@ -1,9 +1,10 @@
-// var storedImages = [];
 initialise();
 
-// Creating card from local storage information 
+// Create fave card from stored favourites information 
 var cardCounter = 1;
 renderFaveCards();
+renderNotes();
+
 function renderFaveCards() {
     $(".cell").empty();
 
@@ -63,6 +64,7 @@ function renderFaveCards() {
             cardImgDiv.removeClass("hide");
         } 
 
+        // Hide card on remove button click
         $(".remove-fave-btn").on("click", function(event){
             event.preventDefault();
             var btnId = event.target.id.substring(15, event.target.id.length)
@@ -74,9 +76,6 @@ function renderFaveCards() {
             storeFaves();
 
             $("#card-" + btnId).addClass("hide");
-            // renderFaveCards();
-            // renderImages();
-            // renderNotes();
 
             if (storedFaves.length > 0) {
                 $("#no-fave-msg").attr("class", "hide");
@@ -85,6 +84,7 @@ function renderFaveCards() {
             }
         })
 
+        // Show image on 'upload/show image' button click
         showImgBtn.on("click", function(event) {
             var btnId = event.target.id.slice(8, event.target.id.length);
             var cardImg = $("#img" + btnId);
@@ -107,11 +107,10 @@ function renderFaveCards() {
                 }
             }
         })
-        
     }
 }
 
-
+// Save note to stored favourites in local storage
 $(".note-submit-btn").each(function() {
     $(this).click(function(){
         var target = this.getAttribute("data-order");
@@ -129,6 +128,7 @@ $(".note-submit-btn").each(function() {
     });
 });
 
+// Render notes to fave card
 function renderNotes() {
     var updatedStoredFaves = JSON.parse(localStorage.getItem("storedFaves"));
     if (updatedStoredFaves !== null) {
@@ -151,8 +151,8 @@ function renderNotes() {
         };
     }
 
+    // Delete note on remove note button click
     $(".notes-delete-btn").on("click", function() {
-        event.preventDefault();
         var target = this.getAttribute("data-target");
         var order = this.getAttribute("data-order");
 
@@ -168,11 +168,9 @@ function renderNotes() {
     });
 };
 
-renderNotes();
-
 noFaveMsg();
 
-// hiding/showing "You have no favourites message"
+// Hide/Show "You have no favourites message"
 function noFaveMsg() {
     if (storedFaves.length > 0) {
         $("#no-fave-msg").attr("class", "hide");
@@ -181,7 +179,7 @@ function noFaveMsg() {
     }
 }
 
-// functionality for 'upload image' button
+// Upload image functionality
 var cardNumber = 0;
 var cardRestaurant = "";
 var imgCardRefId = "";
@@ -197,8 +195,7 @@ $(function() {
             cardNumber = parseInt(e.target.id[e.target.id.length - 1]);
             var imgCardRef = e.target.parentElement.parentElement.parentElement.firstElementChild;
             imgCardRefId = imgCardRef.id.substring(7, imgCardRef.id.length);
-            console.log(imgCardRefId)
-            // cardRestaurant = e.target.parentElement.parentElement.parentElement.firstElementChild.textContent;
+
             var reader = new FileReader();
             reader.onload = imageIsLoaded;
             reader.readAsDataURL(this.files[0]);
@@ -210,6 +207,7 @@ $(function() {
     });
 });
 
+// Show image and save to favourites in local storage
 function imageIsLoaded(e) {
     $("#img" + imgCardRefId).removeAttr("class");
     $("#img" + imgCardRefId).attr("src", e.target.result);
@@ -224,59 +222,27 @@ function imageIsLoaded(e) {
     }
 
     storeFaves();
-    // for (var i = 0; i < storedImages.length; i++) {
-    //     if (storedImages[i][0] === cardRestaurant) {
-    //         storedImages.splice(i, 1);
-    //     }
-    // }
-    // storedImages.push([cardRestaurant, e.target.result]);
-    // storeImages();
 }
 
-// local storage for saved imgs
+// Render stored images 
 function renderImages() {
     for (var i = 0; i < storedFaves.length; i++) {
         if (storedFaves[i].image.length > 0) {
             var imgCardRefId = storedFaves[i].image[0];
             var imgData = storedFaves[i].image[1];
-            // if (typeof imgData !== "undefined") {
-                var imgEl = $("#img" + imgCardRefId);
-                imgEl.attr("src", imgData)
-            //}      
+            var imgEl = $("#img" + imgCardRefId);
+            imgEl.attr("src", imgData)
         }
     }
-    // for (var i = 0; i < storedImages.length; i++) {         
-    //     var restaurantName = storedImages[i][0];
-    //     var divContainingRestaurantName = $("div:contains('" + restaurantName + "')")[$("div:contains('" + restaurantName + "')").length - 1];
-    //     if (typeof divContainingRestaurantName !== "undefined") {
-    //         var cardNumber = divContainingRestaurantName.id[divContainingRestaurantName.id.length - 1];
-    //         $("#img" + cardNumber).attr("src", storedImages[i][1]);
-    //     }
-    // }
 }
 
-// function initialise() {
-//     var savedImages = JSON.parse(localStorage.getItem("storedImages"));
-//     if (savedImages !== null) {
-//         storedImages = savedImages;
-//     }
+// Google Maps Embed API functionality
 
-//     renderImages();
-// }
-
-// function storeImages() {
-//     localStorage.setItem("storedImages", JSON.stringify(storedImages));
-// }
-
-// Google Maps rendering
 var mapBtns = document.querySelectorAll(".map-btn");
-
 document.body.addEventListener("click", function(event) {
     if (event.target.classList.contains("map-btn")) {
-        // var mapNumber = event.target.id[event.target.id.length - 1];
         var mapLocationId = event.target.parentElement.firstElementChild.id.substring(7, event.target.parentElement.firstElementChild.id.length);
         var mapLocation = $("#address" + mapLocationId).text();
-        // console.log(mapLocation.text())
         var specialCharacters = [
             ["$", "24"],
             ["&", "26"],
@@ -288,6 +254,7 @@ document.body.addEventListener("click", function(event) {
             ["@", "40"]
         ]
 
+        // *Note: Some special characters cause issues in the API call URL 
         for (var i = 0; i < mapLocation.length; i++) {
             for (var j = 0; j < specialCharacters.length; j++) {
                 if (mapLocation[i] === specialCharacters[j][0]) {
@@ -309,10 +276,7 @@ document.body.addEventListener("click", function(event) {
     }
 })
 
-/* Remove restaurant from faves when remove btn is clickd */
-
-
-// Expanding and minimising card
+// Expand and minimise fave cards
 var cardStatus = "opened";
 $(".card-divider").on("click", function(event) {
     var cardNumber = event.target.id.substring(7, event.target.id.length);
