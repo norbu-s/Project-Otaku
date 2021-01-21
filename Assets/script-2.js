@@ -31,7 +31,7 @@ function renderFaveCards() {
         var uploadImgForm = $("<form action='/action_page.php'></form>");
         var uploadImgBtn = $("<input type='file' id='imgInput" + cardCounter + "' accept='image/*'>");
         uploadImgForm.append(uploadImgBtn);
-        var img = $("<img id='img" + storedFaves[i].id + "' src='#'>");
+        var img = $("<img id='img" + storedFaves[i].id + "' src='#' alt='User-uploaded image'>");
         cardImgDiv.append(uploadImgForm, img);
         
         // Info section
