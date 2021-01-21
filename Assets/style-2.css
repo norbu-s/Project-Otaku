@@ -13,7 +13,9 @@ main {
     margin-top: 6vh;
 }
 
-/* foundation card component*/
+/* FOUNDATION CARD COMPONENTS */
+
+/* Card container */
 .card {
     display: inline-block;
     margin: 20px;
@@ -36,7 +38,7 @@ main {
     margin: 3px;
 }
 
-/* Google Maps */
+/* map/remove/image button section */
 .map {
     height: 30vh;
 }
@@ -78,6 +80,7 @@ main {
     color: rgb(198, 79, 79);
     border: solid 1px rgb(198, 79, 79);
     margin-right: 5px;
+    float: right;
 }
 
 .remove-fave-btn:hover {
@@ -96,6 +99,7 @@ main {
     padding-bottom: 10px;
     border-bottom: solid 1px grey;
 }
+
 /* card notes */
 .notes-display {
     margin: 0 !important;
@@ -157,13 +161,17 @@ main {
     height: 30px;
 }
 
-.remove-fave-btn {
-    float: right;
+/* ------------MEDIA QUERIES------------- */
+
+/* Extra large desktop screens */
+@media only screen and (min-width: 1200px) {
+    .fave {
+        width: 27vw;
+    }
 }
 
-
+/* Tablet and mobile screens */
 @media only screen and (max-width: 768px) {
-    /* For mobile phones: */
     .fave {
         width: 90vw;
         justify-content: center;
@@ -176,8 +184,3 @@ main {
     }
 }
 
-@media only screen and (min-width: 1200px) {
-    .fave {
-        width: 27vw;
-    }
-}
